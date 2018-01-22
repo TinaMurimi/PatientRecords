@@ -1,0 +1,17 @@
+public ArrayList<Category> getAll(String _idUser) {
+    ArrayList<Category> categoryList = new ArrayList<>();
+    Document query = new Document("_idUser", _idUser);
+    FindIterable<Document> search = collection.find(query);
+    if (search == null) {
+        return null;
+    }
+    for (Document current : search) {
+        Category category = new Category(current.getString("name"),
+                current.getString("color"),
+                current.getString("_idUser"));
+        category.setId(current.getObjectId("_id").toString());
+        categoryList.add(category);
+    }
+    return categoryList;
+}
+ 

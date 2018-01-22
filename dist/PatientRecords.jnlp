@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="PatientRecords.jnlp">
+  <information>
+    <title>PatientRecords</title>
+    <vendor>tinabob</vendor>
+    <description>null</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" java-vm-args="-Djava.security.policy=applet.policy "  href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="PatientRecords.jar" size="989737" download="eager" />
+    <jar href="lib/fontawesomefx-8.9.jar" size="571068" download="eager" />
+    <jar href="lib/fontawesomefx-icons525-4.6.3-javadoc.jar" size="57736" download="eager" />
+    <jar href="lib/fontawesomefx-icons525-4.6.3.jar" size="108770" download="eager" />
+    <jar href="lib/jfoenix-1.4.0.jar" size="2363143" download="eager" />
+    <jar href="lib/mongo-java-driver-3.6.1.jar" size="1895670" download="eager" />
+  </resources>
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="PatientRecords" >
+    <param name="requiredFXVersion" value="8.0+"/>
+  </applet-desc>
+  <jfx:javafx-desc  width="800" height="600" main-class="patientrecords.Main"  name="PatientRecords" />
+  <update check="always"/>
+</jnlp>

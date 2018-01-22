@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.validation.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<!-- fx:controller attribute is required when you specify
+controller-based event handlers in your markup. The xmlns:fx attribute is always
+required and specifies the fx namespace. -->
+
+<fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="297.0" prefWidth="760.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="patientrecords.MainController">
+   <children>
+      <ImageView fitHeight="330.0" fitWidth="445.0" opacity="0.15" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="37.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="317.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@images/records.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton id="signin_button" layoutX="162.0" layoutY="187.0" prefHeight="35.0" prefWidth="122.0" style="-fx-background-color: #48aaad;" text="Learn More" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="75.0" AnchorPane.topAnchor="187.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </JFXButton>
+      <AnchorPane layoutX="443.0" opacity="0.94" prefHeight="297.0" prefWidth="317.0" style="-fx-background-color: #48AAAD;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="443.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label id="errorMsgLabel" layoutX="60.0" layoutY="235.0" prefHeight="27.0" prefWidth="197.0" textFill="#e00707" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="235.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <JFXTextField id="username_field" fx:id="username_field" focusColor="#3d7172" layoutX="60.0" layoutY="75.0" prefHeight="35.0" prefWidth="197.0" promptText="Enter Username" style="-fx-prompt-text-fill: #FFFFFFA3;" unFocusColor="WHITE" AnchorPane.bottomAnchor="187.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="75.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </JFXTextField>
+            <JFXPasswordField id="password_field" fx:id="password_field" focusColor="#3d7172" layoutX="60.0" layoutY="117.0" prefHeight="35.0" prefWidth="300.0" promptText="Enter Password" style="-fx-prompt-text-fill: #FFFFFFA3;" unFocusColor="WHITE" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="120.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </JFXPasswordField>
+            <JFXButton id="signin_button" fx:id="signinButton" disable="true" layoutX="61.0" layoutY="187.0" prefHeight="35.0" prefWidth="197.0" style="-fx-background-color: #FFFFFFA3;" text="SIGN IN" textAlignment="CENTER" textFill="#48aaad" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="61.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="187.0">
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </JFXButton>
+            <Label alignment="CENTER" layoutX="60.0" layoutY="25.0" prefHeight="35.0" prefWidth="197.0" text="Dashboard Login" textAlignment="CENTER" textFill="#ffffffa3" AnchorPane.bottomAnchor="237.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="25.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="21.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="102.0" layoutY="263.0" prefHeight="20.0" prefWidth="114.0" text="\@ 2018" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="15.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="10.0" />
+               </font>
+            </Label>
+            <Label id="uNameReqLabel" layoutX="60.0" layoutY="60.0" prefHeight="20.0" prefWidth="155.0" />
+            <Label id="uNameReqLabel" layoutX="60.0" layoutY="165.0" prefWidth="0.0" />
+            <StackPane layoutX="275.0" prefHeight="41.0" prefWidth="41.0">
+               <children>
+                  <JFXButton id="exitButton" buttonType="RAISED" onAction="MainController.exitButtonAction" prefHeight="0.0" prefWidth="1.0" text="X" textFill="WHITE" />
+               </children>
+            </StackPane>
+         </children></AnchorPane>
+      <Label layoutX="52.0" layoutY="83.0" lineSpacing="5.0" prefHeight="104.0" prefWidth="341.0" text="AN EASY AND EFFICIENT WAY TO MANAGE ALL YOUR PATIENT RECORDS..." textFill="#3b7979" wrapText="true" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="367.0" AnchorPane.topAnchor="83.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="108.0" layoutY="31.0" prefHeight="35.0" prefWidth="261.0" text="Icon of system + Name of Syatem" AnchorPane.bottomAnchor="237.0" AnchorPane.leftAnchor="108.0" AnchorPane.rightAnchor="414.0" AnchorPane.topAnchor="25.0" />
+   </children>
+</fx:root>

@@ -1,0 +1,14 @@
+// Create a DB
+use <db_name>
+
+// Drop DB
+use <db_name>
+db.dropDatabase()
+
+// Create a collection
+db.createCollection(name, options)
+
+
+
+
+Users, Groups, Patients, Records, Invoices, Receipts

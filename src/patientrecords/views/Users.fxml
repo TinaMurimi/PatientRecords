@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox id="userDashboardPane" fx:id="userDashboardPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="845.0" prefWidth="1418.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar style="-fx-background-color: #48aaad;">
+        <menus>
+            <Menu mnemonicParsing="false" text="EyGlas">
+              <items>
+                <MenuItem mnemonicParsing="false" text=" About EyGlas" />
+                  <MenuItem mnemonicParsing="false" text="Log out" />
+                  <MenuItem mnemonicParsing="false" text="Quit EyGlas" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Tools">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Users" />
+                  <MenuItem mnemonicParsing="false" text="User Groups" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="Patients" />
+                  <MenuItem mnemonicParsing="false" text="Medical Records" />
+                  <MenuItem mnemonicParsing="false" text="Invoices" />
+                  <MenuItem mnemonicParsing="false" text="Receipts" />
+                  <MenuItem mnemonicParsing="false" text="Reports" />
+                  <MenuItem mnemonicParsing="false" text="Appointments" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <BorderPane prefHeight="776.0" prefWidth="1282.0">
+         <right>
+          <AnchorPane id="rightPane" prefHeight="682.0" prefWidth="214.0" style="-fx-background-color: #fff; -fx-border-color: #48aaad;" BorderPane.alignment="CENTER">
+            <children>
+                  <GridPane layoutX="25.0" layoutY="40.0" prefHeight="198.0" prefWidth="120.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" percentHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="0.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="0.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                      <Label contentDisplay="CENTER" prefHeight="21.0" prefWidth="106.0" style="-fx-background-color: #fff;" text=" Dashboard" textFill="#0a6061">
+                        <font>
+                            <Font name="Microsoft Sans Serif" size="16.0" />
+                        </font>
+                      </Label>
+                      <Hyperlink id="usersLink" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="24.0" prefWidth="76.0" text="Users" textFill="#48aaad" GridPane.rowIndex="1">
+                        <font>
+                            <Font name="Microsoft Sans Serif" size="13.0" />
+                        </font>
+                      </Hyperlink>
+                      <Hyperlink id="userGroupsLink" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" text="Groups" textFill="#48aaad" GridPane.rowIndex="2">
+                        <font>
+                            <Font name="Microsoft Sans Serif" size="13.0" />
+                        </font>
+                      </Hyperlink>
+                      <Hyperlink id="patientsLink" contentDisplay="CENTER" text="Patients" textFill="#48aaad" GridPane.rowIndex="3">
+                        <font>
+                            <Font name="Microsoft Sans Serif" size="13.0" />
+                        </font>
+                      </Hyperlink>
+                      <Hyperlink id="medicalRecordsLink" contentDisplay="CENTER" text="Medical Records" textFill="#48aaad" GridPane.rowIndex="4">
+                        <font>
+                            <Font name="Microsoft Sans Serif" size="13.0" />
+                        </font>
+                      </Hyperlink>
+                      <Hyperlink id="paymentsLink" contentDisplay="CENTER" text="Invoices/ Receipts" textFill="#48aaad" GridPane.rowIndex="5">
+                        <font>
+                            <Font name="Microsoft Sans Serif" size="13.0" />
+                        </font>
+                      </Hyperlink>
+                      <Hyperlink id="reportsLink" contentDisplay="CENTER" text="Reports" textFill="#48aaad" GridPane.rowIndex="6">
+                        <font>
+                            <Font name="Microsoft Sans Serif" size="13.0" />
+                        </font>
+                      </Hyperlink>
+                      <Hyperlink id="appointmentsLink" contentDisplay="CENTER" text="Appointments" textFill="#48aaad" GridPane.rowIndex="7">
+                        <font>
+                            <Font name="Microsoft Sans Serif" size="13.0" />
+                        </font>
+                      </Hyperlink>
+                     </children>
+                  </GridPane>
+            </children>
+            </AnchorPane>
+         </right>
+         <top>
+            <AnchorPane prefHeight="50.0" prefWidth="822.0" style="-fx-background-color: #fff; -fx-border-color: #48aaad;" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField id="searchField" fx:id="searchField" layoutX="37.0" layoutY="12.0" prefHeight="27.0" prefWidth="269.0" promptText="Search user" />
+                  <Button fx:id="addButton" layoutX="1110.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-color: #fff;">
+                     <graphic>
+                        <ImageView fitHeight="26.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/plus_sign_add_additional-512.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="delButton" layoutX="1154.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: #fff;">
+                     <graphic>
+                        <ImageView fitHeight="29.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/minusSign.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="searchButton" layoutX="306.0" layoutY="8.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="28.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="1069.0" AnchorPane.topAnchor="7.0">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/searchicon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TableView id="usersTableView" fx:id="usersTableView" prefHeight="681.0" prefWidth="1130.0" style="-fx-border-color: #48aaad;" tableMenuButtonVisible="true">
+                    <columns>
+                        <TableColumn id="isSelectedCol" fx:id="isSelectedCol" maxWidth="35.0" minWidth="5.0" prefWidth="35.0" resizable="false" />
+                        <TableColumn id="nameCol" fx:id="nameCol" maxWidth="300.0" minWidth="5.0" prefWidth="300.0" text="Name" />
+                      <TableColumn id="usernameCol" fx:id="usernameCol" maxWidth="200.0" prefWidth="200.0" text="Username" />
+                        <TableColumn id="jobCol" fx:id="jobCol" maxWidth="150.0" minWidth="5.0" prefWidth="150.0" text="Job Title" />
+                        <TableColumn id="isActiveCol" fx:id="isActiveCol" maxWidth="100.0" minWidth="5.0" prefWidth="100.0" resizable="false" text="Active?" />
+                      <TableColumn id="dateCreatedCol" fx:id="dateCreatedCol" maxWidth="200.0" minWidth="0.0" prefWidth="200.0" text="Date Created" />
+                        <TableColumn id="lastLoaginCol" fx:id="lastLoginCol" maxWidth="200.0" minWidth="0.0" prefWidth="200.0" text="Last Login" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </center>
+      </BorderPane>
+      <AnchorPane id="bottomPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="1280.0" style="-fx-background-color: #48aaad;">
+         <children>
+            <Label layoutX="639.0" layoutY="12.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="70.0" text="\@ 2018 EyGlas" textFill="WHITE" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="639.0" AnchorPane.rightAnchor="709.0" AnchorPane.topAnchor="12.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
