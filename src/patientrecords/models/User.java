@@ -1,5 +1,7 @@
 package patientrecords.models;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,11 +16,14 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.binding.Bindings;
 
 public class User {
 
     private static final HashMap<String, User> USERS = new HashMap<String, User>();
-    private CheckBox isSelected;
+    // private CheckBox isSelected;
+    private BooleanProperty isSelected;
+
     private final StringProperty userID;
     private final StringProperty username;
     private final StringProperty title;
@@ -38,7 +43,6 @@ public class User {
     // SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
     // private StringProperty created = dateFormat.format(currDate);
 
-
     public static User of(String username) {
         User user = USERS.get(username);
         System.out.println("USERS.get(username): " + USERS.get(username));
@@ -52,9 +56,10 @@ public class User {
         return user;
     }
 
-
     public User() {
-        this.isSelected = new CheckBox();
+        //     this.isSelected = new CheckBox();
+        this.isSelected = new SimpleBooleanProperty();
+
         this.userID = new SimpleStringProperty();
         this.username = new SimpleStringProperty();
 
@@ -70,17 +75,27 @@ public class User {
         // this.lastLoginDate = new SimpleStringProperty();
         this.lastLoginDate = new SimpleObjectProperty<>();
     }
- 
+
     // select
-    public CheckBox getIsSelected(){
+    // public CheckBox getIsSelected() {
+    //     return isSelected;
+    // }
+
+    public Boolean getIsSelected() {
+        return isSelected.get();
+    }
+
+    // public void setIsSelected(CheckBox isSelected) {
+    //this.isSelected = isSelected;
+    //}
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected.set(isSelected);
+    }
+
+    public BooleanProperty isSelectedProperty() {
         return isSelected;
     }
-    
-    public void setIsSelected(CheckBox isSelected){
-        this.isSelected = isSelected;
-    }
-    
-    
+
     // @return the username
     public void setUserID(String usesrID) {
         this.userID.set(usesrID);
@@ -118,7 +133,7 @@ public class User {
     }
     */
 
-    // @return the dateCreated
+    /** @return the dateCreated */
     public Object getDateCreated() {
         return dateCreated.get();
     }
@@ -133,10 +148,13 @@ public class User {
 
     // title
     public String getTitle() {
-        return title.get();
+        return title.get().trim();
     }
 
     public void setTitle(String title) {
+        if (title != null) {
+            title = StringUtils.capitalize(title.toLowerCase().trim());
+        }
         this.title.set(title);
     }
 
@@ -150,6 +168,9 @@ public class User {
     }
 
     public void setFirstName(String firstName) {
+        if (firstName != null) {
+            firstName = StringUtils.capitalize(firstName.toLowerCase().trim());
+        }
         this.firstName.set(firstName);
     }
 
@@ -163,6 +184,9 @@ public class User {
     }
 
     public void setLastName(String lastName) {
+        if (lastName != null) {
+            lastName = StringUtils.capitalize(lastName.toLowerCase().trim());
+        }
         this.lastName.set(lastName);
     }
 
@@ -176,11 +200,29 @@ public class User {
     }
 
     public void setOtherName(String otherName) {
+        if (otherName != null) {
+            otherName = StringUtils.capitalize(otherName.toLowerCase().trim());
+        }
         this.otherName.set(otherName);
     }
 
     public StringProperty otherNameProperty() {
         return otherName;
+    }
+
+    /**
+     * Returns a StringExpression that holds the value of the 
+     * concatenation firstName (StringProperty) and lastName (StringProperty)
+     * @return combiName (StringProperty) 
+     */
+    public StringProperty concatNameProperty() {
+        if (lastName != null) {
+            StringProperty combiName = new SimpleStringProperty();
+            combiName.bind(Bindings.concat(firstName, " ", lastName));
+            return combiName;
+        }
+        return firstName;
+
     }
 
     // job
@@ -189,6 +231,9 @@ public class User {
     }
 
     public void setJob(String jobTitle) {
+        if (jobTitle != null) {
+            jobTitle = StringUtils.capitalize(jobTitle.toLowerCase().trim());
+        }
         this.jobTitle.set(jobTitle);
     }
 

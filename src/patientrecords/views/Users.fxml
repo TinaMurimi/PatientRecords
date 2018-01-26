@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
+<?import java.net.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.shape.*?>
 <?import com.jfoenix.controls.*?>
@@ -120,7 +122,7 @@
             <AnchorPane prefHeight="50.0" prefWidth="822.0" style="-fx-background-color: #fff; -fx-border-color: #48aaad;" BorderPane.alignment="CENTER">
                <children>
                   <TextField id="searchField" fx:id="searchField" layoutX="37.0" layoutY="12.0" prefHeight="27.0" prefWidth="269.0" promptText="Search user" />
-                  <Button fx:id="addButton" layoutX="1110.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-color: #fff;">
+                  <Button fx:id="addButton" layoutX="1161.0" layoutY="11.0" mnemonicParsing="false" onAction="#addAction" style="-fx-background-color: #fff;">
                      <graphic>
                         <ImageView fitHeight="26.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -129,7 +131,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="delButton" layoutX="1154.0" layoutY="8.0" mnemonicParsing="false" style="-fx-background-color: #fff;">
+                  <Button fx:id="delButton" layoutX="1107.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-color: #fff;">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -138,11 +140,20 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="searchButton" layoutX="306.0" layoutY="8.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="28.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="1069.0" AnchorPane.topAnchor="7.0">
+                  <Button fx:id="searchButton" layoutX="306.0" layoutY="8.0" mnemonicParsing="false" onAction="#searchAction" prefHeight="29.0" prefWidth="28.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="1069.0" AnchorPane.topAnchor="7.0">
                      <graphic>
                         <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/searchicon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="undoButton" fx:id="undoButton" layoutX="340.0" layoutY="10.0" mnemonicParsing="false" onAction="#undoAction" prefHeight="29.0" prefWidth="28.0" style="-fx-background-color: #fff;">
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/undoButtonImage.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -153,15 +164,16 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <TableView id="usersTableView" fx:id="usersTableView" prefHeight="681.0" prefWidth="1130.0" style="-fx-border-color: #48aaad;" tableMenuButtonVisible="true">
+                  <TableView id="usersTableView" fx:id="usersTableView" prefHeight="681.0" prefWidth="1130.0" style="-fx-border-color: #48aaad;" stylesheets="@../styles/dashboard.css" tableMenuButtonVisible="true">
                     <columns>
                         <TableColumn id="isSelectedCol" fx:id="isSelectedCol" maxWidth="35.0" minWidth="5.0" prefWidth="35.0" resizable="false" />
-                        <TableColumn id="nameCol" fx:id="nameCol" maxWidth="300.0" minWidth="5.0" prefWidth="300.0" text="Name" />
-                      <TableColumn id="usernameCol" fx:id="usernameCol" maxWidth="200.0" prefWidth="200.0" text="Username" />
-                        <TableColumn id="jobCol" fx:id="jobCol" maxWidth="150.0" minWidth="5.0" prefWidth="150.0" text="Job Title" />
-                        <TableColumn id="isActiveCol" fx:id="isActiveCol" maxWidth="100.0" minWidth="5.0" prefWidth="100.0" resizable="false" text="Active?" />
-                      <TableColumn id="dateCreatedCol" fx:id="dateCreatedCol" maxWidth="200.0" minWidth="0.0" prefWidth="200.0" text="Date Created" />
-                        <TableColumn id="lastLoaginCol" fx:id="lastLoginCol" maxWidth="200.0" minWidth="0.0" prefWidth="200.0" text="Last Login" />
+                        <TableColumn id="lastNameCol" fx:id="lastNameCol" maxWidth="300.0" minWidth="5.0" prefWidth="145.0" text="Last Name" />
+                        <TableColumn id="concatNameCol" fx:id="concatNameCol" maxWidth="428.0" minWidth="5.0" prefWidth="240.0" text="Other Names" />
+                      <TableColumn id="usernameCol" fx:id="usernameCol" maxWidth="200.0" prefWidth="170.0" text="Username" />
+                        <TableColumn id="jobCol" fx:id="jobCol" maxWidth="188.0" minWidth="5.0" prefWidth="140.0" text="Job Title" />
+                        <TableColumn id="isActiveCol" fx:id="isActiveCol" maxWidth="1.7976931348623157E308" minWidth="5.0" prefWidth="70.0" resizable="false" text="Active?" />
+                      <TableColumn id="dateCreatedCol" fx:id="dateCreatedCol" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="200.0" sortType="DESCENDING" text="Date Created" />
+                        <TableColumn id="lastLoaginCol" fx:id="lastLoginCol" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="200.0" sortType="DESCENDING" text="Last Login" />
                     </columns>
                   </TableView>
                </children>

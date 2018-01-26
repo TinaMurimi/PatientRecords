@@ -1,2 +1,5 @@
 MainAppfiles/
 MongoDBFiles/
+build/
+dist/
+nbproject/

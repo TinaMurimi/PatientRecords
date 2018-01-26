@@ -7,17 +7,26 @@ package patientrecords.controllers;
 
 import javafx.event.ActionEvent;
 
-public interface BaseInterface {
+public interface BaseControllerInterface {
 
     public void addAction(ActionEvent event);
 
     public void deleteAction(ActionEvent event);
+    
+    /**
+     * Displays a dialogue box for confirmation of delete action
+     * @return (Boolean) 
+     */
+    public Boolean deleteConfirmation();
 
     public void editAction(ActionEvent event);
 
     public void viewAction(ActionEvent event);
 
     public void searchAction(ActionEvent event);
+    public void undoAction(ActionEvent event);
+
 
     // public void populateTableView();
 }
+

@@ -11,6 +11,7 @@ import com.mongodb.MongoCredential;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.ServerAddress;
+import com.mongodb.client.MongoDatabase;
 
 
 public class DBAuthentication {
@@ -19,7 +20,7 @@ public class DBAuthentication {
     private final String dbName = "EyGlas";
     private MongoClient mongo;
     private String errorMessage;
-    private DB db;
+    private MongoDatabase db;
     // Stores the username, authentication, and db connected
     // private final HashMap<String, HashMap<String, Object>> conn = new HashMap<String, HashMap<String, Object>>();
     private final HashMap<String, HashMap<String, Object>> conn = new HashMap<>();
@@ -42,10 +43,10 @@ public class DBAuthentication {
 
             ServerAddress serverAddress = new ServerAddress("localhost", 27017);
             mongo = new MongoClient(serverAddress, auths);
-            db = mongo.getDB(dbName);
+            db = mongo.getDatabase(dbName);
 
             // Try if the connection is successful
-            db.getCollectionNames();
+            // db.getCollection("");
             auth = true;
 
         } catch (MongoException e) {

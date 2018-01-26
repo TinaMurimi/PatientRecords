@@ -2,7 +2,7 @@ package patientrecords.controllers;
 
 // import patientrecords.Main;
 import patientrecords.models.User;
-import patientrecords.controllers.BaseInterface;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -21,7 +21,8 @@ import java.time.LocalDateTime;
 import java.util.TimeZone;
 
 import javafx.event.ActionEvent;
-import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.beans.InvalidationListener;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,29 +41,64 @@ import javafx.scene.control.Button;;
 
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
+
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Screen;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.collections.ListChangeListener;
 
 import org.bson.Document;
+import org.bson.types.ObjectId;
+import org.bson.conversions.Bson;
 
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
+
+import com.mongodb.client.result.DeleteResult;
 import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.or;
+import static com.mongodb.client.model.Filters.regex;
+
 import com.mongodb.client.model.Projections;
+import java.util.*;
+import javafx.beans.Observable;
+import javafx.beans.binding.ListBinding;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBoxBuilder;
+import javafx.scene.control.SelectionMode;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
-public class UserDashboardController implements BaseInterface, Initializable {
+public class UserDashboardController extends BaseController implements Initializable {
 
     private UserDashboardController main;
-    private ObservableList<User> userList;
-
     private Stage stage;
-    private DB db;
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
+    private MongoDatabase db;
+    private MongoCollection<Document> collection;
+    private ObservableList<User> userList;
+    // private ArrayList<Document> userList;
+    //    private final List<String> delList = new ArrayList<>();
+
+    // Dashboard CSS file URL
+    private final URL url = this.getClass().getResource("/patientrecords/styles/dashboard.css");
 
     @FXML
     private TextField searchField;
@@ -75,6 +111,12 @@ public class UserDashboardController implements BaseInterface, Initializable {
 
     @FXML
     private TableColumn<User, String> nameCol;
+
+    @FXML
+    private TableColumn<User, String> lastNameCol;
+
+    @FXML
+    private TableColumn<User, String> concatNameCol;
 
     @FXML
     private TableColumn<User, String> usernameCol;
@@ -92,7 +134,7 @@ public class UserDashboardController implements BaseInterface, Initializable {
     private TableColumn<User, LocalDateTime> lastLoginCol;
 
     @FXML
-    private TableColumn<User, String> isSelectedCol;
+    private TableColumn<User, Boolean> isSelectedCol;
 
     @FXML // fx:id="searchButton"
     private Button searchButton; // Value injected by FXMLLoader
@@ -103,16 +145,16 @@ public class UserDashboardController implements BaseInterface, Initializable {
     @FXML // fx:id="addButton"
     private Button addButton;
 
-    private CheckBox selectAll; // TODO
+    @FXML // fx:id="undoButton"
+    private Button undoButton;
 
-    // final TableColumn<Os, Boolean> loadedColumn = new TableColumn<>( "Delete" );
-    // loadedColumn.setCellValueFactory( new PropertyValueFactory<>( "delete" ));
-    // loadedColumn.setCellFactory( tc -> new CheckBoxTableCell<>());
-    // columns.add( loadedColumn );
+    private CheckBox selectAllCheckBox;
 
-    public void userDashboardLoader(Stage stage, DB db) {
+    public void userDashboardLoader(Stage stage, MongoDatabase db) {
         this.stage = stage;
         this.db = db;
+        this.collection = db.getCollection("Users");
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/patientrecords/views/Users.fxml"));
         loader.setController(this);
@@ -124,105 +166,96 @@ public class UserDashboardController implements BaseInterface, Initializable {
         }
 
         try {
-            Scene scene = new Scene(userDashboardPane, 1280, 800);
+            // Scene scene = new Scene(userDashboardPane, 720, 745);
+            Scene scene = new Scene(userDashboardPane, 1420, 845);
+
+            // Add css file
+            if (url != null) {
+                String css = url.toExternalForm();
+                scene.getStylesheets().add(css);
+            } else {
+                System.out.println("CSS URL not found!");
+            }
+
             stage.setTitle("Users");
             stage.setScene(scene);
             stage.setFullScreen(true);
+
+            stage.addEventHandler(WindowEvent.WINDOW_SHOWN, (WindowEvent event) -> {
+                Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+                stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2);
+                stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
+            });
             stage.show();
+
         } catch (Exception e) {
-            Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
         }
 
         // ((Node)(event.getSource())).getScene().getWindow().hide();
-
-        parseUserList();
     }
 
     public void setMain(UserDashboardController main) {
         this.main = main;
     }
 
-    /** TODO: UseDashBoardController
-     * 1. Delete button
-     * 2. TableView with items that are clickable
-     * 3. Create repo from existing folder on local machine
-     * 4. Pagination in Java (Show first x records, next + previous page)
-     * 5. TableView with items with checkboxes
+    @FXML
+    public void populateUsers(ObservableList<User> userData) throws ClassNotFoundException {
+        // Display row data usersTableView
+        setSelectAllCheckBox();
+        usersTableView.setItems(userData);
+        // usersTableView.getItems().setAll(parseUserList());
+    }
+
+    /** TODO: UseDashBoardController Pagination
+     * 1. Pagination in Java (Show first x records, next + previous page)
     
      */
 
-    /**
-     * Parses MongoDB Date to LocalDateTime
-     * @param date (String) Date from MongoDB to be parsed
-     * @return (LocalDateTime) parsed local date time
-     */
-    public LocalDateTime mongoDateToLDT(String date) {
-        if (date.startsWith("TS time:")) {
-            date = date.substring(8);
-        }
-
-        if (date.contains("inc:1")) {
-            date = date.replace("inc:1", "");
-        }
-
-        date = date.trim();
-        final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss zzz yyyy");
-
-        // The parsed date
-        final LocalDateTime parsed = LocalDateTime.parse(date, inputFormat);
-        return parsed;
-    }
-
-    /**
-     * @param  parsedDate (LocalDateTime) to format
-     * @return (String) parsed local date time
-     */
-    public String LDTToString(LocalDateTime parsedDate) {
-        // Convert LocalDateTime to String
-        final DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        return outputFormat.format(parsedDate);
-    }
-
-    private ObservableList<User> parseUserList() {
+    private ObservableList<User> parseUserList(FindIterable<Document> result) {
         userList = FXCollections.observableArrayList();
+        //        String searchText = searchField.getText().trim();
+        //        FindIterable<Document> result;
 
+        // TODO: Dialogue box if user has not permission to perform CRUD action
+        // Throw error if user has no access to User collection
         try {
-
-            DBCollection collection = db.getCollection("Users");
-            BasicDBObject searchObject = new BasicDBObject();
-
-            String searchText = searchField.getText();
-
-            if (searchText != null) {
-                searchObject = new BasicDBObject();
-                searchObject.put("username", Pattern.compile(Pattern.quote(searchText)));
+            /**
+            if (searchText != null && !searchText.equals(" ")) {
+                // query = new Document("username", searchText);
+                Bson query = or(regex("username", searchText), regex("lastname", searchText),
+                        regex("firstname", searchText));
+                result = collection.find(query);
+            } else {
+                Document query = new Document();
+                result = collection.find(query);
             }
+            */
 
-            BasicDBObject fieldObject = new BasicDBObject();
-            fieldObject.put("password", 0);
-            // fieldObject.put("_id", 0);
+            // Iterate throught the result
+            if (result == null) {
+                System.out.println("No results found");
 
-            DBCursor cursor = collection.find(searchObject, fieldObject).sort(new BasicDBObject("lastname", 1));
-            if (cursor != null && cursor.count() > 0) {
+            } else {
 
-                for (DBObject current : cursor) {
+                MongoCursor<Document> cursor = result.iterator();
+                while (cursor.hasNext()) {
                     User user = new User();
-                    DBObject doc = cursor.next();
+                    Document doc = cursor.next();
 
                     user.setUserID(doc.get("_id").toString());
                     user.setUsername(doc.get("username").toString());
 
-                    String title = doc.get("title").toString() == null ? "" : doc.get("title").toString();
+                    String title = doc.get("title") == null ? null : doc.get("title").toString();
                     user.setTitle(title);
 
                     user.setFirstName(doc.get("firstname").toString());
                     user.setLastName(doc.get("lastname").toString());
 
-                    String otherName = doc.get("othername").toString() == null ? "" : doc.get("othername").toString();
+                    String otherName = doc.get("othername") == null ? null : doc.get("othername").toString();
                     user.setOtherName(otherName);
 
-                    String jobTitle = doc.get("job").toString() == null ? "" : doc.get("job").toString();
+                    String jobTitle = doc.get("job") == null ? null : doc.get("job").toString();
                     user.setJob(jobTitle);
 
                     user.setIsActive(Boolean.valueOf(doc.get("active").toString()));
@@ -242,25 +275,52 @@ public class UserDashboardController implements BaseInterface, Initializable {
             }
 
         } catch (Exception e) {
-            Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, null, e);
+            logger.log(Level.SEVERE, "Unable to parse user-list successfully", e);
         }
 
         return userList;
     }
 
-    // Populate Users for TableView
-    @FXML
-    public void populateUsers(ObservableList<User> userData) throws ClassNotFoundException {
-        // Display row data usersTableView
-        usersTableView.setItems(userData);
-        // usersTableView.getItems().setAll(parseUserList());
+    /**
+     * Returns a list of documents (user) in the collection Users that match the pattern in searchField
+     * @return userData (FindIterable<Document>)
+     */
+    private FindIterable<Document> searchItems() {
+        String searchText = searchField.getText().trim();
+        FindIterable<Document> result;
+
+        if (searchText != null && !searchText.equals(" ")) {
+            // query = new Document("username", searchText);
+            Bson query = or(regex("username", searchText), regex("lastname", searchText),
+                    regex("firstname", searchText));
+            result = collection.find(query);
+        } else {
+            result = listAllItems(collection);
+        }
+
+        return result;
     }
 
     @FXML
     @Override
     public void searchAction(ActionEvent event) {
-        //TODO
+        try {
+            FindIterable<Document> result = searchItems();
+            populateUsers(parseUserList(result));
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "Search action failed", e);
+        }
+    }
+
+    @FXML
+    @Override
+    public void undoAction(ActionEvent event) {
+        try {
+            FindIterable<Document> result = listAllItems(collection);
+            populateUsers(parseUserList(result));
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, null, e);
+        }
     }
 
     @FXML
@@ -275,36 +335,114 @@ public class UserDashboardController implements BaseInterface, Initializable {
         //TODO
     }
 
+    @FXML
     @Override
     public void editAction(ActionEvent event) {
         // Pass
     }
 
+    /**
+     * Delete a document or multiple selected documents from Users COllection
+    */
     @FXML
     @Override
     public void deleteAction(ActionEvent event) {
-        ObservableList<User> delList = FXCollections.observableArrayList();
-        /**
-        for (User user : userList){
-            if (user.getIsSelected().isSelected()){
-                delList.add(user);
-            }
-        }
-        */
+        // ObservableList<User> delList = FXCollections.observableArrayList();
+        final List<ObjectId> delList = new ArrayList<>();
 
-        userList.stream().filter((user) -> (user.getIsSelected().isSelected())).forEachOrdered((user) -> {
-            delList.add(user);
+        usersTableView.getItems().stream().filter((user) -> (user.getIsSelected())).forEachOrdered((user) -> {
+            delList.add(new ObjectId(user.getUserID()));
         });
 
-        System.out.println("-------------- deleteUser --------------");
-        System.out.println(delList);
+        // Require user to confirm before deleting
+        if (deleteConfirmation()) {
 
-        // TODO: Delete users in list from DB
+            // Throw exception if user does not have access permission to Collection, "User"
+            try {
+
+                // DBObject query = new BasicDBObject();
+                // query.put("_id", new BasicDBObject("$in", delList));
+
+                Bson condition = new Document("$in", delList);
+                Bson filter = new Document("_id", condition);
+                collection.deleteMany(filter);
+                collection.count();
+
+                //
+                //Removes the selected documents in the User collection
+                // collection.remove(query);
+
+                // Refresh usersTableView
+                setSelectAllCheckBox(); // Ensure isSelected checkbox is removed after a document is deleted
+                FindIterable<Document> result = listAllItems(collection);
+                populateUsers(parseUserList(result));
+
+                System.out.println("--------------DELETED--------------");
+
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "User not deleted successfully", e);
+            }
+
+        } else {
+            System.out.println("-------------- deleteUser NOT confirmed --------------");
+        }
+    }
+
+    /**
+     * Adds an EventHandler to the CheckBox to select/deselect all users in table
+     * The EventHandler sets forEach user.isSelected: true when the selectAllCheckBox is checked
+     * else false
+     * @return selectAllCheckBox (CheckBox)
+     */
+    public CheckBox getSelectAllCheckBox() {
+        if (selectAllCheckBox == null) {
+            final CheckBox selectAllCheckBox = CheckBoxBuilder.create().build();
+
+            // Adding EventHandler to the CheckBox to select/deselect all users in table.
+            selectAllCheckBox.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    // Setting the value in all the users
+                    usersTableView.getItems().forEach((user) -> {
+                        user.setIsSelected(selectAllCheckBox.isSelected());
+                    });
+                }
+            });
+
+            this.selectAllCheckBox = selectAllCheckBox;
+        }
+        return selectAllCheckBox;
+    }
+
+    public void setSelectAllCheckBox() {
+        // An additional coloumn for isSelected Checkbox
+        isSelectedCol.setGraphic(getSelectAllCheckBox());
+        isSelectedCol.setCellValueFactory(cellData -> cellData.getValue().isSelectedProperty());
+        isSelectedCol.setCellFactory((TableColumn<User, Boolean> p) -> {
+            final TableCell<User, Boolean> cell = new TableCell<User, Boolean>() {
+                @Override
+                public void updateItem(final Boolean item, boolean empty) {
+                    if (item == null)
+                        return;
+                    super.updateItem(item, empty);
+                    if (!isEmpty()) {
+                        final User user = getTableView().getItems().get(getIndex());
+                        CheckBox checkBox = new CheckBox();
+                        checkBox.selectedProperty().bindBidirectional(user.isSelectedProperty());
+                        // checkBox.setOnAction(selectColCheckBoxEvent);
+                        setGraphic(checkBox);
+                    }
+                }
+            };
+            cell.setAlignment(Pos.CENTER_LEFT);
+            return cell;
+        });
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        nameCol.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
+        lastNameCol.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+        concatNameCol.setCellValueFactory(cellData -> cellData.getValue().concatNameProperty());
         usernameCol.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
         jobCol.setCellValueFactory(cellData -> cellData.getValue().jobProperty());
 
@@ -314,16 +452,110 @@ public class UserDashboardController implements BaseInterface, Initializable {
         dateCreatedCol.setCellValueFactory(cellData -> cellData.getValue().dateCreatedProperty());
         lastLoginCol.setCellValueFactory(cellData -> cellData.getValue().lastLoginProperty());
 
-        isSelectedCol.setCellValueFactory(new PropertyValueFactory<>("isSelected"));
-        //        isSelectedCol.setCellFactory(CheckBoxTableCell.forTableColumn(isSelectedCol));
+        // An additional coloumn for isSelected Checkbox
+        setSelectAllCheckBox();
+
+        ListBinding<Boolean> lb = new ListBinding<Boolean>() {
+            {
+                bind(usersTableView.getItems());
+            }
+
+            @Override
+            protected ObservableList<Boolean> computeValue() {
+                ObservableList<Boolean> list = FXCollections.observableArrayList();
+                usersTableView.getItems().forEach((p) -> {
+                    list.add(p.getIsSelected());
+                });
+
+                return list;
+            }
+        };
+
+        lb.addListener((ObservableValue<? extends ObservableList<Boolean>> arg0, ObservableList<Boolean> arg1,
+                ObservableList<Boolean> l) -> {
+            selectAllCheckBox.indeterminateProperty().set(true);
+            selectAllCheckBox.setAllowIndeterminate(false);
+
+            // Checking for an unselected user in the table view.      
+            boolean unSelectedFlag = false;
+            for (boolean b : l) {
+                if (!b) {
+                    unSelectedFlag = true;
+                    break;
+                }
+            }
+
+            /*
+            * If at least one user is not selected, then deselecting the check box in the table column header, 
+            * else if all users are selected, then selecting the check box in the header.
+            */
+            if (unSelectedFlag) {
+                getSelectAllCheckBox().setSelected(false);
+            } else {
+                getSelectAllCheckBox().setSelected(true);
+            }
+
+            // Checking for a selected user in the table view.
+            boolean selectedFlag = false;
+            for (boolean b : l) {
+                if (!b) {
+                    selectedFlag = true;
+                    break;
+                }
+            }
+
+            /**
+             * If at least one user is selected, then display the "Delete" button,
+             * else if none of the users are selected,
+             * then hide the "Delete" button.
+             */
+            if (selectedFlag) {
+                delButton.setVisible(true);
+            } else {
+                delButton.setVisible(false);
+
+            }
+        });
+
+        usersTableView.getItems().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable arg0) {
+                System.out.println("invalidated");
+            }
+        });
+
+        //        usersTableView.getItems().addListener((ListChangeListener.Change<? extends User> arg0) -> {
+        //            System.out.println("changed");
+        //        });
+
+        usersTableView.getItems().addListener(new ListChangeListener<User>() {
+            @Override
+            public void onChanged(javafx.collections.ListChangeListener.Change<? extends User> arg0) {
+                System.out.println("changed");
+            }
+        });
+
+        // Detect double click
+        usersTableView.setRowFactory(tv -> {
+            TableRow<User> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                    User rowData = row.getItem();
+                    System.out.println("Double click on: " + rowData.getUsername());
+                }
+            });
+            return row;
+        });
+
+        // Allow for selection of multiple rows
+        // usersTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         try {
-            populateUsers(parseUserList());
+            FindIterable<Document> result = listAllItems(collection);
+            populateUsers(parseUserList(result));
         } catch (ClassNotFoundException e) {
-            Logger logger = Logger.getLogger(getClass().getName());
-            logger.log(Level.SEVERE, null, e);
+            logger.log(Level.SEVERE, "userTableView not populated sucessfully", e);
         } catch (Exception e) {
-            Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, null, e);
         }
 

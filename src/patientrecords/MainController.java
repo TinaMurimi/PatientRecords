@@ -23,9 +23,11 @@ import javafx.beans.value.ObservableValue;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXPasswordField;
 import com.mongodb.DB;
+import com.mongodb.client.MongoDatabase;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 
 import patientrecords.authentication.DBAuthentication;
-import patientrecords.authentication.UserCredentials;
 import patientrecords.controllers.DashboardController;
 
 
@@ -83,11 +85,15 @@ public class MainController implements Initializable {
 
         // scene on stage
         Scene scene = new Scene(rootPane, 760, 297);
-        stage.initStyle(StageStyle.UNDECORATED);
+        // stage.initStyle(StageStyle.UNDECORATED);
         stage.setTitle("Patient Management System");
         stage.setScene(scene);
         stage.setFullScreen(false);
         stage.show();
+        
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
+        stage.setY((primScreenBounds.getHeight() - stage.getHeight()) / 2);   
     }
 
     //     connect main class to controller
@@ -114,12 +120,14 @@ public class MainController implements Initializable {
             DBAuthentication dbAuth = new DBAuthentication(username, password);
             HashMap<String, HashMap<String, Object>> conn = dbAuth.getConn();
             Boolean auth = (Boolean) conn.get(username).get("auth");
-            DB db = (DB) conn.get(username).get("database");
+            MongoDatabase db = (MongoDatabase) conn.get(username).get("database");
         
 //            if (auth) {
 //                // errorMsgLabel.setText("Login successful");
                 DashboardController dc = new DashboardController();
                 dc.dashboardLoader(stage, db);
+                
+                // TODO: Update lastLogin in User db.collections
 //                
 //                
 //            } else {

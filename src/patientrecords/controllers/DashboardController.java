@@ -14,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Hyperlink;
 
 import com.mongodb.DB;
+import com.mongodb.client.MongoDatabase;
 
 import patientrecords.Main;
 
@@ -21,7 +22,7 @@ public class DashboardController {
 
     private Main main;
     private Stage stage;
-    private DB db;
+    private MongoDatabase db;
 
     @FXML
     public VBox dashboardPane;
@@ -29,7 +30,7 @@ public class DashboardController {
     @FXML
     private Hyperlink userlink;
 
-    public void dashboardLoader(Stage stage, DB db) {
+    public void dashboardLoader(Stage stage, MongoDatabase db) {
         this.stage = stage;
         this.db = db;
         FXMLLoader loader = new FXMLLoader();
