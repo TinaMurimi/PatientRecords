@@ -19,14 +19,6 @@
 <?import de.jensd.fx.glyphs.GlyphsBuilder?>
 
 
-
-<!-- fx:controller="patientrecords.MainController" attribute is required when you specify
-controller-based event handlers in your markup. The xmlns:fx attribute is always
-required and specifies the fx namespace. -->
-
-<!--<fx:root type="javafx.scene.layout.AnchorPane" fx:id = "rootPane" maxHeight="1.7976931348623157E308" 
-maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="297.0" prefWidth="760.0"
-            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">-->
 <AnchorPane fx:id="rootPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
             minHeight="-Infinity" minWidth="-Infinity" prefHeight="297.0" prefWidth="760.0"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
@@ -51,22 +43,12 @@ maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" pre
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
-               <!-- <validators>
-                    <RequiredFieldValidator message="Username Required!">
-                        <FontAwesomeIconView glyphName="WARNING" style="-fx-font-family: FontAwesome;"/>
-                    </RequiredFieldValidator>
-                </validators> -->
             </JFXTextField>
             <JFXPasswordField fx:id="password_field" id="password_field" focusColor="#3d7172" layoutX="60.0" layoutY="117.0" prefHeight="35.0" prefWidth="300.0" promptText="Enter Password" 
                               style="-fx-prompt-text-fill: #FFFFFFA3;-fx-text-fill: #FFFFFF;" unFocusColor="WHITE" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="120.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
-<!--               <validators>
-                    <RequiredFieldValidator message="Password Required!">
-                        <FontAwesomeIconView glyphName="WARNING" style="-fx-font-family: FontAwesome;"/>
-                    </RequiredFieldValidator>
-                </validators>-->
             </JFXPasswordField>
 
             <JFXButton fx:id="signinButton" id="signinButton" layoutX="61.0" layoutY="187.0" 
@@ -74,12 +56,12 @@ maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" pre
                        style="-fx-background-color: #FFFFFFA3;" text="SIGN IN" textAlignment="CENTER" 
                        textFill="#48aaad" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="61.0" 
                        AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="187.0">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font>
+                <padding>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </padding>
+                <font>
+                    <Font name="Microsoft Sans Serif" size="13.0" />
+                </font>
             </JFXButton>
 
             <Label fx:id="errorMsgLabel" id="errorMsgLabel" layoutX="60.0" layoutY="235.0" prefHeight="27.0" prefWidth="197.0" textFill="#e00707" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="235.0">
@@ -130,5 +112,4 @@ maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" pre
 
       <Label layoutX="108.0" layoutY="31.0" prefHeight="35.0" prefWidth="261.0" text="Icon of system + Name of Syatem" AnchorPane.bottomAnchor="237.0" AnchorPane.leftAnchor="108.0" AnchorPane.rightAnchor="414.0" AnchorPane.topAnchor="25.0" />
    </children>
-<!--</fx:root>-->
 </AnchorPane>

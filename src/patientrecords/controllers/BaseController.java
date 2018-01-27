@@ -95,6 +95,7 @@ public abstract class BaseController implements BaseControllerInterface {
     
     /**
      * Returns a list of all the documents in the collection provided
+     * @param collection (MongoCollection) Collection to query
      * @return itemData (FindIterable<Document>)
      */
     public FindIterable<Document> listAllItems(MongoCollection collection){
@@ -104,6 +105,7 @@ public abstract class BaseController implements BaseControllerInterface {
         return result;
     }
     
+    @Override
     public void undoAction(ActionEvent event){
         // TODO
     }

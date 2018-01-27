@@ -201,10 +201,12 @@ public class UserDashboardController extends BaseController implements Initializ
 
     @FXML
     public void populateUsers(ObservableList<User> userData) throws ClassNotFoundException {
-        // Display row data usersTableView
+        
+        // Ensure isSelected checkbox is removed after a document is deleted
         setSelectAllCheckBox();
+        
+        // Display row data usersTableView
         usersTableView.setItems(userData);
-        // usersTableView.getItems().setAll(parseUserList());
     }
 
     /** TODO: UseDashBoardController Pagination
@@ -359,26 +361,15 @@ public class UserDashboardController extends BaseController implements Initializ
 
             // Throw exception if user does not have access permission to Collection, "User"
             try {
-
-                // DBObject query = new BasicDBObject();
-                // query.put("_id", new BasicDBObject("$in", delList));
-
                 Bson condition = new Document("$in", delList);
                 Bson filter = new Document("_id", condition);
-                collection.deleteMany(filter);
-                collection.count();
-
-                //
+                
                 //Removes the selected documents in the User collection
-                // collection.remove(query);
+                collection.deleteMany(filter);
 
                 // Refresh usersTableView
-                setSelectAllCheckBox(); // Ensure isSelected checkbox is removed after a document is deleted
                 FindIterable<Document> result = listAllItems(collection);
                 populateUsers(parseUserList(result));
-
-                System.out.println("--------------DELETED--------------");
-
             } catch (Exception e) {
                 logger.log(Level.SEVERE, "User not deleted successfully", e);
             }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import com.jfoenix.validation.*?>
 <?import javafx.scene.text.*?>
 <?import com.jfoenix.controls.*?>
@@ -9,132 +10,76 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="577.0" prefWidth="955.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <bottom>
-      <AnchorPane prefHeight="50.0" prefWidth="955.0" style="-fx-background-color: #48aaad;" BorderPane.alignment="CENTER">
-         <children>
-            <Label alignment="CENTER" layoutX="431.0" layoutY="14.0" prefHeight="20.0" prefWidth="93.0" text="\@ 2018 EyGlas" textFill="WHITE" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="431.0" AnchorPane.rightAnchor="431.0" AnchorPane.topAnchor="14.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="10.0" />
-               </font>
-            </Label>
-         </children></AnchorPane>
-   </bottom>
-   <top>
-      <AnchorPane prefHeight="50.0" prefWidth="1150.0" style="-fx-background-color: #48aaad;" BorderPane.alignment="CENTER">
-         <children>
-            <JFXButton layoutX="911.0" layoutY="11.0" prefHeight="29.0" prefWidth="34.0" 
-                       style="-fx-background-color: #e00707;" text="X" textFill="WHITE" 
-                       AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="911.0" 
-                       AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="11.0">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </JFXButton>
-            <TextField id="searchUserField" layoutX="242.0" layoutY="9.0" prefHeight="35.0" prefWidth="293.0" promptText="Search User" style="-fx-border-color: #48aaad;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="242.0" AnchorPane.topAnchor="9.0">
+<AnchorPane id="pane" fx:id="createUserDashboard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="450.0" styleClass="pane" stylesheets="@../styles/form.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+      <children>
+            <JFXPasswordField fx:id="passwordField" focusColor="#07595a" layoutX="42.0" layoutY="301.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Password" styleClass="jfx-password-field" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="301.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
-            </TextField>
-         </children></AnchorPane>
-   </top>
-   <center>
-      <AnchorPane prefHeight="477.0" prefWidth="555.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="207.0" layoutY="40.0" prefHeight="35.0" prefWidth="141.0" 
-                   text="Create New User" textFill="#0a6061" AnchorPane.bottomAnchor="402.0" 
-                   AnchorPane.leftAnchor="207.0" AnchorPane.rightAnchor="207.0" AnchorPane.topAnchor="40.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="18.0" />
-               </font>
-            </Label>
-            <JFXTextField id="UTitle" focusColor="#07595a" layoutX="42.0" layoutY="103.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Title" unFocusColor="#48aaad" AnchorPane.bottomAnchor="344.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="103.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font></JFXTextField>
-            <JFXTextField id="uFName" focusColor="#07595a" layoutX="42.0" layoutY="171.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter First Name" unFocusColor="#44aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font></JFXTextField>
-            <JFXPasswordField id="uPassword" focusColor="#07595a" layoutX="42.0" layoutY="307.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Password" unFocusColor="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font></JFXPasswordField>
-            <JFXTextField id="uLName" focusColor="#07595a" layoutX="293.0" layoutY="103.0" 
-                          prefHeight="30.0" prefWidth="220.0" promptText="Enter Last Name" 
-                          unFocusColor="#44aaad" AnchorPane.leftAnchor="293.0" AnchorPane.rightAnchor="42.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font></JFXTextField>
-            <JFXTextField id="uOName" focusColor="#07595a" layoutX="293.0" layoutY="171.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Other Name" unFocusColor="#44aaad" AnchorPane.leftAnchor="293.0" AnchorPane.rightAnchor="42.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font></JFXTextField>
-            <JFXPasswordField id="uConfirmPassword" focusColor="#07595a" layoutX="293.0" layoutY="307.0" prefHeight="30.0" prefWidth="220.0" promptText="Confirm Password" unFocusColor="#48aaad" AnchorPane.leftAnchor="293.0" AnchorPane.rightAnchor="42.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font></JFXPasswordField>
-            <JFXButton id="saveButton" layoutX="148.0" layoutY="409.0" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #48AAAD;" text="Save" textFill="WHITE" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="287.0" AnchorPane.topAnchor="409.0">
+      </JFXPasswordField>
+            <JFXTextField id="uLName" fx:id="lastNameField" focusColor="#07595a" layoutX="245.0" layoutY="97.0" prefHeight="30.0" prefWidth="170.0" promptText="Enter Last Name" stylesheets="@../styles/form.css" unFocusColor="#44aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="97.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
-            </JFXButton>
-            <Label layoutX="42.0" layoutY="139.0" text="Title" textFill="#48aaad">
+      </JFXTextField>
+            <JFXTextField id="username" fx:id="userNameField" focusColor="#07595a" layoutX="259.0" layoutY="165.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Username" stylesheets="@../styles/form.css" unFocusColor="#44aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="165.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+      </JFXTextField>
+               
+                        <JFXComboBox id="userGroup" fx:id="uGroupField" focusColor="#07595a" layoutX="259.0" layoutY="233.0" prefHeight="30.0" prefWidth="148.0" promptText="Select User Group" styleClass="jfx-combo-box" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="233.0" />
+            <JFXPasswordField fx:id="confirmPwdField" focusColor="#07595a" layoutX="259.0" layoutY="301.0" prefHeight="30.0" prefWidth="220.0" promptText="Confirm Password" styleClass="jfx-password-field" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="301.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+      </JFXPasswordField>
+            <Label layoutX="42.0" layoutY="133.0" prefHeight="16.0" prefWidth="30.0" text="Title" textFill="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="133.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="293.0" layoutY="139.0" text="Last Name" textFill="#48aaad">
+            <Label layoutX="259.0" layoutY="133.0" prefHeight="16.0" prefWidth="66.0" text="Last Name" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="133.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="293.0" layoutY="207.0" text="Other Name" textFill="#48aaad">
+            <Label layoutX="259.0" layoutY="201.0" prefHeight="16.0" prefWidth="75.0" text="Username" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="201.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="207.0" text="First Name" textFill="#48aaad">
+            <Label layoutX="42.0" layoutY="201.0" prefHeight="16.0" prefWidth="30.0" text="Other Name" textFill="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="201.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="275.0" text="Job Title" textFill="#48aaad">
+            <Label layoutX="42.0" layoutY="269.0" prefHeight="16.0" prefWidth="30.0" text="Job Title" textFill="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="269.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </Label>
-            <JFXTextField id="uJobTitle" focusColor="#07595a" layoutX="42.0" layoutY="239.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Job Title" unFocusColor="#44aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0">
+            <JFXTextField id="uJobTitle" fx:id="jobTitleField" focusColor="#07595a" layoutX="42.0" layoutY="233.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Job Title" stylesheets="@../styles/form.css" unFocusColor="#44aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="233.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </JFXTextField>
-            <Label layoutX="42.0" layoutY="343.0" text="New Password" textFill="#48aaad">
+            <Label layoutX="42.0" layoutY="337.0" prefHeight="16.0" prefWidth="30.0" text="New Password" textFill="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="337.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="293.0" layoutY="343.0" text="Confirm Password" textFill="#48aaad">
+            <Label layoutX="259.0" layoutY="337.0" prefHeight="16.0" prefWidth="121.0" text="Confirm Password" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="84.0" AnchorPane.topAnchor="337.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </Label>
-            <JFXTextField id="uGroup" focusColor="#07595a" layoutX="293.0" layoutY="239.0" prefHeight="30.0" prefWidth="220.0" promptText="Select User Group" unFocusColor="#44aaad" AnchorPane.leftAnchor="293.0" AnchorPane.rightAnchor="42.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font>
-            </JFXTextField>
-            <Label layoutX="293.0" layoutY="275.0" text="User Group" textFill="#48aaad">
+            <Label layoutX="259.0" layoutY="269.0" prefHeight="16.0" prefWidth="71.0" text="User Group" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="269.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </Label>
-            <JFXButton id="cancelButton" layoutX="287.0" layoutY="409.0" prefHeight="35.0" prefWidth="120.0" style="-fx-background-color: #48AAAD;" text="Cancel" textFill="WHITE" AnchorPane.bottomAnchor="33.0" AnchorPane.leftAnchor="287.0" AnchorPane.rightAnchor="148.0" AnchorPane.topAnchor="409.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font>
-            </JFXButton>
-            <JFXButton layoutX="485.0" layoutY="238.0" prefHeight="33.0" prefWidth="35.0" text="+" textFill="#48aaad" AnchorPane.leftAnchor="485.0" AnchorPane.rightAnchor="38.0">
+            <JFXButton id="newGroupButton" fx:id="newGroupButton" layoutX="384.0" layoutY="237.0" prefHeight="33.0" prefWidth="39.0" styleClass="addGroupButton" text="+" textFill="#48aaad" AnchorPane.leftAnchor="384.0" AnchorPane.rightAnchor="27.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="18.0" />
                </font>
@@ -142,60 +87,63 @@
                   <Tooltip text="Create new user group" />
                </tooltip>
             </JFXButton>
-         </children>
-      </AnchorPane>
-   </center>
-   <right>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="477.0" prefWidth="200.0" style="-fx-border-color: #48aaad;" BorderPane.alignment="CENTER">
-         <children>
-            <Label layoutX="30.0" layoutY="70.0" prefHeight="21.0" prefWidth="97.0" text="Dashboard" textFill="#0a6061" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="72.0" AnchorPane.topAnchor="68.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="16.0" />
-               </font>
-            </Label>
-            <Hyperlink id="usersLink" layoutX="30.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" text="Users" textFill="#48aaad" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="95.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font>
-            </Hyperlink>
-            <Hyperlink id="patientsLink" layoutX="30.0" layoutY="145.0" text="Patients" textFill="#48aaad" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="145.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font>
-            </Hyperlink>
-            <Hyperlink id="paymentsLink" layoutX="30.0" layoutY="195.0" text="Invoices/ Receipts" textFill="#48aaad" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="195.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font>
-            </Hyperlink>
-            <Hyperlink id="medicalRecordsLink" layoutX="30.0" layoutY="170.0" text="Medical Records" textFill="#48aaad" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="170.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font>
-            </Hyperlink>
-            <Hyperlink id="reportsLink" layoutX="30.0" layoutY="220.0" text="Reports" textFill="#48aaad" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="220.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font>
-            </Hyperlink>
-            <Hyperlink id="appointmentsLink" layoutX="30.0" layoutY="245.0" text="Appointments" textFill="#48aaad" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="245.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font>
-            </Hyperlink>
-            <Hyperlink id="userGroupsLink" layoutX="36.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="56.0" text="Groups" textFill="#48aaad" AnchorPane.bottomAnchor="344.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="109.0" AnchorPane.topAnchor="120.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font>
-            </Hyperlink>
-         </children>
-      </AnchorPane>
-   </right>
-   <left>
-      <AnchorPane prefHeight="477.0" prefWidth="200.0" style="-fx-border-color: #48aaad;" BorderPane.alignment="CENTER">
-         <children>
-            <ListView layoutX="9.0" layoutY="68.0" prefHeight="386.0" prefWidth="183.0" />
-         </children>
-      </AnchorPane>
-   </left>
-</BorderPane>
+      <Label layoutX="154.0" layoutY="28.0" prefHeight="25.0" prefWidth="142.0" styleClass="titleLabel" stylesheets="@../styles/form.css" text="Create New User" textFill="#48aaad">
+         <font>
+            <Font name="Microsoft Sans Serif" size="31.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="198.0" layoutY="307.0" prefHeight="10.0" prefWidth="7.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="198.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="307.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="398.0" layoutY="102.0" prefHeight="10.0" prefWidth="10.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED" AnchorPane.leftAnchor="398.0" AnchorPane.rightAnchor="42.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="398.0" layoutY="168.0" prefHeight="10.0" prefWidth="10.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED" AnchorPane.leftAnchor="398.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="168.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="168.0" prefHeight="14.0" prefWidth="10.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="168.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="400.0" layoutY="307.0" prefHeight="10.0" prefWidth="7.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED" AnchorPane.bottomAnchor="159.0" AnchorPane.topAnchor="307.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label id="errorMsgLabel" fx:id="errorMsgLabel" layoutX="38.0" layoutY="63.0" prefHeight="25.0" prefWidth="366.0" styleClass="errorLabel" stylesheets="@../styles/form.css" textFill="RED" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <JFXComboBox id="userTitle" fx:id="uTitle" focusColor="#07595a" layoutX="42.0" layoutY="97.0" prefHeight="30.0" prefWidth="163.0" promptText="Select Title" styleClass="jfx-combo-box" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="97.0" />
+      <JFXButton id="saveButton" fx:id="saveButton" layoutX="115.0" layoutY="426.0" prefHeight="30.0" prefWidth="90.0" text="Save" textFill="#48aaad" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="245.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="18.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Create new user group" />
+         </tooltip>
+      </JFXButton>
+      <JFXButton id="cancelButton" fx:id="cancelButton" cancelButton="true" layoutX="245.0" layoutY="426.0" prefHeight="30.0" prefWidth="90.0" text="Cancel" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="115.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="18.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Create new user group" />
+         </tooltip>
+      </JFXButton>
+      <JFXTextField id="uOName" fx:id="otherNameField" focusColor="#07595a" layoutX="42.0" layoutY="165.0" prefHeight="30.0" prefWidth="163.0" promptText="Enter Other Name(s)" stylesheets="@../styles/form.css" unFocusColor="#44aaad" AnchorPane.bottomAnchor="287.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="165.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </JFXTextField>
+      <CheckBox id="isActive" fx:id="isActiveCheckBox" layoutX="42.0" layoutY="378.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="97.0" selected="true" text="Activate?" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="311.0" AnchorPane.topAnchor="378.0" />
+      </children>
+</AnchorPane>
