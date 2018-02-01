@@ -23,9 +23,20 @@ import javafx.beans.value.ObservableValue;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXPasswordField;
 import com.mongodb.DB;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoCommandException;
+import com.mongodb.MongoException;
 import com.mongodb.client.MongoDatabase;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
+import org.bson.Document;
 
 import patientrecords.authentication.DBAuthentication;
 import patientrecords.controllers.DashboardController;
@@ -35,6 +46,9 @@ public class MainController implements Initializable {
     // public class MainController extends AnchorPane {
     private Main main;
     public Stage stage;
+    
+    private MongoDatabase db;
+    private Logger logger;
 
     //     @FXML
     //     private AnchorPane rootPane;
@@ -66,6 +80,7 @@ public class MainController implements Initializable {
     public void loaderInit() {
         //        try {
         // view
+        this.logger = Logger.getLogger(getClass().getName());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainFXML.fxml"));
         //        loader.setRoot(this);
         loader.setController(this);
@@ -121,8 +136,35 @@ public class MainController implements Initializable {
             HashMap<String, HashMap<String, Object>> conn = dbAuth.getConn();
             Boolean auth = (Boolean) conn.get(username).get("auth");
             MongoDatabase db = (MongoDatabase) conn.get(username).get("database");
+            
+            
+            Document command = new Document("rolesInfo", 1)
+                        .append("showPrivileges", true)
+                        .append("showBuiltinRoles", true);
         
+            Document result = db.runCommand(command);
+            ArrayList    roleInfo = (ArrayList) result.get("roles");
+                    Iterator iterator = roleInfo.iterator();
+
+
+
+            while (iterator.hasNext()){
+                
+                // iterator.next(): class org.bson.Document
+                System.out.println("\n------ getRoleList() -------");
+                
+                Document doc = (Document) iterator.next();
+                // Document{{role=readWrite, db=EyGlas, isBuiltin=true, roles=[], inheritedRoles=[], privileges=[Document{{resource=Document{{db=EyGlas, collection=}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.indexes}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}, Document{{resource=Document{{db=EyGlas, collection=system.js}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.namespaces}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}], inheritedPrivileges=[Document{{resource=Document{{db=EyGlas, collection=}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.indexes}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}, Document{{resource=Document{{db=EyGlas, collection=system.js}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.namespaces}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}]}}
+
+                
+                System.out.println(doc);
+                System.out.println(doc.get("role"));
+                System.out.println(doc.get("isBuiltin"));
+
+            }
+
 //            if (auth) {
+                // TODO MainController. !isActive log out user
 //                // errorMsgLabel.setText("Login successful");
                 DashboardController dc = new DashboardController();
                 dc.dashboardLoader(stage, db);
@@ -134,6 +176,15 @@ public class MainController implements Initializable {
 //                errorMsgLabel.setText("Invalid username/password");
 //            }
 //        }
+    }
+    
+    /**
+     * Logout user from application
+     */
+    @FXML
+    public void logOut(){
+        loaderInit();
+        db.runCommand(new Document("logout", 1));
     }
 
     @Override
@@ -148,13 +199,13 @@ public class MainController implements Initializable {
                 .addListener((ObservableValue<? extends Boolean> o, Boolean olduNameVal, Boolean newuNameVal) -> {
                     if (!newuNameVal
                             || (username_field.getText() != null && username_field.getText().trim().length() != 0)) {
-                        uNameReqLabel.setText("");
+                        uNameReqLabel.setText(null);
                     } else {
                         uNameReqLabel.setText("Username required");
                     }
 
                     if (password_field.getText().trim().length() != 0 && password_field.getText() != null) {
-                        uPwdReqLabel.setText("");
+                        uPwdReqLabel.setText(null);
                     } else {
                         uPwdReqLabel.setText("Password required");
                     }
@@ -164,13 +215,13 @@ public class MainController implements Initializable {
                 .addListener((ObservableValue<? extends Boolean> o, Boolean oldPwdVal, Boolean newPwdVal) -> {
                     if (!newPwdVal
                             || (password_field.getText() != null && password_field.getText().trim().length() != 0)) {
-                        uPwdReqLabel.setText("");
+                        uPwdReqLabel.setText(null);
                     } else {
                         uPwdReqLabel.setText("Password required");
                     }
 
                     if (username_field.getText() != null && username_field.getText().trim().length() != 0) {
-                        uNameReqLabel.setText("");
+                        uNameReqLabel.setText(null);
                     } else {
                         uNameReqLabel.setText("Username required");
                     }

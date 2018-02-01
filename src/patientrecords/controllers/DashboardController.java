@@ -1,5 +1,6 @@
 package patientrecords.controllers;
 
+import patientrecords.controllers.user.UserDashboardController;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -13,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Hyperlink;
 
-import com.mongodb.DB;
 import com.mongodb.client.MongoDatabase;
 
 import patientrecords.Main;
@@ -29,6 +29,22 @@ public class DashboardController {
 
     @FXML
     private Hyperlink userlink;
+    
+    @FXML
+    private Hyperlink medicalRecordsLink;
+
+    @FXML
+    private Hyperlink patientsLink;
+
+    @FXML
+    private Hyperlink paymentsLink;
+
+    @FXML
+    private Hyperlink reportsLink;
+
+    @FXML
+    private Hyperlink appointmentsLink;
+
 
     public void dashboardLoader(Stage stage, MongoDatabase db) {
         this.stage = stage;

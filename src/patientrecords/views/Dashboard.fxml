@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
@@ -11,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox id="dashboardPane" fx:id="dashboardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1">
+<VBox id="dashboardPane" fx:id="dashboardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <MenuBar>
         <menus>
@@ -57,11 +61,11 @@
             <AnchorPane prefHeight="324.0" prefWidth="820.0" BorderPane.alignment="CENTER">
                <children>
                   <Hyperlink fx:id="userlink" layoutX="167.0" layoutY="104.0" onAction="#userLinkAction" text="Users" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="607.0" />
-                  <Hyperlink layoutX="590.0" layoutY="104.0" prefHeight="25.0" prefWidth="63.0" text="Patients" AnchorPane.leftAnchor="590.0" AnchorPane.rightAnchor="167.0" />
-                  <Hyperlink layoutX="354.0" layoutY="104.0" text="Medical Records" AnchorPane.leftAnchor="354.0" AnchorPane.rightAnchor="354.0" />
-                  <Hyperlink layoutX="167.0" layoutY="203.0" text="Invoices and Receipts" />
-                  <Hyperlink layoutX="381.0" layoutY="203.0" text="Reports" />
-                  <Hyperlink layoutX="557.0" layoutY="203.0" text="Appointments" />
+                  <Hyperlink fx:id="patientsLink" layoutX="590.0" layoutY="104.0" prefHeight="25.0" prefWidth="63.0" text="Patients" AnchorPane.leftAnchor="590.0" AnchorPane.rightAnchor="167.0" />
+                  <Hyperlink fx:id="medicalRecordsLink" layoutX="354.0" layoutY="104.0" text="Medical Records" AnchorPane.leftAnchor="354.0" AnchorPane.rightAnchor="354.0" />
+                  <Hyperlink fx:id="paymentsLink" layoutX="167.0" layoutY="203.0" text="Invoices and Receipts" />
+                  <Hyperlink fx:id="reportsLink" layoutX="381.0" layoutY="203.0" text="Reports" />
+                  <Hyperlink fx:id="appointmentsLink" layoutX="557.0" layoutY="203.0" text="Appointments" />
                </children>
             </AnchorPane>
          </center>

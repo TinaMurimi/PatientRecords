@@ -45,6 +45,8 @@ public class DBAuthentication {
             mongo = new MongoClient(serverAddress, auths);
             db = mongo.getDatabase(dbName);
 
+            // TODO: Check if user isActive
+
             // Try if the connection is successful
             // db.getCollection("");
             auth = true;

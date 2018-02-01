@@ -1,3 +1,8 @@
+/*
+-fx-alignment property. Valid values are:
+[ top-left | top-center | top-right | center-left | center | center-right bottom-left | bottom-center | bottom-right | baseline-left | baseline-center | baseline-right ]
+*/
+
 .pane {
     -fx-background-color: #48aaad;
     -fx-font-family: "Microsoft Sans Serif";
@@ -7,8 +12,9 @@
 .jfx-combo-box {
     -fx-background-color: transparent;
     -fx-prompt-text-fill: #FFFFFFA3;
-    -fx-text-fill: #FFFFFF;
-    -fx-text-alignment: CENTER-LEFT;
+    -fx-text-fill: WHITE;
+    -fx-text-alignment: LEFT;
+    -fx-alignment: CENTER-LEFT;
     -jfx-focus-color: #07595a;
     -jfx-unfocus-color: WHITE;
 }
@@ -19,10 +25,27 @@
 
 .jfx-combo-box .combo-box-button-container {
     /* -fx-background-color:RED; */
-    -fx-font-size: 14px;
-    -fx-text-fill: #FFFFFFA3;
+    -fx-font-size: 13px;
+    -fx-text-fill: WHITE;
     -fx-prompt-text-fill: #FFFFFFA3;
     -fx-text-fill: #FFFFFF;
+    -fx-text-alignment: LEFT;
+    -fx-alignment: CENTER-LEFT;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: -fx-box-border, -fx-control-inner-background;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box, #084546, 8, 0.0, 0, 0);
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: #084546;
+    -fx-text-fill: WHITE;
+    -fx-font-size: 13px;
+    -fx-font-family: "Microsoft Sans Serif";
+    -fx-text-alignment: LEFT;
+    -fx-alignment: CENTER-LEFT;
 }
 
 .jfx-text-field {
@@ -41,7 +64,8 @@
     -fx-font-family: "Microsoft Sans Serif";
     -fx-font-size: 14px;
     -fx-prompt-text-fill: #FFFFFFA3;
-    -fx-text-alignment: CENTER-LEFT;
+    -fx-text-alignment: LEFT;
+    -fx-alignment: CENTER-LEFT;
     -fx-text-fill: #FFFFFF;
     -jfx-focus-color: #3d7172;
     -jfx-unfocus-color: WHITE;
@@ -51,26 +75,43 @@
     -fx-text-fill: #FFFFFF;
     -fx-font-family: "Microsoft Sans Serif";
     -fx-font-size: 14px;
-    -fx-text-alignment: CENTER-LEFT;
+    -fx-text-alignment: LEFT;
     -jfx-focus-color: #07595a;
     -jfx-unfocus-color: #44aaad;
+    -fx-alignemnt: CENTER-LEFT;
 }
 
 .titleLabel {
     -fx-text-fill: #FFFFFF;
     -fx-font-family: "Microsoft Sans Serif";
     -fx-font-size: 18px;
-    -fx-text-alignment: CENTER-LEFT;
+    -fx-text-alignment: CENTER;
     -fx-alignment: CENTER-LEFT;
     -jfx-focus-color: #07595a;
     -jfx-unfocus-color: #44aaad;
+}
+
+.infoLabel {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-font-family: "Andale Mono";
+    /* Andale Mono */
+    /* Segoe UI Light */
+    -fx-font-size: 10px;
+    -fx-text-alignment: LEFT;
+    -fx-content-display: TOP;
+    -fx-max-height: Infinity;
+    -fx-alignemnt: TOP-LEFT;
+    /* -fx-line-spacing: 1em; */
+    -fx-effect: innershadow( three-pass-box, #FFFFFF, 10, 0.25, 0, 1);
 }
 
 .errorLabel {
     -fx-text-fill: red;
     -fx-font-family: "Microsoft Sans Serif";
     -fx-font-size: 14px;
-    -fx-text-alignment: CENTER-LEFT;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: CENTER-LEFT;
     -jfx-focus-color: #07595a;
     -jfx-unfocus-color: #44aaad;
 }

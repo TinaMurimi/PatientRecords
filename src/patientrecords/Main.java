@@ -16,13 +16,13 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     
-    private Stage stage;
+    // private Stage stage;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         MainController mc = new MainController();
         mc.stage = primaryStage;
-        this.stage = primaryStage;
+        // this.stage = primaryStage;
         mc.loaderInit();
         mc.setMain(this);
    }

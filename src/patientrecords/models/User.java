@@ -22,11 +22,13 @@ public class User {
 
     private static final HashMap<String, User> USERS = new HashMap<String, User>();
     // private CheckBox isSelected;
-    private BooleanProperty isSelected;
+    private final BooleanProperty isSelected;
+    private final BooleanProperty passwordValid;
 
     private final StringProperty userID;
     private final StringProperty username;
     private final StringProperty title;
+    private final StringProperty role;
     private final StringProperty firstName;
     private final StringProperty lastName;
     private final StringProperty otherName;
@@ -59,6 +61,7 @@ public class User {
     public User() {
         //     this.isSelected = new CheckBox();
         this.isSelected = new SimpleBooleanProperty();
+        this.passwordValid= new SimpleBooleanProperty();
 
         this.userID = new SimpleStringProperty();
         this.username = new SimpleStringProperty();
@@ -69,6 +72,7 @@ public class User {
         this.firstName = new SimpleStringProperty();
         this.lastName = new SimpleStringProperty();
         this.otherName = new SimpleStringProperty();
+        this.role = new SimpleStringProperty();
         this.jobTitle = new SimpleStringProperty();
         this.isActive = new SimpleBooleanProperty();
         this.password = new SimpleStringProperty();
@@ -210,6 +214,21 @@ public class User {
         return otherName;
     }
 
+   /**
+    * @return role DB role
+    */ 
+    public String getRole() {
+        return role.get();
+    }
+
+    public void setRole(String role) {
+        this.role.set(role);
+    }
+
+    public StringProperty roleProperty() {
+        return role;
+    }
+
     /**
      * Returns a StringExpression that holds the value of the 
      * concatenation firstName (StringProperty) and lastName (StringProperty)
@@ -266,7 +285,10 @@ public class User {
     public StringProperty passwordProperty() {
         return password;
     }
-
+    
+    public BooleanProperty validPwdProperty() {
+        return passwordValid;
+    }
     // @return the lastLoginDate
     /**
     public String getLastLogin() {

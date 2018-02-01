@@ -1,6 +1,7 @@
-package patientrecords.controllers;
+package patientrecords.controllers.role;
 
 // import patientrecords.Main;
+import patientrecords.controllers.user.CreateUserController;
 import patientrecords.models.User;
 import org.apache.commons.lang3.StringUtils;
 
@@ -59,6 +60,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
+import com.mongodb.MongoCommandException;
 
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.MongoException;
@@ -82,92 +84,64 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBoxBuilder;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.paint.Color;
+import javafx.stage.Modality;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
+import patientrecords.controllers.BaseController;
 
-public class UserDashboardController extends BaseController implements Initializable {
+public class RoleDashboardController extends BaseController implements Initializable {
 
-    private UserDashboardController main;
-    private Stage stage;
-    private final Logger logger = Logger.getLogger(getClass().getName());
+    private RoleDashboardController main;
+    public Stage primaryStage;
+    private final Logger logger;
 
-    private MongoDatabase db;
-    private MongoCollection<Document> collection;
-    private ObservableList<User> userList;
+    public MongoDatabase db;
+    public MongoCollection<Document> collection;
+    private ObservableList<User> roleList;
     // private ArrayList<Document> userList;
     //    private final List<String> delList = new ArrayList<>();
 
     // Dashboard CSS file URL
-    private final URL url = this.getClass().getResource("/patientrecords/styles/dashboard.css");
+    private final URL url;
 
     @FXML
     private TextField searchField;
 
     @FXML
-    private VBox userDashboardPane;
+    public VBox roleDashboardPane;
 
     @FXML
-    TableView<User> usersTableView;
+    TableView<User> rolesTableView;
 
-    @FXML
-    private TableColumn<User, String> nameCol;
+    
+    
+    public RoleDashboardController(){
+        this.logger = Logger.getLogger(getClass().getName());
+        this.url = this.getClass().getResource("/patientrecords/styles/dashboard.css");
+    }
 
-    @FXML
-    private TableColumn<User, String> lastNameCol;
-
-    @FXML
-    private TableColumn<User, String> concatNameCol;
-
-    @FXML
-    private TableColumn<User, String> usernameCol;
-
-    @FXML
-    private TableColumn<User, String> jobCol;
-
-    @FXML
-    private TableColumn<User, Boolean> isActiveCol;
-
-    @FXML
-    private TableColumn<User, LocalDateTime> dateCreatedCol;
-
-    @FXML
-    private TableColumn<User, LocalDateTime> lastLoginCol;
-
-    @FXML
-    private TableColumn<User, Boolean> isSelectedCol;
-
-    @FXML // fx:id="searchButton"
-    private Button searchButton; // Value injected by FXMLLoader
-
-    @FXML // fx:id="delButton"
-    private Button delButton; // Value injected by FXMLLoader
-
-    @FXML // fx:id="addButton"
-    private Button addButton;
-
-    @FXML // fx:id="undoButton"
-    private Button undoButton;
-
-    private CheckBox selectAllCheckBox;
-
-    public void userDashboardLoader(Stage stage, MongoDatabase db) {
-        this.stage = stage;
+    public void roleDashboardLoader(Stage primaryStage, MongoDatabase db) {
+        this.primaryStage = primaryStage;
         this.db = db;
-        this.collection = db.getCollection("Users");
-
+        this.collection = db.getCollection("Groups");
+        
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/patientrecords/views/Users.fxml"));
+        loader.setLocation(getClass().getResource("/patientrecords/views/role/UsersDashboard.fxml"));
         loader.setController(this);
 
         try {
-            userDashboardPane = (VBox) loader.load();
+            roleDashboardPane = (VBox) loader.load();
+            roleDashboardPane.setAlignment(Pos.CENTER);
         } catch (IOException exception) {
-            exception.printStackTrace();
+            logger.log(Level.SEVERE, "Failed to load loader", exception);
         }
 
         try {
             // Scene scene = new Scene(userDashboardPane, 720, 745);
-            Scene scene = new Scene(userDashboardPane, 1420, 845);
+            Scene scene = new Scene(roleDashboardPane, 1420, 845);
 
             // Add css file
             if (url != null) {
@@ -177,16 +151,12 @@ public class UserDashboardController extends BaseController implements Initializ
                 System.out.println("CSS URL not found!");
             }
 
-            stage.setTitle("Users");
-            stage.setScene(scene);
-            stage.setFullScreen(true);
-
-            stage.addEventHandler(WindowEvent.WINDOW_SHOWN, (WindowEvent event) -> {
-                Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
-                stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2);
-                stage.setY((screenBounds.getHeight() - stage.getHeight()) / 2);
-            });
-            stage.show();
+            // stage.initModality(Modality.WINDOW_MODAL);
+            primaryStage.setTitle("Users");
+            primaryStage.setScene(scene);
+            primaryStage.setFullScreen(false);
+            primaryStage.centerOnScreen();
+            primaryStage.show();
 
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
@@ -195,18 +165,135 @@ public class UserDashboardController extends BaseController implements Initializ
         // ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
-    public void setMain(UserDashboardController main) {
+    public void setMain(RoleDashboardController main) {
         this.main = main;
     }
 
     @FXML
     public void populateUsers(ObservableList<User> userData) throws ClassNotFoundException {
-        
+
         // Ensure isSelected checkbox is removed after a document is deleted
-        setSelectAllCheckBox();
-        
+        // setSelectAllCheckBox();
+
         // Display row data usersTableView
-        usersTableView.setItems(userData);
+        rolesTableView.setItems(userData);
+    }
+    
+    
+     /**
+     * 
+     * @return 
+     */
+    private ArrayList <Document> searchRole(String roleName) {
+        boolean roleExists = false;
+
+            Document command;
+            ArrayList<Document> roleInfo = new ArrayList();
+                    
+            if (roleName == null) {
+                command = new Document("rolesInfo", 1)
+                        .append("showPrivileges", true)
+                        .append("showBuiltinRoles", true);
+            } else {
+                command = new Document("rolesInfo", roleName)
+                        .append("showPrivileges", true)
+                        .append("showBuiltinRoles", true);
+            }
+            
+            
+
+            /**
+            Document{{roles=[
+                Document{{role=EyGlas.nurse, db=EyGlas, isBuiltin=false, roles=[], inheritedRoles=[]
+                , privileges=[
+                    Document{{resource=Document{{db=EyGlas, collection=Patients}}, actions=[find, insert, update]}},
+                    Document{{resource=Document{{db=EyGlas, collection=Records}}, actions=[find, insert, update]}},
+                    Document{{resource=Document{{db=EyGlas, collection=Appointments}}, actions=[find, insert, update]}}
+                ]
+                , inheritedPrivileges=[
+                    Document{{resource=Document{{db=EyGlas, collection=Patients}}, actions=[find, insert, update]}}
+                    Document{{resource=Document{{db=EyGlas, collection=Records}}, actions=[find, insert, update]}}
+                    Document{{resource=Document{{db=EyGlas, collection=Appointments}}, actions=[find, insert, update]}}]}}
+                ]
+                , ok=1.0}
+            }
+             */
+
+            // toJson()
+            /**
+            {"roles" : [
+                {
+                    "role" : "EyGlas.nurse", "db" : "EyGlas", "isBuiltin" : false, "roles" : [], "inheritedRoles" : [], "privileges" : [
+                        {"resource" : {"db" : "EyGlas", "collection" : "Patients"}, "actions" : ["find", "insert", "update"]},
+                        {"resource" : {"db" : "EyGlas", "collection" : "Records"}, "actions" : ["find", "insert", "update"]},{"resource" : {"db" : "EyGlas", "collection" : "Appointments"}, "actions" : ["find", "insert", "update"]}
+                    ],
+                    "inheritedPrivileges" : [
+                        {"resource" : {"db" : "EyGlas", "collection" : "Patients"}, "actions" : ["find", "insert", "update"]}, {"resource" : {"db" : "EyGlas", "collection" : "Records"}, "actions" : ["find", "insert", "update"]}, {"resource" : {"db" : "EyGlas", "collection" : "Appointments"}, "actions" : ["find", "insert", "update"]}
+                    ] 
+            }
+                ], "ok" : 1.0}
+            */
+
+        try{
+            Document result = db.runCommand(command);
+            roleInfo = (ArrayList) result.get("roles");
+
+        
+            if (!roleInfo.isEmpty()) {
+                roleExists = true;
+            }
+        } catch (MongoCommandException e) {
+            if (e.getCode() != 13) {
+                throw e;
+            }
+        } catch (MongoException e) {
+            logger.log(Level.WARNING, null, e);
+        }
+        return roleInfo;
+    }
+    
+    /**
+     * Check if role exists
+     */
+    public boolean checkRoleExists(ArrayList result){
+        boolean roleExists = false;
+        if (!result.isEmpty()) {
+                roleExists = true;
+            }
+        
+        return roleExists;
+    }
+    
+    /**
+     * Gets list of names of all DB roles
+     * @param result (ArrayList) DB result from db.runCommand to get roleInfo
+     * @return roleNameList (List <String>) list of names of all user-defined DB roles
+     */
+    public List<String> getRoleNameList(ArrayList result){
+        
+        List <String> roleNameList = new ArrayList<>();
+        
+        Iterator iterator = result.iterator();
+        
+        while (iterator.hasNext()){
+                
+                // iterator.next(): class org.bson.Document
+                System.out.println("\n------ getRoleList() -------");
+                
+                Document doc = (Document) iterator.next();
+                // Document{{role=readWrite, db=EyGlas, isBuiltin=true, roles=[], inheritedRoles=[], privileges=[Document{{resource=Document{{db=EyGlas, collection=}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.indexes}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}, Document{{resource=Document{{db=EyGlas, collection=system.js}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.namespaces}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}], inheritedPrivileges=[Document{{resource=Document{{db=EyGlas, collection=}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.indexes}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}, Document{{resource=Document{{db=EyGlas, collection=system.js}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.namespaces}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}]}}
+
+               
+                if (!Boolean.valueOf(doc.get("isBuiltin").toString())){
+                    roleNameList.add(doc.get("role").toString());
+                }
+                System.out.println(doc);
+                System.out.println(doc.get("role"));
+                System.out.println(doc.get("isBuiltin"));
+
+            }
+        
+        return roleNameList;
     }
 
     /** TODO: UseDashBoardController Pagination
@@ -215,11 +302,9 @@ public class UserDashboardController extends BaseController implements Initializ
      */
 
     private ObservableList<User> parseUserList(FindIterable<Document> result) {
-        userList = FXCollections.observableArrayList();
-        //        String searchText = searchField.getText().trim();
-        //        FindIterable<Document> result;
-
-        // TODO: Dialogue box if user has not permission to perform CRUD action
+        roleList = FXCollections.observableArrayList();
+        
+        // TODO: parseUserList()- Dialogue box if user has not permission to perform CRUD action
         // Throw error if user has no access to User collection
         try {
             /**
@@ -272,7 +357,7 @@ public class UserDashboardController extends BaseController implements Initializ
                     }
 
                     // Add user to the ObservableList, userList
-                    userList.add(user);
+                    roleList.add(user);
                 }
             }
 
@@ -280,7 +365,7 @@ public class UserDashboardController extends BaseController implements Initializ
             logger.log(Level.SEVERE, "Unable to parse user-list successfully", e);
         }
 
-        return userList;
+        return roleList;
     }
 
     /**
@@ -328,13 +413,24 @@ public class UserDashboardController extends BaseController implements Initializ
     @FXML
     @Override
     public void addAction(ActionEvent event) {
-        //TODO
+        // CreateUserController cuc = new CreateUserController(primaryStage, db);
+        // cuc.userDashboardLoader(stage, db);
     }
 
     @FXML
     @Override
     public void viewAction(ActionEvent event) {
         //TODO
+        /* TODO: Use in viewUser details
+            Iterator it = userDetails.iterator();
+            
+            while (it.hasNext()) {
+                System.out.println("\n--------- LOOP: it.hasNext() ----------");
+                Document next = (Document) it.next();
+                System.out.println(next.get("user"));
+                System.out.println();
+            }
+            */
     }
 
     @FXML
@@ -352,7 +448,7 @@ public class UserDashboardController extends BaseController implements Initializ
         // ObservableList<User> delList = FXCollections.observableArrayList();
         final List<ObjectId> delList = new ArrayList<>();
 
-        usersTableView.getItems().stream().filter((user) -> (user.getIsSelected())).forEachOrdered((user) -> {
+        rolesTableView.getItems().stream().filter((user) -> (user.getIsSelected())).forEachOrdered((user) -> {
             delList.add(new ObjectId(user.getUserID()));
         });
 
@@ -363,7 +459,7 @@ public class UserDashboardController extends BaseController implements Initializ
             try {
                 Bson condition = new Document("$in", delList);
                 Bson filter = new Document("_id", condition);
-                
+
                 //Removes the selected documents in the User collection
                 collection.deleteMany(filter);
 
@@ -385,6 +481,8 @@ public class UserDashboardController extends BaseController implements Initializ
      * else false
      * @return selectAllCheckBox (CheckBox)
      */
+    
+    /**
     public CheckBox getSelectAllCheckBox() {
         if (selectAllCheckBox == null) {
             final CheckBox selectAllCheckBox = CheckBoxBuilder.create().build();
@@ -429,126 +527,10 @@ public class UserDashboardController extends BaseController implements Initializ
             return cell;
         });
     }
+    */ 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        lastNameCol.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-        concatNameCol.setCellValueFactory(cellData -> cellData.getValue().concatNameProperty());
-        usernameCol.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());
-        jobCol.setCellValueFactory(cellData -> cellData.getValue().jobProperty());
-
-        isActiveCol.setCellValueFactory(cellData -> cellData.getValue().isActiveProperty());
-        isActiveCol.setCellFactory(CheckBoxTableCell.forTableColumn(isActiveCol));
-
-        dateCreatedCol.setCellValueFactory(cellData -> cellData.getValue().dateCreatedProperty());
-        lastLoginCol.setCellValueFactory(cellData -> cellData.getValue().lastLoginProperty());
-
-        // An additional coloumn for isSelected Checkbox
-        setSelectAllCheckBox();
-
-        ListBinding<Boolean> lb = new ListBinding<Boolean>() {
-            {
-                bind(usersTableView.getItems());
-            }
-
-            @Override
-            protected ObservableList<Boolean> computeValue() {
-                ObservableList<Boolean> list = FXCollections.observableArrayList();
-                usersTableView.getItems().forEach((p) -> {
-                    list.add(p.getIsSelected());
-                });
-
-                return list;
-            }
-        };
-
-        lb.addListener((ObservableValue<? extends ObservableList<Boolean>> arg0, ObservableList<Boolean> arg1,
-                ObservableList<Boolean> l) -> {
-            selectAllCheckBox.indeterminateProperty().set(true);
-            selectAllCheckBox.setAllowIndeterminate(false);
-
-            // Checking for an unselected user in the table view.      
-            boolean unSelectedFlag = false;
-            for (boolean b : l) {
-                if (!b) {
-                    unSelectedFlag = true;
-                    break;
-                }
-            }
-
-            /*
-            * If at least one user is not selected, then deselecting the check box in the table column header, 
-            * else if all users are selected, then selecting the check box in the header.
-            */
-            if (unSelectedFlag) {
-                getSelectAllCheckBox().setSelected(false);
-            } else {
-                getSelectAllCheckBox().setSelected(true);
-            }
-
-            // Checking for a selected user in the table view.
-            boolean selectedFlag = false;
-            for (boolean b : l) {
-                if (!b) {
-                    selectedFlag = true;
-                    break;
-                }
-            }
-
-            /**
-             * If at least one user is selected, then display the "Delete" button,
-             * else if none of the users are selected,
-             * then hide the "Delete" button.
-             */
-            if (selectedFlag) {
-                delButton.setVisible(true);
-            } else {
-                delButton.setVisible(false);
-
-            }
-        });
-
-        usersTableView.getItems().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable arg0) {
-                System.out.println("invalidated");
-            }
-        });
-
-        //        usersTableView.getItems().addListener((ListChangeListener.Change<? extends User> arg0) -> {
-        //            System.out.println("changed");
-        //        });
-
-        usersTableView.getItems().addListener(new ListChangeListener<User>() {
-            @Override
-            public void onChanged(javafx.collections.ListChangeListener.Change<? extends User> arg0) {
-                System.out.println("changed");
-            }
-        });
-
-        // Detect double click
-        usersTableView.setRowFactory(tv -> {
-            TableRow<User> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (!row.isEmpty())) {
-                    User rowData = row.getItem();
-                    System.out.println("Double click on: " + rowData.getUsername());
-                }
-            });
-            return row;
-        });
-
-        // Allow for selection of multiple rows
-        // usersTableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
-        try {
-            FindIterable<Document> result = listAllItems(collection);
-            populateUsers(parseUserList(result));
-        } catch (ClassNotFoundException e) {
-            logger.log(Level.SEVERE, "userTableView not populated sucessfully", e);
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, null, e);
-        }
-
+        // TODO
     }
 }

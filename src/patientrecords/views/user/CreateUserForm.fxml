@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import com.jfoenix.validation.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="pane" fx:id="createUserForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="450.0" styleClass="pane" stylesheets="@../styles/form.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+      <children>
+            <JFXPasswordField fx:id="passwordField" focusColor="#07595a" layoutX="42.0" layoutY="301.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Password" styleClass="jfx-password-field" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="301.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+      </JFXPasswordField>
+            <JFXTextField id="uLName" fx:id="lastNameField" focusColor="#07595a" layoutX="245.0" layoutY="97.0" prefHeight="30.0" prefWidth="170.0" promptText="Enter Last Name" stylesheets="@../styles/form.css" unFocusColor="#44aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="97.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+      </JFXTextField>
+            <JFXTextField id="username" fx:id="usernameField" focusColor="#07595a" layoutX="259.0" layoutY="165.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Username" stylesheets="@../styles/form.css" unFocusColor="#44aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="165.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+         <tooltip>
+            <Tooltip text="Username must contain 5 or more characters and start with a letter. Allowed a-z, A-Z, 0-9, points, dashes and underscores" />
+         </tooltip>
+      </JFXTextField>
+               
+                        <JFXComboBox id="userGroup" fx:id="uGroupComboBox" focusColor="#07595a" layoutX="259.0" layoutY="233.0" prefHeight="30.0" prefWidth="148.0" promptText="Select User Group" styleClass="jfx-combo-box" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="233.0" />
+            <JFXPasswordField fx:id="confirmPwdField" focusColor="#07595a" layoutX="259.0" layoutY="301.0" prefHeight="30.0" prefWidth="220.0" promptText="Confirm Password" styleClass="jfx-password-field" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="301.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+      </JFXPasswordField>
+            <Label layoutX="42.0" layoutY="133.0" prefHeight="16.0" prefWidth="30.0" text="Title" textFill="#48aaad" AnchorPane.bottomAnchor="333.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="133.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lastNameReqLabel" layoutX="259.0" layoutY="133.0" prefHeight="16.0" prefWidth="66.0" text="Last Name" textFill="#48aaad" AnchorPane.bottomAnchor="333.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="133.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="usernameReqLabel" layoutX="259.0" layoutY="201.0" prefHeight="16.0" prefWidth="75.0" text="Username" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="201.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="otherNameReqLabel" layoutX="42.0" layoutY="201.0" prefHeight="16.0" prefWidth="30.0" text="Other Name" textFill="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="201.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="269.0" prefHeight="16.0" prefWidth="30.0" text="Job Title" textFill="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="269.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="passwordReqLabel" layoutX="42.0" layoutY="337.0" prefHeight="16.0" prefWidth="30.0" text="New Password" textFill="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="337.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="confirmPwdReqLabel" layoutX="259.0" layoutY="337.0" prefHeight="16.0" prefWidth="121.0" text="Confirm Password" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="84.0" AnchorPane.topAnchor="337.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <JFXTextField id="uJobTitle" fx:id="jobTitleField" focusColor="#07595a" layoutX="42.0" layoutY="233.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Job Title" stylesheets="@../styles/form.css" unFocusColor="#44aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="233.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </JFXTextField>
+            <Label layoutX="259.0" layoutY="269.0" prefHeight="16.0" prefWidth="71.0" text="User Group" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="269.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <JFXButton id="newGroupButton" fx:id="newGroupButton" layoutX="384.0" layoutY="237.0" prefHeight="33.0" prefWidth="39.0" styleClass="addGroupButton" text="+" textFill="#48aaad" AnchorPane.leftAnchor="384.0" AnchorPane.rightAnchor="27.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="18.0" />
+               </font>
+               <tooltip>
+                  <Tooltip text="Create new user group" />
+               </tooltip>
+            </JFXButton>
+      <Label layoutX="154.0" layoutY="41.0" prefHeight="25.0" prefWidth="142.0" styleClass="titleLabel" stylesheets="@../styles/form.css" text="Create New User" textFill="#48aaad">
+         <font>
+            <Font name="Microsoft Sans Serif" size="31.0" />
+         </font>
+      </Label>
+      <Label fx:id="lastNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="398.0" layoutY="102.0" prefHeight="10.0" prefWidth="10.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED" AnchorPane.leftAnchor="398.0" AnchorPane.rightAnchor="42.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="398.0" layoutY="168.0" prefHeight="10.0" prefWidth="10.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED" AnchorPane.leftAnchor="398.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="168.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label id="passwordLabel" fx:id="passwordLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="301.0" prefHeight="16.0" prefWidth="10.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="301.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="397.0" layoutY="307.0" prefHeight="16.0" prefWidth="10.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED" AnchorPane.bottomAnchor="159.0" AnchorPane.topAnchor="307.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label id="errorMsgLabel" fx:id="errorMsgLabel" layoutX="38.0" layoutY="53.0" prefHeight="48.0" prefWidth="366.0" styleClass="errorLabel" stylesheets="@../styles/form.css" textFill="RED" wrapText="true" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <JFXComboBox id="userTitle" fx:id="uTitleComboBox" focusColor="#07595a" layoutX="42.0" layoutY="97.0" prefHeight="30.0" prefWidth="163.0" promptText="Select Title" styleClass="jfx-combo-box" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="97.0" />
+      <JFXButton id="saveButton" fx:id="saveButton" layoutX="115.0" layoutY="426.0" onAction="#saveAction" prefHeight="30.0" prefWidth="90.0" text="Save" textFill="#48aaad" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="245.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="18.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Create new user group" />
+         </tooltip>
+      </JFXButton>
+      <JFXButton id="cancelButton" fx:id="cancelButton" cancelButton="true" layoutX="245.0" layoutY="426.0" prefHeight="30.0" prefWidth="90.0" text="Cancel" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="115.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="18.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Create new user group" />
+         </tooltip>
+      </JFXButton>
+      <JFXTextField id="uOName" fx:id="otherNameField" focusColor="#07595a" layoutX="42.0" layoutY="165.0" prefHeight="30.0" prefWidth="163.0" promptText="Enter Other Name(s)" stylesheets="@../styles/form.css" unFocusColor="#44aaad" AnchorPane.bottomAnchor="287.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="165.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </JFXTextField>
+      <CheckBox id="isActive" fx:id="isActiveCheckBox" layoutX="42.0" layoutY="378.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="97.0" selected="true" text="Activate?" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="311.0" AnchorPane.topAnchor="378.0" />
+      <Label fx:id="lastNameRulesLabel" alignment="TOP_LEFT" layoutX="258.0" layoutY="125.0" prefHeight="61.0" prefWidth="185.0" styleClass="infoLabel" stylesheets="@../styles/form.css" visible="false" wrapText="true">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Label>
+      <Label id="otherNameRulesLabel" fx:id="otherNameRulesLabel" alignment="TOP_LEFT" layoutX="56.0" layoutY="195.0" prefHeight="61.0" prefWidth="185.0" style="-fx-max-height: Infinity;" styleClass="infoLabel" stylesheets="@../styles/form.css" visible="false" wrapText="true">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Label>
+      <Label fx:id="usernameRulesLabel" alignment="TOP_LEFT" layoutX="258.0" layoutY="194.0" prefHeight="87.0" prefWidth="185.0" styleClass="infoLabel" stylesheets="@../styles/form.css" visible="false" wrapText="true">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Label>
+      <Label id="passwordRulesLabel" fx:id="passwordRulesLabel" alignment="TOP_LEFT" layoutX="207.0" layoutY="299.0" prefHeight="127.0" prefWidth="241.0" style="-fx-max-height: Infinity;" styleClass="infoLabel" stylesheets="@../styles/form.css" visible="false" wrapText="true">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Label>
+      <Label fx:id="otherNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="168.0" prefHeight="10.0" prefWidth="10.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="168.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      </children>
+</AnchorPane>
