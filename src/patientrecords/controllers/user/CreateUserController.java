@@ -40,17 +40,25 @@ import com.mongodb.MongoException;
 import com.mongodb.operation.OperationExecutor;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import javafx.collections.ObservableList;
 // import javafx.beans.binding.Bindings;
 import javax.script.Bindings;
 import org.bson.BSONObject;
 
 import patientrecords.models.User;
+import patientrecords.controllers.role.RoleDashboardController;
+import patientrecords.models.Role;
 
 public class CreateUserController extends UserDashboardController implements Initializable {
 
     // Dashboard CSS file URL
+    FXMLLoader loader = new FXMLLoader();
+    
     private final URL url = this.getClass().getResource("/patientrecords/styles/form.css");
 
     private UserDashboardController main;
@@ -118,10 +126,7 @@ public class CreateUserController extends UserDashboardController implements Ini
     private JFXComboBox<Title> uTitleComboBox;
 
     @FXML
-    private JFXComboBox<?> uGroupComboBox;
-    
-    @FXML
-    private Label userGroupReqLabel;
+    private JFXComboBox<Role> uGroupComboBox;
 
     @FXML
     private CheckBox isActiveCheckBox;
@@ -152,6 +157,9 @@ public class CreateUserController extends UserDashboardController implements Ini
 
     @FXML
     private Label otherNameReqLabel;
+
+    @FXML
+    private Label userGroupReqLabel;
 
     /**
      * TODO: Class CreateUserController
@@ -237,6 +245,10 @@ public class CreateUserController extends UserDashboardController implements Ini
     }
 
     public void saveAction() {
+        
+        // If any input field is not valid variable validInput is set to false
+        boolean validInput = true;
+        
         // TODO: CreateUserContoller.saveAction()
         /** Validation
          * Username unique
@@ -256,13 +268,13 @@ public class CreateUserController extends UserDashboardController implements Ini
         final String lname = lastNameField.getText();
         // if (lname != null && lname.trim().length() != 0 && lname.matches("\\b[a-zA-Z]{3,10}\\b")) {
         if (lname != null && lname.matches("\\b[a-zA-Z]{3,10}\\b")) {
-            // errorMsgLabel.setText(null);
             lastNameReqLabel.setStyle("-fx-text-fill: WHITE;");
             user.setLastName(lname);
+            // validInput = true;// 
         } else {
             errorMsgLabel.setText("Invalid last name");
             lastNameReqLabel.setStyle("-fx-text-fill: RED;");
-            // saveButton.setDisable(true);
+            validInput = false;
         }
 
         /** Validate otherNames
@@ -271,15 +283,14 @@ public class CreateUserController extends UserDashboardController implements Ini
          * otherNames should NOT contain special characters
          */
         final String oNames = otherNameField.getText();
-        // if (oNames != null && oNames.trim().length() != 0 && (!oNames.matches("\\b[a-zA-Z]{3,20}\\b"))) {
         if (oNames != null && oNames.matches("\\b[a-zA-Z]{3,20}\\b")) {
-            // errorMsgLabel.setText(null);
             otherNameReqLabel.setStyle("-fx-text-fill: WHITE;");
             user.setOtherName(oNames);
+            // validInput = true;
         } else {
             errorMsgLabel.setText("Invalid name");
             otherNameReqLabel.setStyle("-fx-text-fill: RED;");
-            // saveButton.setDisable(true);
+            validInput = false;
         }
 
         /** Validate username
@@ -293,31 +304,32 @@ public class CreateUserController extends UserDashboardController implements Ini
             if (checkUserExists(username)) {
                 errorMsgLabel.setText("Username exists");
                 usernameReqLabel.setStyle("-fx-text-fill: RED;");
+                validInput = false;
             } else {
                 // errorMsgLabel.setText(null);
                 usernameReqLabel.setStyle("-fx-text-fill: WHITE;");
                 user.setUsername(username);
+                // validInput = true;
             }
         } else {
             errorMsgLabel.setText("Invalid username");
             usernameReqLabel.setStyle("-fx-text-fill: RED;");
-            // saveButton.setDisable(true);
+            validInput = false;
         }
 
         /**
          * Validate userGroup
          */
-        /*
-        String userGroup = uGroupComboBox.getValue();
-        if (uTitleComboBox.getValue()) {
-            // errorMsgLabel.setText(null);
+        Role userGroup = uGroupComboBox.getValue();
+        if (userGroup != null && !userGroup.getName().equals("")) {
             userGroupReqLabel.setStyle("-fx-text-fill: WHITE;");
-            user.setRole(userGroup);
+            user.setRole(userGroup.getName());
+            // validInput = true;
         } else {
             errorMsgLabel.setText("User group required");
             userGroupReqLabel.setStyle("-fx-text-fill: RED;");
+            validInput = false;
         }
-        */
 
         /** Validate password
          * password should be longer than 6 characters
@@ -325,12 +337,12 @@ public class CreateUserController extends UserDashboardController implements Ini
         String password = passwordField.getText();
         final String passwordPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,15}$";
         if (password != null && password.matches(passwordPattern)) {
-            // errorMsgLabel.setText(null);
             passwordReqLabel.setStyle("-fx-text-fill: WHITE;");
+            // validInput = true;
         } else {
             errorMsgLabel.setText("Invalid password");
             passwordReqLabel.setStyle("-fx-text-fill: RED;");
-            // saveButton.setDisable(true);
+            validInput = false;
         }
 
         /**
@@ -341,6 +353,7 @@ public class CreateUserController extends UserDashboardController implements Ini
             // errorMsgLabel.setText(null);
             confirmPwdReqLabel.setStyle("-fx-text-fill: WHITE;");
             user.setPassword(password);
+            // validInput = true;
         } else {
             errorMsgLabel.setText("Passwords do NOT match");
 
@@ -349,12 +362,10 @@ public class CreateUserController extends UserDashboardController implements Ini
 
             passwordField.clear();
             passwordReqLabel.setStyle("-fx-text-fill: RED;");
-            // saveButton.setDisable(true);
+            
+            validInput = false;
         }
-
-        // username, password, userGroup
-        // title, lname, oNames, job, active
-
+        
         // Get uTitle
         String uTitle;
         if (uTitleComboBox.getValue() != null) {
@@ -375,23 +386,28 @@ public class CreateUserController extends UserDashboardController implements Ini
             isActive = true;
         }
         user.setIsActive(isActive);
-        
+
         /**
          * Insert user to DB
          */
-        createUser(user);
-
+        if (validInput){
+            createUser(user);
+        }
     }
 
     /**Creates a new user
      * @param user
      */
     private void createUser(User user) {
+        
         Document customData = new Document("title", user.getTitle())
                 .append("lastname", user.getLastName())
-                .append("otherName", user.getOtherName()).append("job", user.getJob())
-                .append("active", user.getIsActive()).append("created", user.getDateCreated())
+                .append("otherName", user.getOtherName())
+                .append("job", user.getJob())
+                .append("active", user.getIsActive())
+                .append("created", new Date())
                 .append("lastLogin", null);
+        
 
         Document command = new Document("createUser", user.getUsername())
                 .append("pwd", user.getPassword())
@@ -401,8 +417,16 @@ public class CreateUserController extends UserDashboardController implements Ini
 
         try {
             db.runCommand(command);
+            errorMsgLabel.setText("User created successfully");
+            
+            // Reload page
+            createUserLoader(db);
         } catch (MongoCommandException e) {
-            throw e;
+            if (e.getErrorCode() == 31){
+                logger.log(Level.SEVERE, "RoleNotFound", e);
+            } else {
+                logger.log(Level.SEVERE, null, e);
+            }
         }
     }
 
@@ -420,7 +444,7 @@ public class CreateUserController extends UserDashboardController implements Ini
     }
 
     public enum Title {
-        None(null), Dr("Dr."), Mr("Mr."), Ms("Ms."), Miss("Miss"), Prof("Prof."), Mx("Mx."), Other("Other");
+        Dr("Dr."), Mr("Mr."), Ms("Ms."), Miss("Miss"), Prof("Prof."), Mx("Mx."), Other("Other");
 
         private final String title;
 
@@ -435,6 +459,8 @@ public class CreateUserController extends UserDashboardController implements Ini
 
     /**
      * Initializes the controller class.
+     * @param url (URL)
+     * @param rb (ResourceBundle)
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -444,8 +470,18 @@ public class CreateUserController extends UserDashboardController implements Ini
         uTitleComboBox.getItems().setAll(Title.values());
         // ObservableList<Title> options = FXCollections.observableArrayList(Title.values());
         // uTitle.setItems(options);
+        uTitleComboBox.getSelectionModel().select(1);
         uTitleComboBox.setVisibleRowCount(3);
         uTitleComboBox.setValue(null);
+
+        // Populate the uGroupComboBox JFXComboBox
+        RoleDashboardController rdc = new RoleDashboardController();
+        rdc.db = db;
+        ObservableList<Role> roles = rdc.getRoleNameList();
+        roles.sort(Comparator.comparing(Role::getCode)); // Sort the list
+        uGroupComboBox.setItems(roles);
+        uGroupComboBox.setVisibleRowCount(3);
+        uGroupComboBox.setValue(null);
 
         // Show hint for lastName rules
         final String lastNameRules = "Last Name requirements:\n" + " 1. Last name is mandatory\n"

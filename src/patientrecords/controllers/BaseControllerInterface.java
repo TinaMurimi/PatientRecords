@@ -18,6 +18,11 @@ public interface BaseControllerInterface {
      * @return (Boolean) 
      */
     public Boolean deleteConfirmation();
+    
+    /**
+     * Warns a user when no items are selected for deletion
+     */
+    public void deleteWarning();
 
     public void editAction(ActionEvent event);
 

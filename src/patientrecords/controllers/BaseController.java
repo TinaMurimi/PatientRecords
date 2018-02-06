@@ -56,26 +56,23 @@ public abstract class BaseController implements BaseControllerInterface {
         alert.getButtonTypes().setAll(yesButton, noButton);
         alert.initStyle(StageStyle.UTILITY);
 
-        // Add css file
-        //        String css = "-fx-border-color: #48aaad; -fx-font-family: Arial; -fx-text-fill: black; -fx-font-size: 13px; -fx-font-weight: bold;";
-        //        // StageStyle.DECORATED, StageStyle.UNDECORATED, StageStyle.TRANSPARENT, StageStyle.UTILITY, or StageStyle.UNIFIED.
-        //        alert.getDialogPane().setStyle(css);
-        //        alert.getDialogPane().getScene().setFill(Color.GREEN); // Used for better visual representation of the bug
-
-//        DialogPane dialogPane = alert.getDialogPane();
-//        if (url != null) {
-//            String css = url.toExternalForm();
-//            dialogPane.getStylesheets().add(css);
-//            dialogPane.getStyleClass().add("confirmDialog");
-//        } else {
-//            System.out.println("CSS URL not found!");
-//        }
-
-        // Stage stageDialogue = (Stage) dialog.getDialogPane().getScene().getWindow();
-        // stage(stageDialogue, 366, 175);
-
         Optional<ButtonType> result = alert.showAndWait();
         return result.get() == yesButton;
+    }
+    
+    /**
+     * Displays a dialogue box for confirmation of delete action
+     * @return (Boolean) 
+     */
+    @Override
+    public void deleteWarning() {
+
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Delete Warning");
+        alert.setHeaderText(null);
+        alert.setContentText("No items selected");
+        alert.initStyle(StageStyle.UTILITY);
+        alert.showAndWait();
     }
 
     @Override
@@ -138,6 +135,7 @@ public abstract class BaseController implements BaseControllerInterface {
      * @return (String) parsed local date time
      */
     public String LDTToString(LocalDateTime parsedDate) {
+        // new Date("<YYYY-mm-ddTHH:MM:ss>")
         // Convert LocalDateTime to String
         final DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return outputFormat.format(parsedDate);

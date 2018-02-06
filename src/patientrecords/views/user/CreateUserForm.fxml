@@ -31,7 +31,10 @@
          </tooltip>
       </JFXTextField>
                
-                        <JFXComboBox id="userGroup" fx:id="uGroupComboBox" focusColor="#07595a" layoutX="259.0" layoutY="233.0" prefHeight="30.0" prefWidth="148.0" promptText="Select User Group" styleClass="jfx-combo-box" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="233.0" />
+                        <JFXComboBox id="userGroup" fx:id="uGroupComboBox" focusColor="#07595a" layoutX="259.0" layoutY="233.0" prefHeight="30.0" prefWidth="148.0" promptText="Select User Group" styleClass="jfx-combo-box" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="233.0">
+         <tooltip>
+            <Tooltip text="Determines user's access level" />
+         </tooltip></JFXComboBox>
             <JFXPasswordField fx:id="confirmPwdField" focusColor="#07595a" layoutX="259.0" layoutY="301.0" prefHeight="30.0" prefWidth="220.0" promptText="Confirm Password" styleClass="jfx-password-field" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="301.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
@@ -57,7 +60,7 @@
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="269.0" prefHeight="16.0" prefWidth="30.0" text="Job Title" textFill="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="269.0">
+            <Label layoutX="42.0" layoutY="269.0" prefHeight="16.0" prefWidth="30.0" text="Job Title" textFill="#48aaad" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="269.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
@@ -77,11 +80,6 @@
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </JFXTextField>
-            <Label layoutX="259.0" layoutY="269.0" prefHeight="16.0" prefWidth="71.0" text="User Group" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="269.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font>
-            </Label>
             <JFXButton id="newGroupButton" fx:id="newGroupButton" layoutX="384.0" layoutY="237.0" prefHeight="33.0" prefWidth="39.0" styleClass="addGroupButton" text="+" textFill="#48aaad" AnchorPane.leftAnchor="384.0" AnchorPane.rightAnchor="27.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="18.0" />
@@ -115,7 +113,7 @@
             <Font name="Microsoft Sans Serif" size="13.0" />
          </font>
       </Label>
-      <Label id="errorMsgLabel" fx:id="errorMsgLabel" layoutX="38.0" layoutY="53.0" prefHeight="48.0" prefWidth="366.0" styleClass="errorLabel" stylesheets="@../styles/form.css" textFill="RED" wrapText="true" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0">
+      <Label id="errorMsgLabel" fx:id="errorMsgLabel" layoutX="38.0" layoutY="53.0" prefHeight="48.0" prefWidth="366.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="* Mandatory" textFill="RED" wrapText="true" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0">
          <font>
             <Font name="Microsoft Sans Serif" size="13.0" />
          </font>
@@ -164,6 +162,16 @@
          </effect>
       </Label>
       <Label fx:id="otherNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="168.0" prefHeight="10.0" prefWidth="10.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="168.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameLabel1" alignment="CENTER" contentDisplay="CENTER" layoutX="399.0" layoutY="229.0" prefHeight="10.0" prefWidth="10.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="userGroupReqLabel" layoutX="245.0" layoutY="269.0" prefHeight="16.0" prefWidth="75.0" text="User Group" textFill="#48aaad" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="269.0">
          <font>
             <Font name="Microsoft Sans Serif" size="13.0" />
          </font>

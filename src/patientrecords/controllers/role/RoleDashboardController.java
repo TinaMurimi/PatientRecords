@@ -91,6 +91,7 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 import patientrecords.controllers.BaseController;
+import patientrecords.models.Role;
 
 public class RoleDashboardController extends BaseController implements Initializable {
 
@@ -200,6 +201,10 @@ public class RoleDashboardController extends BaseController implements Initializ
                         .append("showBuiltinRoles", true);
             }
             
+            System.out.println("\n-------- RoleDashboardController.searchRole() ------");
+            System.out.println(command);
+            System.out.println("db.getName(): "+db.getName());
+            
             
 
             /**
@@ -266,37 +271,51 @@ public class RoleDashboardController extends BaseController implements Initializ
     
     /**
      * Gets list of names of all DB roles
-     * @param result (ArrayList) DB result from db.runCommand to get roleInfo
      * @return roleNameList (List <String>) list of names of all user-defined DB roles
      */
-    public List<String> getRoleNameList(ArrayList result){
+    public ObservableList<Role> getRoleNameList(){
         
-        List <String> roleNameList = new ArrayList<>();
+        System.out.println("\n------ getRoleList() -------");
+        
+        ObservableList<Role>  roleNameList = FXCollections.observableArrayList();
+        
+        
+        
+       
+        
+        ArrayList <Document> result = searchRole(null);
+        
+        System.out.println("\nArrayList <Document> result");
+        System.out.println(result);
         
         Iterator iterator = result.iterator();
-        
         while (iterator.hasNext()){
-                
                 // iterator.next(): class org.bson.Document
-                System.out.println("\n------ getRoleList() -------");
+                
+                
+                
+                
                 
                 Document doc = (Document) iterator.next();
                 // Document{{role=readWrite, db=EyGlas, isBuiltin=true, roles=[], inheritedRoles=[], privileges=[Document{{resource=Document{{db=EyGlas, collection=}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.indexes}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}, Document{{resource=Document{{db=EyGlas, collection=system.js}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.namespaces}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}], inheritedPrivileges=[Document{{resource=Document{{db=EyGlas, collection=}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.indexes}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}, Document{{resource=Document{{db=EyGlas, collection=system.js}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.namespaces}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}]}}
 
-               
-                if (!Boolean.valueOf(doc.get("isBuiltin").toString())){
-                    roleNameList.add(doc.get("role").toString());
-                }
                 System.out.println(doc);
                 System.out.println(doc.get("role"));
                 System.out.println(doc.get("isBuiltin"));
 
+                
+                if (!Boolean.valueOf(doc.get("isBuiltin").toString())){
+                    Role role = new Role(doc.get("role").toString(), doc.get("role").toString());
+                    // role.setCode(doc.get("role").toString());
+                    // role.setName(doc.get("role").toString());
+                    roleNameList.add(role);
+                }
             }
         
         return roleNameList;
     }
 
-    /** TODO: UseDashBoardController Pagination
+    /** TODO: RoleDashboardController Pagination
      * 1. Pagination in Java (Show first x records, next + previous page)
     
      */

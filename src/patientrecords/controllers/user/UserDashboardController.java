@@ -372,6 +372,11 @@ public class UserDashboardController extends BaseController implements Initializ
         usersTableView.getItems().stream().filter((user) -> (user.getIsSelected())).forEachOrdered((user) -> {
             delList.add(new ObjectId(user.getUserID()));
         });
+        
+        if (delList.isEmpty()){
+            // Display warning dialogue box: no items selected
+            deleteWarning();
+        }
 
         // Require user to confirm before deleting
         if (deleteConfirmation()) {

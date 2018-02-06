@@ -100,7 +100,7 @@ public class User {
         return isSelected;
     }
 
-    // @return the username
+    // @return the userID
     public void setUserID(String usesrID) {
         this.userID.set(usesrID);
     }
@@ -152,7 +152,7 @@ public class User {
 
     // title
     public String getTitle() {
-        return title.get().trim();
+        return title.get();
     }
 
     public void setTitle(String title) {

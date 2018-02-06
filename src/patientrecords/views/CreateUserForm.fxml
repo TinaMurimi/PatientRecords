@@ -60,7 +60,7 @@
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="42.0" layoutY="269.0" prefHeight="16.0" prefWidth="30.0" text="Job Title" textFill="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="269.0">
+            <Label layoutX="42.0" layoutY="269.0" prefHeight="16.0" prefWidth="30.0" text="Job Title" textFill="#48aaad" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="269.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
@@ -80,11 +80,6 @@
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </JFXTextField>
-            <Label fx:id="userGroupReqLabel" layoutX="259.0" layoutY="269.0" prefHeight="16.0" prefWidth="71.0" text="User Group" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="269.0">
-               <font>
-                  <Font name="Microsoft Sans Serif" size="13.0" />
-               </font>
-            </Label>
             <JFXButton id="newGroupButton" fx:id="newGroupButton" layoutX="384.0" layoutY="237.0" prefHeight="33.0" prefWidth="39.0" styleClass="addGroupButton" text="+" textFill="#48aaad" AnchorPane.leftAnchor="384.0" AnchorPane.rightAnchor="27.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="18.0" />
@@ -132,7 +127,7 @@
             <Tooltip text="Create new user group" />
          </tooltip>
       </JFXButton>
-      <JFXButton id="cancelButton" fx:id="cancelButton" cancelButton="true" layoutX="245.0" layoutY="426.0" prefHeight="30.0" prefWidth="90.0" text="Cancel" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="115.0">
+      <JFXButton id="cancelButton" fx:id="cancelButton" cancelButton="true" layoutX="245.0" layoutY="426.0" onAction="#cancelAction" prefHeight="30.0" prefWidth="90.0" text="Cancel" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="115.0">
          <font>
             <Font name="Microsoft Sans Serif" size="18.0" />
          </font>
@@ -172,6 +167,11 @@
          </font>
       </Label>
       <Label fx:id="usernameLabel1" alignment="CENTER" contentDisplay="CENTER" layoutX="399.0" layoutY="229.0" prefHeight="10.0" prefWidth="10.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="*" textFill="RED">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="userGroupReqLabel" layoutX="245.0" layoutY="269.0" prefHeight="16.0" prefWidth="75.0" text="User Group" textFill="#48aaad" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="269.0">
          <font>
             <Font name="Microsoft Sans Serif" size="13.0" />
          </font>
