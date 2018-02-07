@@ -13,8 +13,8 @@ import org.apache.commons.lang3.StringUtils;
 public class Role {
 
     private StringProperty roleID;
-    private StringProperty code;
-    private StringProperty name;
+    private final StringProperty code;
+    private final StringProperty name;
 
     public Role() {
         this.roleID = new SimpleStringProperty();
@@ -22,9 +22,9 @@ public class Role {
         this.code = new SimpleStringProperty();
     }
     
-    public Role(String code, String name) {
-        code = StringUtils.capitalize(code.toLowerCase().trim());
-        this.code = new SimpleStringProperty(code);
+    public Role(String name) {
+        String codename = StringUtils.capitalize(name.toLowerCase().trim());
+        this.code = new SimpleStringProperty(codename);
         
         name = name.toLowerCase().trim();
         this.name = new SimpleStringProperty(name);
@@ -75,9 +75,12 @@ public class Role {
         return code;
     }
     
+    public Role getRole(){
+        return this;
+    }
+    
     @Override
     public String toString(){
         return this.code.get();
     }
-
 }

@@ -3,5 +3,3 @@ MongoDBFiles/
 build/
 dist/
 nbproject/
-*EditUserController.java
-*EditUserForm.fxml

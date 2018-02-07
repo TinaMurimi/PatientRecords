@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.effect.*?>
+<?import com.jfoenix.validation.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="pane" fx:id="editUserForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="450.0" styleClass="pane" stylesheets="@../../styles/form.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+      <children>
+            <JFXTextField id="uLName" fx:id="lastNameField" focusColor="#07595a" layoutX="245.0" layoutY="104.0" prefHeight="30.0" prefWidth="170.0" promptText="Enter Last Name" styleClass="jfx-text-field" unFocusColor="#44aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="104.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+      </JFXTextField>
+            <JFXTextField id="username" fx:id="usernameField" disable="true" editable="false" focusColor="#07595a" layoutX="245.0" layoutY="180.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Username" styleClass="jfx-text-field" unFocusColor="#44aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="180.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+         <tooltip>
+            <Tooltip text="Username must contain 5 or more characters and start with a letter. Allowed a-z, A-Z, 0-9, points, dashes and underscores" />
+         </tooltip>
+      </JFXTextField>
+               
+                        <JFXComboBox id="userGroup" fx:id="uGroupComboBox" focusColor="#07595a" layoutX="245.0" layoutY="256.0" prefHeight="30.0" prefWidth="148.0" promptText="Select User Group" styleClass="jfx-combo-box" unFocusColor="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="256.0">
+         <tooltip>
+            <Tooltip text="Determines user's access level" />
+         </tooltip></JFXComboBox>
+            <Label layoutX="42.0" layoutY="140.0" prefHeight="16.0" prefWidth="30.0" text="Title" textFill="#48aaad" AnchorPane.bottomAnchor="326.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="140.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="lastNameReqLabel" layoutX="245.0" layoutY="140.0" prefHeight="16.0" prefWidth="66.0" text="Last Name" textFill="#48aaad" AnchorPane.bottomAnchor="326.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="140.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="usernameReqLabel" layoutX="245.0" layoutY="216.0" prefHeight="16.0" prefWidth="75.0" text="Username" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="216.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="otherNameReqLabel" layoutX="42.0" layoutY="216.0" prefHeight="16.0" prefWidth="30.0" text="Other Name" textFill="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="216.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <Label layoutX="42.0" layoutY="292.0" prefHeight="16.0" prefWidth="30.0" text="Job Title" textFill="#48aaad" AnchorPane.bottomAnchor="174.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="293.0" AnchorPane.topAnchor="292.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </Label>
+            <JFXTextField id="uJobTitle" fx:id="jobTitleField" focusColor="#07595a" layoutX="42.0" layoutY="256.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Job Title" styleClass="jfx-text-field" unFocusColor="#44aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="256.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="13.0" />
+               </font>
+            </JFXTextField>
+            <JFXButton id="newGroupButton" fx:id="newGroupButton" layoutX="383.0" layoutY="264.0" prefHeight="33.0" prefWidth="39.0" styleClass="addGroupButton" text="+" textFill="#48aaad" AnchorPane.leftAnchor="383.0" AnchorPane.rightAnchor="28.0">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="18.0" />
+               </font>
+               <tooltip>
+                  <Tooltip text="Create new user group" />
+               </tooltip>
+            </JFXButton>
+      <Label contentDisplay="CENTER" layoutX="167.0" layoutY="42.0" prefHeight="25.0" prefWidth="148.0" styleClass="titleLabel" text="Edit User Details" textAlignment="CENTER" textFill="#48aaad" AnchorPane.leftAnchor="167.0" AnchorPane.rightAnchor="135.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="31.0" />
+         </font>
+      </Label>
+      <Label fx:id="lastNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="398.0" layoutY="96.0" prefHeight="10.0" prefWidth="10.0" styleClass="errorLabel" text="*" textFill="RED" AnchorPane.leftAnchor="398.0" AnchorPane.rightAnchor="45.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label id="passwordLabel" fx:id="passwordLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="195.0" layoutY="249.0" prefHeight="16.0" prefWidth="10.0" styleClass="errorLabel" text="*" textFill="RED" AnchorPane.bottomAnchor="217.0" AnchorPane.leftAnchor="195.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="249.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="398.0" layoutY="250.0" prefHeight="16.0" prefWidth="10.0" styleClass="errorLabel" text="*" textFill="RED" AnchorPane.bottomAnchor="220.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="250.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label id="errorMsgLabel" fx:id="errorMsgLabel" layoutX="42.0" layoutY="67.0" prefHeight="30.0" prefWidth="366.0" styleClass="errorLabel" text="* Mandatory" textFill="RED" wrapText="true" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <JFXComboBox id="userTitle" fx:id="uTitleComboBox" focusColor="#07595a" layoutX="42.0" layoutY="104.0" prefHeight="30.0" prefWidth="163.0" promptText="Select Title" styleClass="jfx-combo-box" unFocusColor="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="104.0" />
+      <JFXButton id="saveButton" fx:id="updateButton" layoutX="115.0" layoutY="426.0" onAction="#updateAction" prefHeight="30.0" prefWidth="90.0" text="Update" textFill="#48aaad" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="245.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="18.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Create new user group" />
+         </tooltip>
+      </JFXButton>
+      <JFXButton id="cancelButton" fx:id="cancelButton" cancelButton="true" layoutX="245.0" layoutY="426.0" prefHeight="30.0" prefWidth="90.0" text="Cancel" textFill="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="115.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="18.0" />
+         </font>
+         <tooltip>
+            <Tooltip text="Create new user group" />
+         </tooltip>
+      </JFXButton>
+      <JFXTextField id="uOName" fx:id="otherNameField" focusColor="#07595a" layoutX="42.0" layoutY="180.0" prefHeight="30.0" prefWidth="163.0" promptText="Enter Other Name(s)" styleClass="jfx-text-field" unFocusColor="#44aaad" AnchorPane.bottomAnchor="272.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="180.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </JFXTextField>
+      <CheckBox id="isActive" fx:id="isActiveCheckBox" layoutX="42.0" layoutY="338.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="97.0" styleClass="jfx-check-box" text="Active?" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="311.0" AnchorPane.topAnchor="338.0" />
+      <Label fx:id="lastNameRulesLabel" alignment="TOP_LEFT" layoutX="258.0" layoutY="120.0" prefHeight="61.0" prefWidth="185.0" styleClass="infoLabel" visible="false" wrapText="true">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Label>
+      <Label id="otherNameRulesLabel" fx:id="otherNameRulesLabel" alignment="TOP_LEFT" layoutX="56.0" layoutY="190.0" prefHeight="61.0" prefWidth="185.0" style="-fx-max-height: Infinity;" styleClass="infoLabel" visible="false" wrapText="true">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Label>
+      <Label fx:id="usernameRulesLabel" alignment="TOP_LEFT" layoutX="258.0" layoutY="189.0" prefHeight="87.0" prefWidth="185.0" styleClass="infoLabel" visible="false" wrapText="true">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Label>
+      <Label id="passwordRulesLabel" fx:id="passwordRulesLabel" alignment="TOP_LEFT" layoutX="207.0" layoutY="294.0" prefHeight="127.0" prefWidth="241.0" style="-fx-max-height: Infinity;" styleClass="infoLabel" visible="false" wrapText="true">
+         <effect>
+            <InnerShadow />
+         </effect>
+      </Label>
+      <Label fx:id="otherNameLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="196.0" layoutY="173.0" prefHeight="10.0" prefWidth="10.0" styleClass="errorLabel" text="*" textFill="RED" AnchorPane.leftAnchor="196.0" AnchorPane.rightAnchor="244.0" AnchorPane.topAnchor="173.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameLabel1" alignment="CENTER" contentDisplay="CENTER" layoutX="400.0" layoutY="172.0" prefHeight="10.0" prefWidth="10.0" styleClass="errorLabel" text="*" textFill="RED" AnchorPane.rightAnchor="42.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="userGroupReqLabel" layoutX="245.0" layoutY="292.0" prefHeight="16.0" prefWidth="75.0" text="User Group" textFill="#48aaad" AnchorPane.bottomAnchor="174.0" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="108.0" AnchorPane.topAnchor="292.0">
+         <font>
+            <Font name="Microsoft Sans Serif" size="13.0" />
+         </font>
+      </Label>
+      <Hyperlink fx:id="resetPwdLink" layoutX="37.0" layoutY="383.0" onAction="#updatePassword" text="Reset password?" AnchorPane.leftAnchor="37.0" />
+      </children>
+</AnchorPane>

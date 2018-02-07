@@ -59,6 +59,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.BasicDBObject;
+import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoCommandException;
 
@@ -228,7 +229,7 @@ public class UserDashboardController extends BaseController implements Initializ
      * Returns a list of all users in the DB
      * @return users
      */
-    private List<Document> getUsers(){
+    public List<Document> getUsers(){
         
         List<Document> users = new ArrayList<>();
         Document command = new Document("usersInfo", 1);
@@ -238,6 +239,25 @@ public class UserDashboardController extends BaseController implements Initializ
             users = (ArrayList) result.get("users");
         } catch (MongoCommandException e) {
             logger.log(Level.SEVERE, "Unable to fetch list of all users", e);
+        }
+        
+        return users;
+    }
+    
+    /**
+     * Returns the details of a single user in the DB
+     * @return users
+     */
+    public List<Document> getUser(String user){
+        
+        List<Document> users = new ArrayList<>();
+        Document command = new Document("usersInfo", user);
+             
+        try{
+            Document result = db.runCommand(command);
+            users = (ArrayList) result.get("users");
+        } catch (MongoCommandException e) {
+            logger.log(Level.SEVERE, "Unable to fetch user details", e);
         }
         
         return users;
@@ -390,6 +410,32 @@ public class UserDashboardController extends BaseController implements Initializ
     public void editAction(ActionEvent event) {
         // Pass
     }
+    
+    /**
+     * Checks if a username exists/ is already in user in the database
+     * @param username (String) Username to validate
+     * @return userExists (Boolean)
+    */
+    public boolean checkUserExists(String username) {
+        boolean userExists = false;
+        try {
+            BasicDBObjectBuilder builder = new BasicDBObjectBuilder();
+            builder.push("usersInfo").add("user", username).add("db", db.getName()).add("showPrivileges", true);
+
+            Document result = db.runCommand((Bson) builder.get());
+            ArrayList userDetails = (ArrayList) result.get("users");
+            if (!userDetails.isEmpty()) {
+                userExists = true;
+            }
+        } catch (MongoCommandException e) {
+            if (e.getCode() != 13) {
+                throw e;
+            }
+        } catch (MongoException e) {
+            logger.log(Level.WARNING, null, e);
+        }
+        return userExists;
+    }
 
     /**
      * Delete a document or multiple selected documents from Users COllection
@@ -484,6 +530,42 @@ public class UserDashboardController extends BaseController implements Initializ
             cell.setAlignment(Pos.CENTER_LEFT);
             return cell;
         });
+    }
+    
+    /**
+     * User honorific title
+     */
+    public enum Title {
+        Dr("Dr."), Mr("Mr."), Ms("Ms."), Miss("Miss"), Prof("Prof."), Mx("Mx."), Other("Other");
+
+        private final String title;
+        private Title code;
+
+        Title(String title) {
+            this.title = title;
+        }
+
+        public String getEnumTitle() {
+            return title;
+        }
+    }
+    
+    /**
+     * Returns user's honorific title
+     * @param name (String) Title name to match to
+     * @return title (Title)
+     */
+    public Title getTitle(String name) {
+        Title title = null;
+
+        for (Title t : Title.values()) {
+            if (t.getEnumTitle().equals(name)) {
+                title = t;
+                break;
+            }
+        }
+        
+        return title;
     }
 
     @Override
@@ -589,6 +671,17 @@ public class UserDashboardController extends BaseController implements Initializ
                 if (event.getClickCount() == 2 && (!row.isEmpty())) {
                     User rowData = row.getItem();
                     System.out.println("Double click on: " + rowData.getUsername());
+                    
+                    userDashboardPane.setEffect(new GaussianBlur());
+                    EditUserController euc = new EditUserController(rowData.getUsername());
+                    euc.editUserLoader(db);
+                    
+                    // CreateUserForm.cancelButton action
+                    euc.cancelButton.setOnAction(cancelEvent -> {
+                    populateUsers();
+                    euc.stage.close();
+                    userDashboardPane.setEffect(null);
+                    });
                 }
             });
             return row;

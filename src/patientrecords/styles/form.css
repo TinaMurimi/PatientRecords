@@ -80,10 +80,20 @@
     -fx-text-fill: #FFFFFF;
     -fx-font-family: "Microsoft Sans Serif";
     -fx-font-size: 18px;
-    -fx-text-alignment: CENTER;
+    -fx-text-alignment: LEFT;
     -fx-alignment: CENTER-LEFT;
     -jfx-focus-color: #07595a;
     -jfx-unfocus-color: #44aaad;
+}
+
+.hyperlink {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: "Microsoft Sans Serif";
+    -fx-font-size: 14px;
+    -fx-text-alignment: LEFT;
+    -jfx-focus-color: #07595a;
+    -jfx-unfocus-color: #44aaad;
+    -fx-alignemnt: CENTER-LEFT;
 }
 
 .infoLabel {
