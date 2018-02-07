@@ -45,6 +45,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 // import javafx.beans.binding.Bindings;
 import javax.script.Bindings;
@@ -211,8 +212,7 @@ public class CreateUserController extends UserDashboardController implements Ini
             stage.centerOnScreen();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
-            // stage.showAndWait();
-
+            
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
         }
@@ -261,16 +261,22 @@ public class CreateUserController extends UserDashboardController implements Ini
         errorMsgLabel.setText(null);
 
         /** Validate lastName
-         * lastName should not start with a number
+         * Mandatory single name, WITHOUT spaces, WITH special characters:
+         * lastName should not contain a number
          * lastName should be longer than 2 characters
-         * lastName should NOT contain special characters
          */
         final String lname = lastNameField.getText();
         // if (lname != null && lname.trim().length() != 0 && lname.matches("\\b[a-zA-Z]{3,10}\\b")) {
-        if (lname != null && lname.matches("\\b[a-zA-Z]{3,10}\\b")) {
-            lastNameReqLabel.setStyle("-fx-text-fill: WHITE;");
-            user.setLastName(lname);
-            // validInput = true;// 
+        // if (lname != null && lname.matches("\\b[a-zA-Z]{3,10}\\b")) {
+        if (lname != null && lname.matches("^[A-Za-z]{3,10}(((\\'|\\-|\\.)?([A-Za-z])+))?$")) {
+            if (lname.trim() == null) {
+                errorMsgLabel.setText("Invalid last name");
+                lastNameReqLabel.setStyle("-fx-text-fill: RED;");
+                validInput = false;
+            } else {
+                lastNameReqLabel.setStyle("-fx-text-fill: WHITE;");
+                user.setLastName(lname);
+            }
         } else {
             errorMsgLabel.setText("Invalid last name");
             lastNameReqLabel.setStyle("-fx-text-fill: RED;");
@@ -278,12 +284,14 @@ public class CreateUserController extends UserDashboardController implements Ini
         }
 
         /** Validate otherNames
-         * otherNames should not start with a number
+         * Mandatory single name, optional additional names, WITH spaces, WITH special characters:
+         * otherNames should not contain a number
          * otherNames should be longer than 2 characters
-         * otherNames should NOT contain special characters
+         * otherNames can contain special characters
          */
         final String oNames = otherNameField.getText();
-        if (oNames != null && oNames.matches("\\b[a-zA-Z]{3,20}\\b")) {
+        // if (oNames != null && oNames.matches("\\b[a-zA-Z]{3,20}\\b")) {
+        if (oNames != null && oNames.matches("^[A-Za-z]{3,10}((\\s)?((\\'|\\-|\\.)?[A-Za-z]{3,10}))*$")) {
             otherNameReqLabel.setStyle("-fx-text-fill: WHITE;");
             user.setOtherName(oNames);
             // validInput = true;
@@ -299,7 +307,7 @@ public class CreateUserController extends UserDashboardController implements Ini
          * Username should NOT contain special characters
          */
         final String username = usernameField.getText();
-        if (username != null && username.matches("\\b[a-zA-Z][a-zA-Z0-9\\-._]{5,10}\\b")) {
+        if (username != null && username.matches("\\b[a-zA-Z][a-zA-Z0-9\\-._]{4,10}\\b")) {
             // Check if username exists
             if (checkUserExists(username)) {
                 errorMsgLabel.setText("Username exists");
@@ -375,7 +383,7 @@ public class CreateUserController extends UserDashboardController implements Ini
 
         // Get job
         String job;
-        if (jobTitleField.getText() != null) {
+        if (jobTitleField.getText() != null || !(jobTitleField.getText().equals(""))) {
             job = jobTitleField.getText();
             user.setJob(job);
         }
@@ -392,8 +400,22 @@ public class CreateUserController extends UserDashboardController implements Ini
          */
         if (validInput){
             createUser(user);
+            
+            // Clear all fields
+            uTitleComboBox.setValue(null);
+            lastNameField.clear();
+            otherNameField.clear();
+            usernameField.clear();
+            jobTitleField.clear();
+            uGroupComboBox.setValue(null);
+            passwordField.clear();
+            confirmPwdField.clear();
+            isActiveCheckBox.setSelected(true);
+            
+            errorMsgLabel.setText("User created successfully");
         }
     }
+    
 
     /**Creates a new user
      * @param user
@@ -401,7 +423,7 @@ public class CreateUserController extends UserDashboardController implements Ini
     private void createUser(User user) {
         
         Document customData = new Document("title", user.getTitle())
-                .append("lastname", user.getLastName())
+                .append("lastName", user.getLastName())
                 .append("otherName", user.getOtherName())
                 .append("job", user.getJob())
                 .append("active", user.getIsActive())
@@ -417,10 +439,7 @@ public class CreateUserController extends UserDashboardController implements Ini
 
         try {
             db.runCommand(command);
-            errorMsgLabel.setText("User created successfully");
             
-            // Reload page
-            createUserLoader(db);
         } catch (MongoCommandException e) {
             if (e.getErrorCode() == 31){
                 logger.log(Level.SEVERE, "RoleNotFound", e);

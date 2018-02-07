@@ -122,20 +122,20 @@
             <AnchorPane prefHeight="50.0" prefWidth="822.0" style="-fx-background-color: #fff; -fx-border-color: #48aaad;" BorderPane.alignment="CENTER">
                <children>
                   <TextField id="searchField" fx:id="searchField" layoutX="37.0" layoutY="12.0" prefHeight="27.0" prefWidth="269.0" promptText="Search user" />
-                  <Button fx:id="addButton" layoutX="1161.0" layoutY="11.0" mnemonicParsing="false"   style="-fx-background-color: #fff;">
+                  <Button fx:id="addButton" layoutX="1161.0" layoutY="11.0" mnemonicParsing="false" style="-fx-background-color: #fff;">
                      <graphic>
-                        <ImageView fitHeight="26.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView id="addButton" fitHeight="26.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/plus_sign_add_additional-512.png" />
+                              <Image url="@../../images/plus_sign_add_additional-512.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="delButton" layoutX="1107.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-color: #fff;">
+                  <Button id="deleteButton" fx:id="delButton" layoutX="1107.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteAction" style="-fx-background-color: #fff;">
                      <graphic>
                         <ImageView fitHeight="29.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/minusSign.png" />
+                              <Image url="@../../images/minusSign.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -144,7 +144,7 @@
                      <graphic>
                         <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/searchicon.png" />
+                              <Image url="@../../images/searchicon.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -153,7 +153,7 @@
                      <graphic>
                         <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/undoButtonImage.png" />
+                              <Image url="@../../images/undoButtonImage.png" />
                            </image>
                         </ImageView>
                      </graphic>

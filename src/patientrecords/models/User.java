@@ -29,7 +29,6 @@ public class User {
     private final StringProperty username;
     private final StringProperty title;
     private final StringProperty role;
-    private final StringProperty firstName;
     private final StringProperty lastName;
     private final StringProperty otherName;
 
@@ -69,7 +68,6 @@ public class User {
         // this.dateCreated = new SimpleStringProperty((String) dateFormat.format(currDate));
         this.dateCreated = new SimpleObjectProperty<>(currDateTime);
         this.title = new SimpleStringProperty();
-        this.firstName = new SimpleStringProperty();
         this.lastName = new SimpleStringProperty();
         this.otherName = new SimpleStringProperty();
         this.role = new SimpleStringProperty();
@@ -166,22 +164,6 @@ public class User {
         return title;
     }
 
-    // firstName
-    public String getFirstName() {
-        return firstName.get();
-    }
-
-    public void setFirstName(String firstName) {
-        if (firstName != null) {
-            firstName = StringUtils.capitalize(firstName.toLowerCase().trim());
-        }
-        this.firstName.set(firstName);
-    }
-
-    public StringProperty firstNameProperty() {
-        return firstName;
-    }
-
     // lastName
     public String getLastName() {
         return lastName.get();
@@ -227,21 +209,6 @@ public class User {
 
     public StringProperty roleProperty() {
         return role;
-    }
-
-    /**
-     * Returns a StringExpression that holds the value of the 
-     * concatenation firstName (StringProperty) and lastName (StringProperty)
-     * @return combiName (StringProperty) 
-     */
-    public StringProperty concatNameProperty() {
-        if (lastName != null) {
-            StringProperty combiName = new SimpleStringProperty();
-            combiName.bind(Bindings.concat(firstName, " ", lastName));
-            return combiName;
-        }
-        return firstName;
-
     }
 
     // job

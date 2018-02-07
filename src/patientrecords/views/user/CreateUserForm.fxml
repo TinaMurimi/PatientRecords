@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
 <?import javafx.scene.effect.*?>
 <?import com.jfoenix.validation.*?>
 <?import javafx.scene.text.*?>
@@ -10,19 +11,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="pane" fx:id="createUserForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="450.0" styleClass="pane" stylesheets="@../styles/form.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="pane" fx:id="createUserForm" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="482.0" prefWidth="450.0" styleClass="pane" stylesheets="@../../styles/form.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
       <children>
-            <JFXPasswordField fx:id="passwordField" focusColor="#07595a" layoutX="42.0" layoutY="301.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Password" styleClass="jfx-password-field" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="301.0">
+            <JFXPasswordField fx:id="passwordField" focusColor="#07595a" layoutX="42.0" layoutY="301.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Password" styleClass="jfx-password-field" stylesheets="@../../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="301.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
       </JFXPasswordField>
-            <JFXTextField id="uLName" fx:id="lastNameField" focusColor="#07595a" layoutX="245.0" layoutY="97.0" prefHeight="30.0" prefWidth="170.0" promptText="Enter Last Name" stylesheets="@../styles/form.css" unFocusColor="#44aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="97.0">
+            <JFXTextField id="uLName" fx:id="lastNameField" focusColor="#07595a" layoutX="245.0" layoutY="97.0" prefHeight="30.0" prefWidth="170.0" promptText="Enter Last Name" styleClass="jfx-text-field" unFocusColor="#44aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="97.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
       </JFXTextField>
-            <JFXTextField id="username" fx:id="usernameField" focusColor="#07595a" layoutX="259.0" layoutY="165.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Username" stylesheets="@../styles/form.css" unFocusColor="#44aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="165.0">
+            <JFXTextField id="username" fx:id="usernameField" focusColor="#07595a" layoutX="259.0" layoutY="165.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Username" styleClass="jfx-text-field" unFocusColor="#44aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="165.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
@@ -31,11 +32,11 @@
          </tooltip>
       </JFXTextField>
                
-                        <JFXComboBox id="userGroup" fx:id="uGroupComboBox" focusColor="#07595a" layoutX="259.0" layoutY="233.0" prefHeight="30.0" prefWidth="148.0" promptText="Select User Group" styleClass="jfx-combo-box" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="233.0">
+                        <JFXComboBox id="userGroup" fx:id="uGroupComboBox" focusColor="#07595a" layoutX="259.0" layoutY="233.0" prefHeight="30.0" prefWidth="148.0" promptText="Select User Group" styleClass="jfx-combo-box" unFocusColor="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="57.0" AnchorPane.topAnchor="233.0">
          <tooltip>
             <Tooltip text="Determines user's access level" />
          </tooltip></JFXComboBox>
-            <JFXPasswordField fx:id="confirmPwdField" focusColor="#07595a" layoutX="259.0" layoutY="301.0" prefHeight="30.0" prefWidth="220.0" promptText="Confirm Password" styleClass="jfx-password-field" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="301.0">
+            <JFXPasswordField fx:id="confirmPwdField" focusColor="#07595a" layoutX="259.0" layoutY="301.0" prefHeight="30.0" prefWidth="220.0" promptText="Confirm Password" styleClass="jfx-password-field" stylesheets="@../../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="245.0" AnchorPane.rightAnchor="42.0" AnchorPane.topAnchor="301.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
@@ -75,7 +76,7 @@
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
             </Label>
-            <JFXTextField id="uJobTitle" fx:id="jobTitleField" focusColor="#07595a" layoutX="42.0" layoutY="233.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Job Title" stylesheets="@../styles/form.css" unFocusColor="#44aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="233.0">
+            <JFXTextField id="uJobTitle" fx:id="jobTitleField" focusColor="#07595a" layoutX="42.0" layoutY="233.0" prefHeight="30.0" prefWidth="220.0" promptText="Enter Job Title" styleClass="jfx-text-field" unFocusColor="#44aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="233.0">
                <font>
                   <Font name="Microsoft Sans Serif" size="13.0" />
                </font>
@@ -88,7 +89,7 @@
                   <Tooltip text="Create new user group" />
                </tooltip>
             </JFXButton>
-      <Label layoutX="154.0" layoutY="41.0" prefHeight="25.0" prefWidth="142.0" styleClass="titleLabel" stylesheets="@../styles/form.css" text="Create New User" textFill="#48aaad">
+      <Label layoutX="154.0" layoutY="41.0" prefHeight="25.0" prefWidth="142.0" styleClass="titleLabel" text="Create New User" textFill="#48aaad">
          <font>
             <Font name="Microsoft Sans Serif" size="31.0" />
          </font>
@@ -113,12 +114,12 @@
             <Font name="Microsoft Sans Serif" size="13.0" />
          </font>
       </Label>
-      <Label id="errorMsgLabel" fx:id="errorMsgLabel" layoutX="38.0" layoutY="53.0" prefHeight="48.0" prefWidth="366.0" styleClass="errorLabel" stylesheets="@../styles/form.css" text="* Mandatory" textFill="RED" wrapText="true" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0">
+      <Label id="errorMsgLabel" fx:id="errorMsgLabel" layoutX="38.0" layoutY="53.0" prefHeight="48.0" prefWidth="366.0" styleClass="errorLabel" text="* Mandatory" textFill="RED" wrapText="true" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="42.0">
          <font>
             <Font name="Microsoft Sans Serif" size="13.0" />
          </font>
       </Label>
-      <JFXComboBox id="userTitle" fx:id="uTitleComboBox" focusColor="#07595a" layoutX="42.0" layoutY="97.0" prefHeight="30.0" prefWidth="163.0" promptText="Select Title" styleClass="jfx-combo-box" stylesheets="@../styles/form.css" unFocusColor="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="97.0" />
+      <JFXComboBox id="userTitle" fx:id="uTitleComboBox" focusColor="#07595a" layoutX="42.0" layoutY="97.0" prefHeight="30.0" prefWidth="163.0" promptText="Select Title" styleClass="jfx-combo-box" unFocusColor="#48aaad" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="97.0" />
       <JFXButton id="saveButton" fx:id="saveButton" layoutX="115.0" layoutY="426.0" onAction="#saveAction" prefHeight="30.0" prefWidth="90.0" text="Save" textFill="#48aaad" AnchorPane.leftAnchor="115.0" AnchorPane.rightAnchor="245.0">
          <font>
             <Font name="Microsoft Sans Serif" size="18.0" />
@@ -135,12 +136,12 @@
             <Tooltip text="Create new user group" />
          </tooltip>
       </JFXButton>
-      <JFXTextField id="uOName" fx:id="otherNameField" focusColor="#07595a" layoutX="42.0" layoutY="165.0" prefHeight="30.0" prefWidth="163.0" promptText="Enter Other Name(s)" stylesheets="@../styles/form.css" unFocusColor="#44aaad" AnchorPane.bottomAnchor="287.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="165.0">
+      <JFXTextField id="uOName" fx:id="otherNameField" focusColor="#07595a" layoutX="42.0" layoutY="165.0" prefHeight="30.0" prefWidth="163.0" promptText="Enter Other Name(s)" styleClass="jfx-text-field" unFocusColor="#44aaad" AnchorPane.bottomAnchor="287.0" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="165.0">
          <font>
             <Font name="Microsoft Sans Serif" size="13.0" />
          </font>
       </JFXTextField>
-      <CheckBox id="isActive" fx:id="isActiveCheckBox" layoutX="42.0" layoutY="378.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="97.0" selected="true" text="Activate?" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="311.0" AnchorPane.topAnchor="378.0" />
+      <CheckBox id="isActive" fx:id="isActiveCheckBox" layoutX="42.0" layoutY="378.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="97.0" selected="true" styleClass="jfx-check-box" text="Activate?" AnchorPane.leftAnchor="42.0" AnchorPane.rightAnchor="311.0" AnchorPane.topAnchor="378.0" />
       <Label fx:id="lastNameRulesLabel" alignment="TOP_LEFT" layoutX="258.0" layoutY="125.0" prefHeight="61.0" prefWidth="185.0" styleClass="infoLabel" stylesheets="@../styles/form.css" visible="false" wrapText="true">
          <effect>
             <InnerShadow />

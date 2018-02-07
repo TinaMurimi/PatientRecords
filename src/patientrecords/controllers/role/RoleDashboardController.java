@@ -355,7 +355,6 @@ public class RoleDashboardController extends BaseController implements Initializ
                     String title = doc.get("title") == null ? null : doc.get("title").toString();
                     user.setTitle(title);
 
-                    user.setFirstName(doc.get("firstname").toString());
                     user.setLastName(doc.get("lastname").toString());
 
                     String otherName = doc.get("othername") == null ? null : doc.get("othername").toString();

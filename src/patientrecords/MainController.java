@@ -136,32 +136,6 @@ public class MainController implements Initializable {
             HashMap<String, HashMap<String, Object>> conn = dbAuth.getConn();
             Boolean auth = (Boolean) conn.get(username).get("auth");
             MongoDatabase db = (MongoDatabase) conn.get(username).get("database");
-            
-            
-            Document command = new Document("rolesInfo", 1)
-                        .append("showPrivileges", true)
-                        .append("showBuiltinRoles", true);
-        
-            Document result = db.runCommand(command);
-            ArrayList    roleInfo = (ArrayList) result.get("roles");
-                    Iterator iterator = roleInfo.iterator();
-
-
-
-            while (iterator.hasNext()){
-                
-                // iterator.next(): class org.bson.Document
-                System.out.println("\n------ MainController -------");
-                
-                Document doc = (Document) iterator.next();
-                // Document{{role=readWrite, db=EyGlas, isBuiltin=true, roles=[], inheritedRoles=[], privileges=[Document{{resource=Document{{db=EyGlas, collection=}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.indexes}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}, Document{{resource=Document{{db=EyGlas, collection=system.js}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.namespaces}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}], inheritedPrivileges=[Document{{resource=Document{{db=EyGlas, collection=}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.indexes}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}, Document{{resource=Document{{db=EyGlas, collection=system.js}}, actions=[changeStream, collStats, convertToCapped, createCollection, createIndex, dbHash, dbStats, dropCollection, dropIndex, emptycapped, find, insert, killCursors, listCollections, listIndexes, planCacheRead, remove, renameCollectionSameDB, update]}}, Document{{resource=Document{{db=EyGlas, collection=system.namespaces}}, actions=[changeStream, collStats, dbHash, dbStats, find, killCursors, listCollections, listIndexes, planCacheRead]}}]}}
-
-                
-                System.out.println(doc);
-                System.out.println(doc.get("role"));
-                System.out.println(doc.get("isBuiltin"));
-
-            }
 
 //            if (auth) {
                 // TODO MainController. !isActive log out user

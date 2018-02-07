@@ -19,10 +19,6 @@
     -jfx-unfocus-color: WHITE;
 }
 
-/* .jfx-combo-box:focused {
-    -fx-background-color: #07595a;
-} */
-
 .jfx-combo-box .combo-box-button-container {
     /* -fx-background-color:RED; */
     -fx-font-size: 13px;
@@ -49,7 +45,6 @@
 }
 
 .jfx-text-field {
-    /* -fx-background-color: white; */
     -fx-font-family: "Microsoft Sans Serif";
     -fx-font-size: 14px;
     -fx-prompt-text-fill: #FFFFFFA3;
@@ -102,7 +97,6 @@
     -fx-content-display: TOP;
     -fx-max-height: Infinity;
     -fx-alignemnt: TOP-LEFT;
-    /* -fx-line-spacing: 1em; */
     -fx-effect: innershadow( three-pass-box, #FFFFFF, 10, 0.25, 0, 1);
 }
 
@@ -116,9 +110,9 @@
     -jfx-unfocus-color: #44aaad;
 }
 
-/* .jfx-button:armed, */
-
-.jfx-button:hover, .jfx-button:focused, .jfx-button {
+.jfx-button:hover,
+.jfx-button:focused,
+.jfx-button {
     -fx-background-color: WHITE;
     -fx-text-fill: #48aaad;
     -fx-font-family: "Microsoft Sans Serif";
@@ -142,7 +136,8 @@
     -fx-background-insets: 0px;
 }
 
-.addGroupButton:hover, .addGroupButton:focused {
+.addGroupButton:hover,
+.addGroupButton:focused {
     -fx-background-color: transparent;
     -fx-font-family: "Arial";
     -fx-font-size: 18px;
@@ -161,9 +156,9 @@
 }
 
 .jfx-check-box .box {
-    -fx-background-color: #48AAAD;
-    -fx-background-radius: 21;
-    /* -fx-border-color: -jfx-unchecked-color; */
+    -fx-background-color: WHITE;
+    /* -fx-background-radius: 21; */
+    -fx-border-color: #48aaad;
     -fx-border-style: solid;
     -fx-border-radius: 2;
     -fx-border-width: 2;
@@ -173,32 +168,6 @@
     -fx-border-color: #FFFFFFA3;
 }
 
-.jfx-check-box .mark {
-    -fx-shape: "M384 690l452-452 60 60-512 512-238-238 60-60z";
-    -fx-max-width: 15;
-    -fx-max-height: 12;
-    -fx-background-color: WHITE;
-    -fx-border-color: WHITE;
-    -fx-border-width: 2;
-    -fx-border-radius: 2;
-}
-
-.check-box {
-    -fx-font-family: "Microsoft Sans Serif";
-    -fx-font-size: 14px;
-    -fx-text-fill: WHITE;
-}
-
-.check-box .box {
-    -fx-background-color: #48aaad;
-    -fx-border-color: WHITE;
-    -fx-border-radius: 3px;
-}
-
-.check-box:selected .mark {
-    -fx-background-color: #48AAAD;
-}
-
-.check-box:selected .box {
-    -fx-background-color: WHITE;
+.jfx-check-box:selected .mark {
+    -fx-border-color: #48aaad;
 }
