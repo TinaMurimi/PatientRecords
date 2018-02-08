@@ -31,9 +31,10 @@ import javafx.fxml.Initializable;
 
 import javafx.geometry.Pos;
 
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.CheckBoxBuilder;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.cell.CheckBoxTableCell;
@@ -44,6 +45,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.layout.VBox;
 
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.MongoCommandException;
@@ -353,7 +355,7 @@ public class UserDashboardController extends BaseController implements Initializ
 
     @FXML
     @Override
-    public void searchAction(ActionEvent event) {
+    public void searchAction() {
         try {
             List<Document> result = searchItems(searchField.getText());
             populateUsers(result);
@@ -554,6 +556,14 @@ public class UserDashboardController extends BaseController implements Initializ
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+        // onEnter in searchField
+        searchField.setOnKeyPressed((KeyEvent ke) -> {
+            if (ke.getCode().equals(KeyCode.ENTER)) {
+                searchAction();
+            }
+        });
+
         lastNameCol.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
         concatNameCol.setCellValueFactory(cellData -> cellData.getValue().otherNameProperty());
         usernameCol.setCellValueFactory(cellData -> cellData.getValue().usernameProperty());

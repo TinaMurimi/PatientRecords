@@ -380,7 +380,7 @@ public class RoleDashboardController extends BaseController implements Initializ
 
     @FXML
     @Override
-    public void searchAction(ActionEvent event) {
+    public void searchAction() {
         try {
             FindIterable<Document> result = searchItems();
             populateUsers(parseUserList(result));

@@ -76,7 +76,7 @@ public abstract class BaseController implements BaseControllerInterface {
     }
 
     @Override
-    public void editAction(ActionEvent event) {
+    public void updateAction(ActionEvent event) {
         // TODO
     }
 
@@ -86,7 +86,7 @@ public abstract class BaseController implements BaseControllerInterface {
     }
 
     @Override
-    public void searchAction(ActionEvent event) {
+    public void searchAction() {
         // TODO
     }
     
