@@ -66,7 +66,7 @@ public class User {
         this.username = new SimpleStringProperty();
 
         // this.dateCreated = new SimpleStringProperty((String) dateFormat.format(currDate));
-        this.dateCreated = new SimpleObjectProperty<>(currDateTime);
+        this.dateCreated = new SimpleObjectProperty<>();
         this.title = new SimpleStringProperty();
         this.lastName = new SimpleStringProperty();
         this.otherName = new SimpleStringProperty();
@@ -78,18 +78,10 @@ public class User {
         this.lastLoginDate = new SimpleObjectProperty<>();
     }
 
-    // select
-    // public CheckBox getIsSelected() {
-    //     return isSelected;
-    // }
-
     public Boolean getIsSelected() {
         return isSelected.get();
     }
-
-    // public void setIsSelected(CheckBox isSelected) {
-    //this.isSelected = isSelected;
-    //}
+    
     public void setIsSelected(Boolean isSelected) {
         this.isSelected.set(isSelected);
     }
@@ -123,25 +115,14 @@ public class User {
     public StringProperty usernameProperty() {
         return username;
     }
-
-    // @return the dateCreated
-    /**
-    public String getDateCreated() {
-        return dateCreated.get();
-    }
     
-    public StringProperty DateCreatedroperty() {
-        return dateCreated;
-    }
-    */
-
     /** @return the dateCreated */
     public Object getDateCreated() {
         return dateCreated.get();
     }
 
-    public void setDateCreated(LocalDateTime lastLoginDate) {
-        this.lastLoginDate.set(lastLoginDate);
+    public void setDateCreated(LocalDateTime dateCreated) {
+        this.dateCreated.set(dateCreated);
     }
 
     public SimpleObjectProperty<LocalDateTime> dateCreatedProperty() {

@@ -24,7 +24,7 @@ public interface BaseControllerInterface {
      */
     public void deleteWarning();
 
-    public void editAction(ActionEvent event);
+    public void updateAction(ActionEvent event);
 
     public void viewAction(ActionEvent event);
 

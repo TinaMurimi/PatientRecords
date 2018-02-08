@@ -59,6 +59,17 @@
     -fx-fill: black;
 }
 
+.isSelected .label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: red;
+    -fx-text-alignment: CENTER;
+}
+
+.isSelected .column-header .label {
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+}
+
 /* .menu-bar .label {
     -fx-font-size: 13pt;
     -fx-font-family: "Microsoft Sans Serif";
@@ -73,11 +84,41 @@
     -fx-effect: dropshadow( three-pass-box, #48aaad, 10, 0.25, 0, 1);
 }
 
+/**
+.searchButton { 
+    -fx-background-image: url('/patientrecords/images/searchicon.png');
+    -fx-image: url('/patientrecords/images/searchicon.png');
+    
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 90%;
+}
+
+#undoButton { 
+    -fx-background-image: url('/patientrecords/images/undoButtonImage.png');
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 90%;
+}
+
+#delButton { 
+    -fx-background-image: url('/patientrecords/images/minusSign.png');
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 90%;
+}
+
+#addButton { 
+    -fx-background-image: url('/patientrecords/images/plus_sign_add_additional-512.png');
+    -fx-background-size: 30px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 90%;
+}
+*/
 
 /* .button:focused {
     -fx-effect: dropshadow( three-pass-box, #48aaad, 10, 0.25, 0, 1);
 } */
-
 
 /* .confirmDialog {
     -fx-background-color: white;

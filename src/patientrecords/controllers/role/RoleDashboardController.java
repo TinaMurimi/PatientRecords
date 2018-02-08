@@ -425,7 +425,7 @@ public class RoleDashboardController extends BaseController implements Initializ
 
     @FXML
     @Override
-    public void editAction(ActionEvent event) {
+    public void updateAction(ActionEvent event) {
         // Pass
     }
 
