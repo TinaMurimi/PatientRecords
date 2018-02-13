@@ -1,0 +1,220 @@
+.root {
+    -fx-background-color: #FFFFFFA3;
+}
+
+.label {
+    -fx-text-fill: #48aaad;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 14px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: CENTER-LEFT;
+}
+
+.timeDateLabel {
+    -fx-text-fill: #48aaad;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 18px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: CENTER-LEFT;
+}
+
+.menuAnchor {
+    -fx-background-color: #48aaad;
+}
+
+.menuAnchor .label {
+    -fx-text-fill: WHITE
+}
+
+/* LEFT OF BORDER PANE*/
+
+/* .line {
+    -fx-stroke: #14797A;
+    ;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP_LEFT;
+}
+
+.dataLabel {
+    -fx-padding: 4;
+    -fx-text-fill: #14797A;
+    /* -fx-text-fill: #000080; */
+
+/* -fx-font-family: "Segoe UI Light"; */
+
+/* -fx-font-family: "Andale Mono"; */
+
+/* -fx-font-family: "Arial"; 
+    -fx-font-family: "Microsoft Sans Serif";
+    -fx-font-size: 13px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP_LEFT;
+} */
+
+.detailsvbox {
+    /* -fx-background-color: #F3F0F0; */
+    /* -fx-background-color: rgba(236, 243, 236, 0.53); */
+    /* -fx-background-color: rgb(72, 170, 173, 0.05); */
+    /* -fx-background-color: rgba(19, 82, 19, 0.03); */
+    -fx-background-color: rgba(58, 94, 82, 0.06);
+    /* -fx-background-color: rgba(225, 252, 225, 0.71); */
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP_LEFT;
+}
+
+.title-label {
+    -fx-padding: 1;
+    /* -fx-text-fill: rgba(19, 82, 19, 0.71); */
+    -fx-text-fill: #389173;
+    /* -fx-text-fill: rgba(19, 59, 221, 0.79); */
+    
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP_LEFT;
+}
+
+
+.subtitle-label {
+    -fx-padding: 1;
+    /* -fx-text-fill: rgba(19, 82, 19, 0.71); */
+    -fx-text-fill: #389173;
+    /* -fx-text-fill: rgba(19, 59, 221, 0.79); */
+    
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP-LEFT;
+}
+
+.detailsvbox .data-label {
+    -fx-padding: 4;
+    /* -fx-text-fill: #389173; */
+    -fx-text-fill: rgba(20, 35, 94, 0.79);
+    
+    /* -fx-font-family: "Segoe UI Light"; */
+    /* -fx-font-family: "Andale Mono"; */
+    /* -fx-font-family: "Arial"; */
+    -fx-font-family: "Microsoft Sans Serif";
+    -fx-font-size: 13px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP-LEFT;
+}
+
+.detailsvbox .line {
+    /* -fx-stroke: #222275; */
+    -fx-stroke: #389173;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP-LEFT;
+}
+
+
+.accordion .titled-pane {
+    -fx-background-color: #FFFFFFA3;
+    -fx-alignment: center-left; 
+    -fx-cursor: "hand";
+    -fx-focus-color: #389173;
+    -fx-font-size: 12pt; 
+    -fx-font-weight: bold; 
+    /* -fx-text-fill: white;  */
+    -fx-text-fill: #389173;
+}
+
+.accordion .titled-pane .title {
+    /* -fx-background-color: transparent ; */
+    -fx-background-color: transparent ;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP-LEFT;
+}
+
+/* CENTRE OF BORDERPANE */
+.medical-vbox {
+    /* -fx-background-color: #F3F0F0; */
+    /* -fx-background-color: rgba(236, 243, 236, 0.53); */
+    /* -fx-background-color: rgb(72, 170, 173, 0.05); */
+    /* -fx-background-color: rgba(19, 82, 19, 0.03); */
+    -fx-background-color: rgba(58, 94, 82, 0.06);
+    /* -fx-background-color: rgba(225, 252, 225, 0.71); */
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP_LEFT;
+}
+
+.titlecenter-label {
+    -fx-padding: 1;
+    /* -fx-text-fill: rgba(19, 82, 19, 0.71); */
+    /* -fx-text-fill: #389173; */
+    -fx-text-fill: rgba(20, 35, 94, 0.79);
+    
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP_LEFT;
+}
+
+.medical-vbox .data-label {
+    -fx-padding: 4;
+    /* -fx-text-fill: #0A5E30; */
+    /* -fx-text-fill: #389173; */
+    /* -fx-text-fill: #389173; */
+    /* -fx-text-fill: rgba(20, 35, 94, 0.79); */
+    -fx-text-fill: #389173;
+    
+    
+    /* -fx-font-family: "Segoe UI Light"; */
+    /* -fx-font-family: "Andale Mono"; */
+    /* -fx-font-family: "Arial"; */
+    -fx-font-family: "Microsoft Sans Serif";
+    -fx-font-size: 13px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP_LEFT;
+}
+
+.medical-vbox .line {
+    /* -fx-stroke: #222275; */
+    /* -fx-stroke: #389173; */
+    -fx-stroke: rgba(20, 35, 94, 0.79);
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP_LEFT;
+}
+
+.labelUser {
+    -fx-text-fill: #48aaad;
+    -fx-font-family: "Segoe UI Light";
+    -fx-font-size: 12px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: CENTER-LEFT;
+}
+
+.searchBoxLabel {
+    -fx-padding: 0 2 0 7;
+}
+
+.searchBoxLabelIcon {
+    -glyph-size: 13;
+    -glyph-name: SEARCH;
+}
+
+/* Andale Mono */
+
+/* Segoe UI Light */

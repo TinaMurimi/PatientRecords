@@ -89,6 +89,10 @@ import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+
+
+
 public class PatientDashboardController extends BaseController implements Initializable {
 
     private PatientDashboardController main;

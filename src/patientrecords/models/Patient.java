@@ -18,6 +18,8 @@ import org.bson.Document;
 public class Patient {
     private final BooleanProperty isSelected;
 
+
+
     private final StringProperty _ID;
     private final StringProperty fileNo;
     private final StringProperty identification; // Field National ID/ Passprt Number
@@ -38,6 +40,9 @@ public class Patient {
     private final ListProperty<Document> allergies;
     private final ListProperty<Document> chronicDiseases;
     private final ListProperty<Document> vaccinations; // Vaccination/ Immunization name, valid until
+
+    // Insurance details
+    // NHIF Number
 
     private final SimpleObjectProperty<LocalDateTime> dateCreated;
 

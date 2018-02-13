@@ -381,6 +381,9 @@ public class RoleDashboardController extends BaseController implements Initializ
     @FXML
     @Override
     public void searchAction() {
+        // https://stackoverflow.com/questions/44317837/create-search-textfield-field-to-search-in-a-javafx-tableview
+        // https://stackoverflow.com/questions/47559491/making-a-search-bar-in-javafx
+        
         try {
             FindIterable<Document> result = searchItems();
             populateUsers(parseUserList(result));

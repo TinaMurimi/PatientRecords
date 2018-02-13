@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import org.controlsfx.control.textfield.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="660.0" prefWidth="926.0" stylesheets="@../../styles/patientView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane prefHeight="55.0" prefWidth="919.0" styleClass="menuAnchor" BorderPane.alignment="CENTER">
+         <children>
+            <Label id="timeLabel" fx:id="timeLabel" layoutX="14.0" layoutY="10.0" prefHeight="35.0" prefWidth="70.0" text="9:50 am" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="844.0" AnchorPane.topAnchor="10.0" />
+            <Label id="dateLabel" fx:id="dateLabel" layoutX="102.0" layoutY="10.0" prefHeight="35.0" prefWidth="70.0" text="25 Sep" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="102.0" AnchorPane.rightAnchor="756.0" AnchorPane.topAnchor="10.0" />
+            <Line endX="100.0" endY="20.0" layoutX="-7.0" layoutY="17.0" startX="100.0" stroke="#c9c8c8" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="92.5" AnchorPane.rightAnchor="834.5" AnchorPane.topAnchor="17.0" />
+            <GridPane layoutX="652.0" layoutY="10.0" prefHeight="35.0" prefWidth="175.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="labelUser" text="You are signed in as: " />
+                  <Label prefHeight="15.0" prefWidth="167.0" styleClass="labelUser" text="Dr. M. N. Townsend" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="59.0" prefWidth="726.0">
+               <children>
+                  <ImageView fitHeight="36.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" />
+                  <JFXButton layoutX="22.0" layoutY="16.0" prefHeight="27.0" prefWidth="99.0" text="Patients" />
+
+                  <CustomTextField fx:id="fieldSearch" layoutX="110.0" layoutY="16.0" prefHeight="30.0" prefWidth="160.0" promptText="Find Patient" styleClass="searchField">
+                    <left>
+                        <Label styleClass="searchBoxLabel">
+                            <graphic>
+                                <FontAwesomeIconView styleClass="searchBoxLabelIcon" />
+                            </graphic>
+                        </Label>
+                    </left>
+                  </CustomTextField>
+
+               </children>
+            </AnchorPane>
+            <AnchorPane prefHeight="548.0" prefWidth="726.0" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
