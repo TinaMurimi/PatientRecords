@@ -22,10 +22,9 @@ public class Patient {
     private final StringProperty fileNo;
     private final StringProperty identification; // Field National ID/ Passprt Number
 
-    private final StringProperty title;
     private final StringProperty lastName;
-    private final StringProperty otherName;
-    private final StringProperty address; // Address Line 1*, Address Line 2, City*, State, ZipCode, Country*
+    private final StringProperty givenName;
+    private final ListProperty<Document> address; // Address Line 1*, Address Line 2, City*, State, ZipCode, Country*
 
     private final SimpleObjectProperty<LocalDateTime> DoB;
 
@@ -67,6 +66,7 @@ public class Patient {
      */
 
 
+    // NextofKin, Parent, Doctor, Patient
     public Patient() {
         this.isSelected = new SimpleBooleanProperty();
 
@@ -74,11 +74,10 @@ public class Patient {
         this.fileNo = new SimpleStringProperty();
         this.identification = new SimpleStringProperty();
 
-        this.title = new SimpleStringProperty();
         this.lastName = new SimpleStringProperty();
-        this.otherName = new SimpleStringProperty();
-        this.address = new SimpleStringProperty();
-        this.DoB = new SimpleObjectProperty<>();
+        this.givenName = new SimpleStringProperty();
+        this.address = new SimpleListProperty<>();
+        this.DoB = new SimpleObjectProperty<>(); // if age < 18, guardian/parent
 
         this.phoneNo = new SimpleStringProperty();
         this.altPhoneNo = new SimpleStringProperty();
@@ -145,22 +144,6 @@ public class Patient {
         return identification;
     }
 
-    // title
-    public String getTitle() {
-        return title.get();
-    }
-
-    public void setTitle(String title) {
-        if (title != null) {
-            title = StringUtils.capitalize(title.toLowerCase().trim());
-        }
-        this.title.set(title);
-    }
-
-    public StringProperty titleProperty() {
-        return title;
-    }
-
     // lastName
     public String getLastName() {
         return lastName.get();
@@ -177,33 +160,46 @@ public class Patient {
         return lastName;
     }
 
-    // otherName
-    public String getOtherName() {
-        return otherName.get();
+    // givenName
+    public String getGivenName() {
+        return givenName.get();
     }
 
-    public void setOtherName(String otherName) {
-        if (otherName != null) {
-            otherName = StringUtils.capitalize(otherName.toLowerCase().trim());
+    public void setGivenName(String givenName) {
+        if (givenName != null) {
+            givenName = StringUtils.capitalize(givenName.toLowerCase().trim());
         }
-        this.otherName.set(otherName);
+        this.givenName.set(givenName);
     }
 
-    public StringProperty otherNameProperty() {
-        return otherName;
+    public StringProperty givenNameProperty() {
+        return givenName;
     }
 
     // the address
-    public void setAddress(String address) {
+    public void setAddress(ObservableList<Document> address) {
         this.address.set(address);
     }
 
-    public String getAddress() {
+    public ObservableList<Document> getAddress() {
         return address.get();
     }
 
-    public StringProperty addressProperty() {
+    public ListProperty<Document> addressProperty() {
         return address;
+    }
+
+    /** @return the DoB */
+    public Object getDoB() {
+        return DoB.get();
+    }
+
+    public void setDoB(LocalDateTime DoB) {
+        this.DoB.set(DoB);
+    }
+
+    public SimpleObjectProperty<LocalDateTime> dobProperty() {
+        return DoB;
     }
 
     // the phoneNo
