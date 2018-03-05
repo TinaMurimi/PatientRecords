@@ -1,0 +1,60 @@
+.root {
+    -fx-background-color: #FFFFFFA3;
+}
+
+.tab {
+    -fx-pref-width: 150
+}
+
+.tab-header-background {
+    -fx-background-color: #48aaad
+}
+
+.tab-pane {
+    -fx-padding: 0 -1 -1 -1
+}
+
+.rectangle {
+    -fx-fill: rgba(58, 94, 82, 0.06);
+    -fx-stroke: WHITE;
+    -fx-stroke-width: 0.10;
+    -fx-stroke-type: outside;
+    -fx-stroke-line-cap: round;
+}
+
+.line {
+    /* -fx-stroke: #222275; */
+    -fx-stroke: #389173;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-alignment: LEFT;
+    -fx-alignemnt: TOP-LEFT;
+    -fx-opacity: 0.25;
+}
+
+.check-box {
+    -jfx-unchecked-color: #FFFFFF;
+    -jfx-checked-color: #48aaad;
+    -fx-font-family: "Microsoft Sans Serif";
+    -fx-font-size: 12px;
+    -fx-text-fill: BLACK;
+}
+
+.check-box .box {
+    -fx-background-color: WHITE;
+    /* -fx-background-radius: 21; */
+    -fx-border-color: #48aaad;
+    -fx-border-style: solid;
+    -fx-border-radius: 2;
+    -fx-border-width: 2;
+}
+
+.check-box:selected .box {
+    /* -fx-border-color: #FFFFFFA3; */
+    -fx-border-color: #48AAAD;
+}
+
+.check-box:selected .mark {
+    -fx-border-color: #48aaad;
+}

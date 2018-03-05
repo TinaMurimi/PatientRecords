@@ -15,25 +15,14 @@ import javafx.beans.property.SimpleListProperty;
 import javafx.collections.ObservableList;
 import org.bson.Document;
 
-public class Patient {
-    private final BooleanProperty isSelected;
+public class Patient extends Person {
+    // private final BooleanProperty isSelected;
 
-
-
-    private final StringProperty _ID;
     private final StringProperty fileNo;
-    private final StringProperty identification; // Field National ID/ Passprt Number
-
-    private final StringProperty lastName;
-    private final StringProperty givenName;
-    private final ListProperty<Document> address; // Address Line 1*, Address Line 2, City*, State, ZipCode, Country*
-
+    
     private final SimpleObjectProperty<LocalDateTime> DoB;
-
-    private final StringProperty phoneNo;
-    private final StringProperty altPhoneNo; // Alternative Phone Number
-    private final StringProperty email;
-
+    private final StringProperty gender;
+    
     private final StringProperty bloodGroup;
     private final StringProperty rh;
 
@@ -44,7 +33,6 @@ public class Patient {
     // Insurance details
     // NHIF Number
 
-    private final SimpleObjectProperty<LocalDateTime> dateCreated;
 
     /**
     public Person(int id, List<Priority> list) {
@@ -73,20 +61,14 @@ public class Patient {
 
     // NextofKin, Parent, Doctor, Patient
     public Patient() {
-        this.isSelected = new SimpleBooleanProperty();
+        super();
+        // this.isSelected = new SimpleBooleanProperty();
 
-        this._ID = new SimpleStringProperty(); // ObjectID from DB
+        
         this.fileNo = new SimpleStringProperty();
-        this.identification = new SimpleStringProperty();
-
-        this.lastName = new SimpleStringProperty();
-        this.givenName = new SimpleStringProperty();
-        this.address = new SimpleListProperty<>();
+        
         this.DoB = new SimpleObjectProperty<>(); // if age < 18, guardian/parent
-
-        this.phoneNo = new SimpleStringProperty();
-        this.altPhoneNo = new SimpleStringProperty();
-        this.email = new SimpleStringProperty();
+        this.gender = new SimpleStringProperty();
 
         this.bloodGroup = new SimpleStringProperty();
         this.rh = new SimpleStringProperty();
@@ -94,35 +76,9 @@ public class Patient {
         this.allergies = new SimpleListProperty<>();
         this.chronicDiseases = new SimpleListProperty<>();
         this.vaccinations = new SimpleListProperty<>();
-
-        this.dateCreated = new SimpleObjectProperty<>();
     }
 
-    public Boolean getIsSelected() {
-        return isSelected.get();
-    }
-
-    public void setIsSelected(Boolean isSelected) {
-        this.isSelected.set(isSelected);
-    }
-
-    public BooleanProperty isSelectedProperty() {
-        return isSelected;
-    }
-
-    // @return the _ID
-    public void setID(String _ID) {
-        this._ID.set(_ID);
-    }
-
-    public String getID() {
-        return _ID.get();
-    }
-
-    public StringProperty IDProperty() {
-        return _ID;
-    }
-
+    
     // @return the fileNo
     public void setFileNo(String fileNo) {
         this.fileNo.set(fileNo);
@@ -134,64 +90,6 @@ public class Patient {
 
     public StringProperty fileNoProperty() {
         return fileNo;
-    }
-
-    // @return the identification
-    public void setIdentification(String identification) {
-        this.identification.set(identification);
-    }
-
-    public String getIdentification() {
-        return identification.get();
-    }
-
-    public StringProperty identificationProperty() {
-        return identification;
-    }
-
-    // lastName
-    public String getLastName() {
-        return lastName.get();
-    }
-
-    public void setLastName(String lastName) {
-        if (lastName != null) {
-            lastName = StringUtils.capitalize(lastName.toLowerCase().trim());
-        }
-        this.lastName.set(lastName);
-    }
-
-    public StringProperty lastNameProperty() {
-        return lastName;
-    }
-
-    // givenName
-    public String getGivenName() {
-        return givenName.get();
-    }
-
-    public void setGivenName(String givenName) {
-        if (givenName != null) {
-            givenName = StringUtils.capitalize(givenName.toLowerCase().trim());
-        }
-        this.givenName.set(givenName);
-    }
-
-    public StringProperty givenNameProperty() {
-        return givenName;
-    }
-
-    // the address
-    public void setAddress(ObservableList<Document> address) {
-        this.address.set(address);
-    }
-
-    public ObservableList<Document> getAddress() {
-        return address.get();
-    }
-
-    public ListProperty<Document> addressProperty() {
-        return address;
     }
 
     /** @return the DoB */
@@ -207,45 +105,19 @@ public class Patient {
         return DoB;
     }
 
-    // the phoneNo
-    public void setPhoneNo(String phoneNo) {
-        this.phoneNo.set(phoneNo);
+    // gender
+    public String getGender() {
+        return gender.get();
     }
 
-    public String getPhoneNo() {
-        return phoneNo.get();
+    public void setGender(String gender) {
+        this.gender.set(gender);
     }
 
-    public StringProperty phoneNoProperty() {
-        return phoneNo;
+    public StringProperty genderProperty() {
+        return gender;
     }
-
-    // the altPhoneNo
-    public void setAltPhoneNo(String altPhoneNo) {
-        this.altPhoneNo.set(altPhoneNo);
-    }
-
-    public String getAltPhoneNo() {
-        return altPhoneNo.get();
-    }
-
-    public StringProperty altPhoneNoProperty() {
-        return altPhoneNo;
-    }
-
-    // the email
-    public void setEmail(String email) {
-        this.email.set(email);
-    }
-
-    public String getEmail() {
-        return email.get();
-    }
-
-    public StringProperty emailProperty() {
-        return email;
-    }
-
+    
     // the bloodGroup
     public void setBloodGroup(String bloodGroup) {
         this.bloodGroup.set(bloodGroup);
@@ -309,18 +181,5 @@ public class Patient {
 
     public ListProperty<Document> vaccineProperty() {
         return vaccinations;
-    }
-
-    /** @return the dateCreated */
-    public Object getDateCreated() {
-        return dateCreated.get();
-    }
-
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated.set(dateCreated);
-    }
-
-    public SimpleObjectProperty<LocalDateTime> dateCreatedProperty() {
-        return dateCreated;
     }
 }

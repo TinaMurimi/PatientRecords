@@ -14,21 +14,22 @@
 
 <!-- <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?> -->
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1125.0" style="-fx-background-color: #FFFFFFA3;" stylesheets="@../../styles/patientView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="patientViewPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1125.0" style="-fx-background-color: #FFFFFFA3;" stylesheets="@../../styles/patientView.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <left>
       <AnchorPane prefHeight="690.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <Label id="name" fx:id="nameLabel" layoutX="16.0" layoutY="14.0" prefHeight="25.0" prefWidth="223.0" styleClass="title-label" text="TOWNSEND JOHNATHAN D." wrapText="true" />
-            <VBox id="demograhics" fx:id="demograhics" layoutX="15.0" layoutY="40.0" prefHeight="80.0" prefWidth="270.0" styleClass="detailsvbox">
+            <Label id="name" fx:id="nameLabel" layoutX="16.0" layoutY="14.0" prefHeight="25.0" prefWidth="223.0" styleClass="title-label" text="TOWNSEND JOHNATHAN D." wrapText="true" AnchorPane.topAnchor="14.0" />
+            <VBox id="demograhics" fx:id="demograhics" layoutX="15.0" layoutY="40.0" prefHeight="105.0" prefWidth="273.0" styleClass="detailsvbox" AnchorPane.bottomAnchor="545.0" AnchorPane.topAnchor="40.0">
                <children>
                   <Line endX="100.0" startX="-170.0" strokeWidth="3.0" styleClass="line" />
                   <Label id="fileNo" fx:id="fileNoLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="168.0" styleClass="data-label" text="File Number: Patient/001" />
                   <Label id="gender" fx:id="genderLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="101.0" styleClass="data-label" text="Male" />
                   <Label id="age" fx:id="ageLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="187.0" styleClass="data-label" text="40 years old (28/12/1978)" />
+                  <Label id="age" fx:id="bloodGroupLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="187.0" styleClass="data-label" text="Blood Group/RH: AB+" />
                </children>
             </VBox>
-            <Label id="insuranceDetails" layoutX="14.0" layoutY="290.0" prefHeight="25.0" prefWidth="223.0" styleClass="title-label" text="INSURANCE DETAILS" wrapText="true" />
-            <VBox id="insuranceData" layoutX="13.0" layoutY="316.0" prefHeight="334.0" prefWidth="270.0" style="-fx-background-color: #FFFFFFA3;" styleClass="detailsvbox">
+            <Label id="insuranceDetails" layoutX="15.0" layoutY="303.0" prefHeight="25.0" prefWidth="223.0" styleClass="title-label" text="INSURANCE DETAILS" wrapText="true" AnchorPane.topAnchor="303.0" />
+            <VBox id="insuranceData" layoutX="14.0" layoutY="329.0" prefHeight="334.0" prefWidth="270.0" style="-fx-background-color: #FFFFFFA3;" styleClass="detailsvbox">
                <children>
                   <Line endX="100.0" startX="-170.0" strokeWidth="3.0" styleClass="line" />
                   <Accordion id="insuranceDetails">
@@ -52,7 +53,7 @@
                                  <children>
                                     <Line endX="100.0" startX="-140.0" strokeWidth="3.0" styleClass="line" />
                                     <Label id="insuranceLabel" fx:id="insurProviderLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Provider: Resolution Health" />
-                                    <Label fx:id="scheneLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Scheme Name/No: 1234567890" />
+                                    <Label fx:id="schemeLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Scheme Name/No: 1234567890" />
                                     <Label id="insuranceNoLabel" fx:id="insurPatientNoLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Patient’s Member No: 1234567890" />
                                     <Separator prefWidth="200.0" />
                                     <Label fx:id="insurPrinNameLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Principal Name: 1234567890" />
@@ -70,8 +71,8 @@
                   </Accordion>
                </children>
             </VBox>
-            <Label id="contacts" layoutX="17.0" layoutY="142.0" prefHeight="25.0" prefWidth="223.0" styleClass="title-label" text="CONTACTS" wrapText="true" />
-            <VBox id="contactsData" layoutX="13.0" layoutY="168.0" prefHeight="106.0" prefWidth="270.0" styleClass="detailsvbox" AnchorPane.rightAnchor="14.0">
+            <Label id="contacts" layoutX="18.0" layoutY="155.0" prefHeight="25.0" prefWidth="223.0" styleClass="title-label" text="CONTACTS" wrapText="true" AnchorPane.bottomAnchor="510.0" AnchorPane.topAnchor="155.0" />
+            <VBox id="contactsData" layoutX="14.0" layoutY="181.0" prefHeight="106.0" prefWidth="270.0" styleClass="detailsvbox" AnchorPane.rightAnchor="13.0">
                <children>
                   <Line endX="100.0" startX="-170.0" strokeWidth="3.0" styleClass="line" />
                   <Label id="phoneLabel" fx:id="phoneLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Phone No.: 0712345678" />
@@ -119,8 +120,8 @@
                         </Label>
                     </left>
                   </CustomTextField>
-                  <JFXButton fx:id="appoiintmentButton" layoutX="486.0" layoutY="19.0" prefHeight="30.0" prefWidth="196.0" text="Schedule Appointment" />
-                  <JFXButton layoutX="692.0" layoutY="20.0" prefHeight="30.0" prefWidth="76.0" text="New Visit" />
+                  <JFXButton fx:id="appointmentButton" layoutX="486.0" layoutY="19.0" prefHeight="30.0" prefWidth="196.0" text="Schedule Appointment" />
+                  <JFXButton fx:id="newVisitButton" layoutX="692.0" layoutY="20.0" prefHeight="30.0" prefWidth="76.0" text="New Visit" />
 
                      </children>
                <opaqueInsets>
@@ -134,13 +135,13 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Label id="name" fx:id="nameLabel1" layoutX="30.0" layoutY="14.0" prefHeight="25.0" prefWidth="223.0" styleClass="titlecenter-label" text="VITALS" wrapText="true" />
+            <Label id="name" layoutX="30.0" layoutY="14.0" prefHeight="25.0" prefWidth="223.0" styleClass="titlecenter-label" text="VITALS" wrapText="true" />
             <VBox id="demograhics" fx:id="demograhics1" layoutX="30.0" layoutY="39.0" prefHeight="80.0" prefWidth="223.0" styleClass="medical-vbox">
                <children>
                   <Line endX="100.0" startX="-120.0" strokeWidth="3.0" styleClass="line" />
-                  <Label id="fileNo" fx:id="fileNoLabel1" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="168.0" styleClass="data-label" text="File Number: Patient/001" />
-                  <Label id="gender" fx:id="genderLabel1" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="101.0" styleClass="data-label" text="Male" />
-                  <Label id="age" fx:id="ageLabel1" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="187.0" styleClass="data-label" text="40 years old (28/12/1978)" />
+                  <Label id="fileNo" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="168.0" styleClass="data-label" text="File Number: Patient/001" />
+                  <Label id="gender" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="101.0" styleClass="data-label" text="Male" />
+                  <Label id="age" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="187.0" styleClass="data-label" text="40 years old (28/12/1978)" />
                </children>
             </VBox>
             <Accordion layoutX="30.0" layoutY="142.0">
@@ -150,8 +151,8 @@
                         <VBox id="insuranceData" prefWidth="247.0" styleClass="detailsvbox">
                            <children>
                               <Line endX="100.0" startX="-120.0" strokeWidth="3.0" styleClass="line" />
-                              <Label id="insuranceLabel" fx:id="insuranceLabel1" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Name: Msichana Huyu" />
-                              <Label id="insuranceNoLabel" fx:id="insuranceNoLabel1" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Member's ID No: 1234567890" />
+                              <Label id="insuranceLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Name: Msichana Huyu" />
+                              <Label id="insuranceNoLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Member's ID No: 1234567890" />
                               <Label alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Member NHIF No: 1234567890" />
                               <Label alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Relationship: Principal Member( or Spouse, Child)" />
                            </children>
@@ -163,25 +164,25 @@
                         <VBox id="insuranceData" prefWidth="247.0" styleClass="detailsvbox">
                            <children>
                               <Line endX="100.0" startX="-120.0" strokeWidth="3.0" styleClass="line" />
-                              <Label id="insuranceLabel" fx:id="insuranceLabel2" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Provider: Resolution Health" />
+                              <Label id="insuranceLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Provider: Resolution Health" />
                               <Label alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Scheme Name: 1234567890" />
-                              <Label id="insuranceNoLabel" fx:id="insuranceNoLabel2" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Patient’s Member No: 1234567890" />
+                              <Label id="insuranceNoLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Patient’s Member No: 1234567890" />
                               <Separator prefWidth="200.0" />
-                              <Label id="insuranceNoLabel" fx:id="insuranceNoLabel21" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Relationship: Grand-mother" />
+                              <Label id="insuranceNoLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Relationship: Grand-mother" />
                               <Label alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Principal Name: 1234567890" />
-                              <Label id="insuranceNoLabel" fx:id="insuranceNoLabel2311" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Principal ID No: 1234567890" />
-                              <Label id="insuranceNoLabel" fx:id="insuranceNoLabel22" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Member No: 1234567890" />
-                              <Label id="insuranceNoLabel" fx:id="insuranceNoLabel231" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Phone No: 1234567890" />
+                              <Label id="insuranceNoLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Principal ID No: 1234567890" />
+                              <Label id="insuranceNoLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Member No: 1234567890" />
+                              <Label id="insuranceNoLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Phone No: 1234567890" />
                               <TitledPane prefWidth="185.0" text="Address">
                                  <content>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
                                        <children>
-                                          <Label id="insuranceNoLabel" fx:id="insuranceNoLabel2312" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Principal ID No: 1234567890" />
+                                          <Label id="insuranceNoLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Principal ID No: 1234567890" />
                                        </children>
                                     </VBox>
                                  </content>
                               </TitledPane>
-                              <Label id="insuranceNoLabel" fx:id="insuranceNoLabel2313" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Principal ID No: 1234567890" />
+                              <Label id="insuranceNoLabel" alignment="BOTTOM_LEFT" prefHeight="25.0" prefWidth="220.0" styleClass="data-label" text="Principal ID No: 1234567890" />
                            </children>
                         </VBox>
                      </content>

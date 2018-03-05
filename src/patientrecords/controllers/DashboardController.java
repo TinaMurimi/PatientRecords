@@ -15,10 +15,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Hyperlink;
 
 import com.mongodb.client.MongoDatabase;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.EventHandler;
+import javafx.fxml.Initializable;
 
 import patientrecords.Main;
+import patientrecords.controllers.patient.PatientDashboardController;
+import patientrecords.controllers.patient.PatientViewController;
 
-public class DashboardController {
+public class DashboardController implements Initializable {
 
     private Main main;
     private Stage stage;
@@ -82,6 +88,21 @@ public class DashboardController {
 
         UserDashboardController uc = new UserDashboardController();
         uc.userDashboardLoader(stage, db);
+
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb){
+
+        patientsLink.setOnAction(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent e) {
+                    PatientDashboardController pc = new PatientDashboardController();
+                    pc.db = db;
+                    pc.collection = db.getCollection("Patients");
+                    pc.parsePatientList(pc.getPatients());
+                }
+            });
 
     }
 }

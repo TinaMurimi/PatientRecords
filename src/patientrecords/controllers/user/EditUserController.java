@@ -54,10 +54,11 @@ import com.mongodb.client.MongoDatabase;
 
 public class EditUserController extends UserDashboardController implements Initializable {
 
-    // Dashboard CSS file URL
     FXMLLoader loader = new FXMLLoader();
 
+    // Dashboard CSS file URL
     private final URL url = this.getClass().getResource("/patientrecords/styles/form.css");
+    
     private ObservableList<User> userDetails;
 
     private EditUserController main;
