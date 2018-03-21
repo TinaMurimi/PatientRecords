@@ -14,12 +14,10 @@
     -fx-padding: 0 -1 -1 -1
 }
 
-.rectangle {
+.details-anchor-pane {
     -fx-fill: rgba(58, 94, 82, 0.06);
-    -fx-stroke: WHITE;
-    -fx-stroke-width: 0.10;
-    -fx-stroke-type: outside;
-    -fx-stroke-line-cap: round;
+    -fx-birder-color: WHITE;
+    -fx-border-width: 0.10;
 }
 
 .line {
@@ -58,3 +56,8 @@
 .check-box:selected .mark {
     -fx-border-color: #48aaad;
 }
+
+.invalid-input {
+    -fx-border-color: red;
+}
+

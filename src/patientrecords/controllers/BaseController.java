@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package patientrecords.controllers;
 
 import com.mongodb.client.FindIterable;
@@ -130,6 +125,22 @@ public abstract class BaseController implements BaseControllerInterface {
         return parsed;
     }
 
+
+    /**
+     * Parses MongoDB Date to LocalDateTime
+     * @param date (String) string to be converted to LocalDateTime
+     * @return (LocalDateTime) parsed local date time
+     */
+    public LocalDateTime stringToLDT(String date) {
+        date = date.trim();
+        final DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
+        // The parsed date
+        final LocalDateTime parsed = LocalDateTime.parse(date, inputFormat);
+        return parsed;
+    }
+
+
     /**
      * @param  parsedDate (LocalDateTime) to format
      * @return (String) parsed local date time
@@ -139,6 +150,42 @@ public abstract class BaseController implements BaseControllerInterface {
         // Convert LocalDateTime to String
         final DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return outputFormat.format(parsedDate);
+    }
+
+    /**
+     * Honorific titles
+     */
+    public enum Title {
+        Dr("Dr."), Mr("Mr."), Ms("Ms."), Miss("Miss"), Prof("Prof."), Mx("Mx."), Other("Other");
+
+        private final String title;
+        private Title code;
+
+        Title(String title) {
+            this.title = title;
+        }
+
+        public String getEnumTitle() {
+            return title;
+        }
+    }
+
+    /**
+     * Returns user's honorific title
+     * @param name (String) Title name to match to
+     * @return title (Title)
+     */
+    public Title getTitle(String name) {
+        Title title = null;
+
+        for (Title t : Title.values()) {
+            if (t.getEnumTitle().equals(name)) {
+                title = t;
+                break;
+            }
+        }
+
+        return title;
     }
 
 }

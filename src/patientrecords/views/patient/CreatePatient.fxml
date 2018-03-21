@@ -10,11 +10,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="620.0" stylesheets="@../../styles/newPatient.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="createPatientPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="765.0" stylesheets="@../../styles/newPatient.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <AnchorPane id="MenubarPane" prefHeight="30.0" prefWidth="500.0">
          <children>
-            <MenuBar prefHeight="29.0" prefWidth="620.0">
+            <MenuBar prefHeight="29.0" prefWidth="765.0">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
@@ -36,139 +36,186 @@
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="31.0" prefWidth="500.0" />
-      <JFXTabPane prefHeight="700.0" prefWidth="620.0" stylesheets="@../../styles/newPatient.css">
+      <JFXTabPane fx:id="newPatientTabPane" prefHeight="706.0" prefWidth="765.0" stylesheets="@../../styles/newPatient.css">
          <tabs>
-            <Tab id="demographicsPane" text="Demographics">
+            <Tab id="demographicsPane" fx:id="demographicsTab" text="Demographics">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TextField layoutX="171.0" layoutY="79.0" prefHeight="30.0" prefWidth="150.0" AnchorPane.leftAnchor="171.0" AnchorPane.rightAnchor="303.0" AnchorPane.topAnchor="79.0" />
-                        <Label layoutX="83.0" layoutY="51.0" text="Name" AnchorPane.leftAnchor="83.0" AnchorPane.rightAnchor="505.0" />
-                        <Label layoutX="171.0" layoutY="111.0" text="Last Name (required)" AnchorPane.leftAnchor="171.0" AnchorPane.topAnchor="111.0" />
-                        <Label layoutX="342.0" layoutY="111.0" text="Given Names (required)" AnchorPane.leftAnchor="342.0" AnchorPane.topAnchor="111.0" />
-                        <TextField layoutX="342.0" layoutY="79.0" prefHeight="30.0" prefWidth="200.0" AnchorPane.leftAnchor="342.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="79.0" />
-                        <Label layoutX="83.0" layoutY="177.0" text="Gender" AnchorPane.leftAnchor="83.0" AnchorPane.topAnchor="177.0" />
-                        <ComboBox layoutX="83.0" layoutY="145.0" prefHeight="30.0" prefWidth="180.0" AnchorPane.leftAnchor="83.0" AnchorPane.rightAnchor="361.0" AnchorPane.topAnchor="145.0" />
-                        <DatePicker layoutX="283.0" layoutY="145.0" prefHeight="30.0" prefWidth="259.0" AnchorPane.leftAnchor="283.0" AnchorPane.rightAnchor="82.0" AnchorPane.topAnchor="145.0" />
-                        <Label layoutX="283.0" layoutY="177.0" text="Date of Birth" AnchorPane.leftAnchor="283.0" AnchorPane.topAnchor="177.0" />
-                        <Label layoutX="259.0" layoutY="25.0" text="Basic Information" />
-                        <Label layoutX="283.0" layoutY="245.0" text="Identification Number" AnchorPane.topAnchor="244.0" />
-                        <ComboBox layoutX="83.0" layoutY="212.0" prefHeight="30.0" prefWidth="180.0" AnchorPane.topAnchor="212.0" />
-                        <Label layoutX="83.0" layoutY="244.0" text="Identification" AnchorPane.topAnchor="244.0" />
-                        <TextField layoutX="283.0" layoutY="212.0" prefHeight="30.0" prefWidth="259.0" AnchorPane.leftAnchor="283.0" AnchorPane.topAnchor="212.0" />
-                        <ComboBox layoutX="83.0" layoutY="79.0" prefHeight="30.0" prefWidth="70.0" AnchorPane.leftAnchor="83.0" AnchorPane.rightAnchor="471.0" AnchorPane.topAnchor="79.0" />
-                        <Label layoutX="83.0" layoutY="111.0" text="Title" AnchorPane.topAnchor="111.0" />
+                        <Label layoutX="111.0" layoutY="34.0" text="Basic Information" AnchorPane.topAnchor="30.0" />
+                        <AnchorPane layoutX="73.0" layoutY="47.0" prefHeight="199.0" prefWidth="650.0" styleClass="details-anchor-pane">
+                           <children>
+                              <TextField fx:id="lastNameField" layoutX="39.0" layoutY="13.0" prefHeight="30.0" prefWidth="260.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="13.0" />
+                              <TextField fx:id="givenNameField" layoutX="324.0" layoutY="13.0" prefHeight="30.0" prefWidth="287.0" AnchorPane.leftAnchor="324.0" AnchorPane.topAnchor="13.0" />
+                              <ComboBox fx:id="genderComboBox" layoutX="39.0" layoutY="76.0" prefHeight="30.0" prefWidth="180.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="76.0" />
+                              <DatePicker fx:id="dobDatePicker" layoutX="251.0" layoutY="76.0" prefHeight="30.0" prefWidth="360.0" AnchorPane.topAnchor="76.0" />
+                              <ComboBox fx:id="idTypeComboBox" layoutX="39.0" layoutY="138.0" prefHeight="30.0" prefWidth="180.0" AnchorPane.topAnchor="138.0" />
+                              <TextField fx:id="idField" layoutX="251.0" layoutY="138.0" prefHeight="30.0" prefWidth="360.0" AnchorPane.topAnchor="138.0" />
+                              <Label layoutX="39.0" layoutY="43.0" text="Last Name (required)" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="43.0" />
+                              <Label layoutX="39.0" layoutY="106.0" text="Gender (required)" />
+                              <Label layoutX="39.0" layoutY="168.0" text="Identification" />
+                              <Label layoutX="324.0" layoutY="43.0" text="Given Name (required)" AnchorPane.leftAnchor="324.0" AnchorPane.topAnchor="43.0" />
+                              <Label layoutX="251.0" layoutY="108.0" text="Date of Birth (required)" />
+                              <Label layoutX="251.0" layoutY="170.0" text="Identification Number" />
+                           </children>
+                        </AnchorPane>
+                        <Label fx:id="errorMsgLabel" layoutX="111.0" layoutY="338.0" prefHeight="220.0" prefWidth="330.0" wrapText="true" />
                      </children>
                   </AnchorPane>
               </content>
             </Tab>
-            <Tab id="contactsPane" text="Contact Info">
+            <Tab id="contactsPane" fx:id="contactsTab" text="Contact Info">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label layoutX="55.0" layoutY="14.0" text="Address" AnchorPane.topAnchor="14.0" />
-                        <TextField layoutX="55.0" layoutY="41.0" prefHeight="30.0" prefWidth="515.0" AnchorPane.topAnchor="41.0" />
-                        <TextField layoutX="55.0" layoutY="79.0" prefHeight="30.0" prefWidth="515.0" AnchorPane.topAnchor="79.0" />
-                        <TextField layoutX="55.0" layoutY="117.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="117.0" />
-                        <TextField layoutX="320.0" layoutY="117.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.topAnchor="117.0" />
-                        <TextField layoutX="55.0" layoutY="168.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.topAnchor="168.0" />
-                        <Label layoutX="55.0" layoutY="147.0" text="City" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="147.0" />
-                        <Label layoutX="320.0" layoutY="147.0" text="State" AnchorPane.topAnchor="147.0" />
-                        <Label layoutX="55.0" layoutY="199.0" text="Zip/Postal Code" AnchorPane.topAnchor="199.0" />
-                        <Label layoutX="320.0" layoutY="199.0" text="Country" AnchorPane.topAnchor="199.0" />
-                        <PrefixSelectionComboBox layoutX="320.0" layoutY="164.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.topAnchor="168.0" />
-                        <TextField layoutX="55.0" layoutY="270.0" prefHeight="30.0" prefWidth="515.0" AnchorPane.topAnchor="270.0" />
-                        <Label layoutX="55.0" layoutY="243.0" text="Email" AnchorPane.topAnchor="243.0" />
-                        <Label layoutX="55.0" layoutY="322.0" text="Phone Number" AnchorPane.topAnchor="322.0" />
-                        <Label layoutX="320.0" layoutY="379.0" text="Home Phone Number " />
-                        <Label layoutX="55.0" layoutY="379.0" text="Mobile Number" />
-                        <TextField layoutX="320.0" layoutY="349.0" prefHeight="30.0" prefWidth="250.0" />
-                        <TextField layoutX="55.0" layoutY="349.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.topAnchor="349.0" />
+                        <Label layoutX="126.0" layoutY="31.0" text="Contact Information" AnchorPane.topAnchor="30.0" />
+                        <AnchorPane layoutX="58.0" layoutY="47.0" prefHeight="460.0" prefWidth="650.0" styleClass="details-anchor-pane">
+                           <children>
+                              <TextField fx:id="addrln1Field" layoutX="68.0" layoutY="41.0" prefHeight="30.0" prefWidth="515.0" AnchorPane.topAnchor="41.0" />
+                              <TextField fx:id="addrln2Field" layoutX="68.0" layoutY="79.0" prefHeight="30.0" prefWidth="515.0" AnchorPane.leftAnchor="68.0" AnchorPane.topAnchor="79.0" />
+                              <TextField fx:id="cityField" layoutX="68.0" layoutY="117.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.leftAnchor="68.0" AnchorPane.topAnchor="117.0" />
+                              <TextField fx:id="stateField" layoutX="333.0" layoutY="117.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.topAnchor="117.0" />
+                              <TextField fx:id="zipCodeField" layoutX="68.0" layoutY="168.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.leftAnchor="68.0" AnchorPane.topAnchor="168.0" />
+                              <PrefixSelectionComboBox fx:id="countryComboBox" layoutX="333.0" layoutY="168.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.topAnchor="168.0" />
+                              <TextField fx:id="emailField" layoutX="68.0" layoutY="270.0" prefHeight="30.0" prefWidth="515.0" AnchorPane.leftAnchor="68.0" AnchorPane.topAnchor="270.0" />
+                              <TextField fx:id="phoneField" layoutX="68.0" layoutY="349.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.leftAnchor="68.0" AnchorPane.topAnchor="349.0" />
+                              <TextField fx:id="altPhoneField" layoutX="333.0" layoutY="349.0" prefHeight="30.0" prefWidth="250.0" />
+                              <Label layoutX="68.0" layoutY="14.0" text="Address" AnchorPane.topAnchor="14.0" />
+                              <Label layoutX="68.0" layoutY="322.0" text="Phone Number" AnchorPane.leftAnchor="68.0" AnchorPane.topAnchor="322.0" />
+                              <Label layoutX="68.0" layoutY="147.0" text="City" AnchorPane.leftAnchor="68.0" AnchorPane.topAnchor="147.0" />
+                              <Label layoutX="68.0" layoutY="243.0" text="Email" AnchorPane.leftAnchor="68.0" AnchorPane.topAnchor="243.0" />
+                              <Label layoutX="68.0" layoutY="199.0" text="Zip/Postal Code" AnchorPane.leftAnchor="68.0" AnchorPane.topAnchor="199.0" />
+                              <Label layoutX="68.0" layoutY="379.0" text="Phone Number" />
+                              <Label layoutX="333.0" layoutY="147.0" text="State" AnchorPane.topAnchor="147.0" />
+                              <Label layoutX="333.0" layoutY="379.0" text="Home Phone Number " />
+                              <Label layoutX="333.0" layoutY="199.0" text="Country" AnchorPane.topAnchor="199.0" />
+                           </children>
+                        </AnchorPane>
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab id="insurancePane" text="Insurance Info">
+            <Tab id="insurancePane" fx:id="nhifTab" text="NHIF Info">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="470.0" layoutX="29.0" layoutY="180.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.1" styleClass="rectangle" width="560.0" />
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="105.0" layoutX="32.0" layoutY="42.0" stroke="BLACK" strokeLineCap="ROUND" strokeType="OUTSIDE" strokeWidth="0.1" styleClass="rectangle" width="560.0" />
-                        <Label layoutX="54.0" layoutY="25.0" text="National Hospital Insurance Fund (NHIF) Details" />
-                        <TextField layoutX="51.0" layoutY="57.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="57.0" />
-                        <Label layoutX="51.0" layoutY="88.0" text="Member ID No." AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="88.0" />
-                        <Label layoutX="322.0" layoutY="88.0" text="Member NHIF No." AnchorPane.leftAnchor="322.0" AnchorPane.topAnchor="88.0" />
-                        <TextField layoutX="319.0" layoutY="57.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.leftAnchor="319.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="57.0" />
-                        <Label layoutX="50.0" layoutY="116.0" prefHeight="17.0" prefWidth="107.0" text="Relationship:" AnchorPane.leftAnchor="50.0" />
-                        <JFXRadioButton layoutX="142.0" layoutY="116.0" text="Principal Member" />
-                        <JFXRadioButton layoutX="307.0" layoutY="116.0" text="Spouse" />
-                        <JFXRadioButton layoutX="418.0" layoutY="116.0" text="Child" />
-                        <AnchorPane layoutX="51.0" layoutY="321.0" prefHeight="98.0" prefWidth="508.0">
+                        <Label layoutX="113.0" layoutY="30.0" text="National Hospital Insurance Fund (NHIF) Details" AnchorPane.topAnchor="30.0" />
+                        <AnchorPane fx:id="nhifPane" layoutX="50.0" layoutY="96.0" prefHeight="146.0" prefWidth="650.0" styleClass="details-anchor-pane">
                            <children>
-                              <JFXRadioButton layoutX="98.0" layoutY="70.0" text="Principal Member/Employee" />
-                              <JFXRadioButton layoutX="323.0" layoutY="70.0" text="Spouse" />
-                              <TextField layoutX="271.0" layoutY="11.0" prefHeight="30.0" prefWidth="232.0" AnchorPane.leftAnchor="271.0" AnchorPane.rightAnchor="5.0" />
-                              <JFXRadioButton layoutX="427.0" layoutY="70.0" text="Child" AnchorPane.rightAnchor="9.0" />
-                              <TextField editable="false" layoutX="6.0" layoutY="11.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.leftAnchor="6.0" />
-                              <Label layoutX="6.0" layoutY="42.0" text="Patient Name" AnchorPane.topAnchor="42.0" />
-                              <Label layoutX="6.0" layoutY="70.0" prefHeight="17.0" prefWidth="107.0" text="Relationship:" />
-                              <Label layoutX="271.0" layoutY="42.0" text="Patient’s Member Number" AnchorPane.leftAnchor="271.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="42.0" />
+                              <TextField fx:id="nhifMemIDField" layoutX="63.0" layoutY="14.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="14.0" />
+                              <TextField fx:id="memNhifNoField" layoutX="331.0" layoutY="14.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.leftAnchor="331.0" AnchorPane.rightAnchor="62.0" AnchorPane.topAnchor="14.0" />
+                              <JFXRadioButton fx:id="priMemRadio" layoutX="155.0" layoutY="80.0" prefHeight="17.0" prefWidth="156.0" text="Principal Member" />
+                              <JFXRadioButton fx:id="spouseRadio" layoutX="370.0" layoutY="80.0" text="Spouse" />
+                              <JFXRadioButton fx:id="childRadio" layoutX="509.0" layoutY="80.0" text="Child" />
+                              <Label layoutX="63.0" layoutY="80.0" prefHeight="17.0" prefWidth="107.0" text="Relationship:" AnchorPane.leftAnchor="63.0" />
+                              <Label layoutX="63.0" layoutY="45.0" text="Member ID No." AnchorPane.leftAnchor="63.0" AnchorPane.topAnchor="45.0" />
+                              <Label layoutX="331.0" layoutY="45.0" text="Member NHIF No." AnchorPane.leftAnchor="331.0" AnchorPane.topAnchor="45.0" />
                            </children>
                         </AnchorPane>
-                        <Label layoutX="51.0" layoutY="163.0" text="Insurance Details" />
-                        <PrefixSelectionComboBox layoutX="51.0" layoutY="207.0" prefHeight="30.0" prefWidth="275.0" promptText="Select Insurance Provider" AnchorPane.leftAnchor="51.0" AnchorPane.topAnchor="207.0" />
-                        <Label layoutX="51.0" layoutY="189.0" text="Insurance Provider" AnchorPane.leftAnchor="51.0" />
-                        <TextField editable="false" layoutX="339.0" layoutY="206.0" prefHeight="30.0" prefWidth="230.0" promptText="Other" AnchorPane.rightAnchor="51.0" />
-                        <Label layoutX="52.0" layoutY="248.0" text="Scheme Name/ Principal Member’s Employer" AnchorPane.topAnchor="248.0" />
-                        <TextField editable="false" layoutX="51.0" layoutY="265.0" prefHeight="30.0" prefWidth="518.0" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="51.0" AnchorPane.topAnchor="265.0" />
-                        <Line endX="412.0" layoutX="153.0" layoutY="311.0" opacity="0.25" startX="-100.0" styleClass="line" AnchorPane.bottomAnchor="284.5" AnchorPane.topAnchor="310.5" />
-                        <Line endX="412.0" layoutX="153.0" layoutY="444.0" opacity="0.25" startX="-100.0" styleClass="line" />
-                        <AnchorPane layoutX="56.0" layoutY="457.0" prefHeight="182.0" prefWidth="508.0">
-                           <children>
-                              <TextField layoutX="263.0" layoutY="37.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="5.0" />
-                              <TextField editable="false" layoutX="5.0" layoutY="37.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.leftAnchor="5.0" />
-                              <Label layoutX="5.0" layoutY="68.0" text="Last Name" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="68.0" />
-                              <Label layoutX="263.0" layoutY="68.0" text="Given Name(s)" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="84.0" AnchorPane.topAnchor="68.0" />
-                              <Label layoutX="6.0" layoutY="14.0" text="Name" />
-                              <TextField layoutX="266.0" layoutY="91.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.rightAnchor="263.0" />
-                              <Label layoutX="263.0" layoutY="122.0" text="Member NHIF No." />
-                              <Label layoutX="5.0" layoutY="122.0" text="Member ID No." />
-                              <TextField layoutX="263.0" layoutY="91.0" prefHeight="30.0" prefWidth="240.0" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="5.0" />
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                                 <children>
-                                    <Label layoutX="55.0" layoutY="14.0" text="Address" AnchorPane.topAnchor="14.0" />
-                                    <TextField layoutX="55.0" layoutY="41.0" prefHeight="30.0" prefWidth="515.0" AnchorPane.topAnchor="41.0" />
-                                    <TextField layoutX="55.0" layoutY="79.0" prefHeight="30.0" prefWidth="515.0" AnchorPane.topAnchor="79.0" />
-                                    <TextField layoutX="55.0" layoutY="117.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="117.0" />
-                                    <TextField layoutX="320.0" layoutY="117.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.topAnchor="117.0" />
-                                    <TextField layoutX="55.0" layoutY="168.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.topAnchor="168.0" />
-                                    <Label layoutX="55.0" layoutY="147.0" text="City" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="147.0" />
-                                    <Label layoutX="320.0" layoutY="147.0" text="State" AnchorPane.topAnchor="147.0" />
-                                    <Label layoutX="55.0" layoutY="199.0" text="Zip/Postal Code" AnchorPane.topAnchor="199.0" />
-                                    <Label layoutX="320.0" layoutY="199.0" text="Country" AnchorPane.topAnchor="199.0" />
-                                    <PrefixSelectionComboBox layoutX="320.0" layoutY="164.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.topAnchor="168.0" />
-                                    <TextField layoutX="55.0" layoutY="270.0" prefHeight="30.0" prefWidth="515.0" AnchorPane.topAnchor="270.0" />
-                                    <Label layoutX="55.0" layoutY="243.0" text="Email" AnchorPane.topAnchor="243.0" />
-                                    <Label layoutX="55.0" layoutY="322.0" text="Phone Number" AnchorPane.topAnchor="322.0" />
-                                    <Label layoutX="320.0" layoutY="379.0" text="Home Phone Number " />
-                                    <Label layoutX="55.0" layoutY="379.0" text="Mobile Number" />
-                                    <TextField layoutX="320.0" layoutY="349.0" prefHeight="30.0" prefWidth="250.0" />
-                                    <TextField layoutX="55.0" layoutY="349.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.topAnchor="349.0" />
-                                 </children>
-                              </AnchorPane>
-                           </children>
-                        </AnchorPane>
+                        <CheckBox fx:id="hasNHIFCheckBox" layoutX="113.0" layoutY="76.0" mnemonicParsing="false" text="Patient is insured by NHIF?" AnchorPane.leftAnchor="113.0" />
                      </children>
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets></AnchorPane>
                </content>
             </Tab>
-            <Tab id="additionalInfoPane" text="Additional Info">
+            <Tab id="insurancePane" fx:id="insuranceTab" text="Insurance Info">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="58.0" layoutY="50.0" prefHeight="626.0" prefWidth="650.0" styleClass="details-anchor-pane">
+                           <children>
+                              <PrefixSelectionComboBox fx:id="insurProviderComboBox" layoutX="44.0" layoutY="31.0" prefHeight="30.0" prefWidth="290.0" promptText="Select Insurance Provider" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="31.0" />
+                              <TextField fx:id="otherProviderField" layoutX="349.0" layoutY="31.0" prefHeight="30.0" prefWidth="258.0" promptText="Other" AnchorPane.rightAnchor="43.0" />
+                              <TextField fx:id="schemeField" layoutX="44.0" layoutY="91.0" prefHeight="30.0" prefWidth="563.0" AnchorPane.leftAnchor="44.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="91.0" />
+                              <Accordion layoutX="44.0" layoutY="134.0">
+                                <panes>
+                                  <TitledPane animated="false" text="Patient Insurance Details">
+                                       <content>
+                                          <AnchorPane prefHeight="127.0" prefWidth="538.0">
+                                             <children>
+                                                <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="88.0" prefWidth="526.0">
+                                                   <children>
+                                                      <TextField fx:id="pNameField" editable="false" layoutX="12.0" layoutY="6.0" prefHeight="30.0" prefWidth="250.0" />
+                                                      <TextField fx:id="pNoField" layoutX="283.0" layoutY="6.0" prefHeight="30.0" prefWidth="232.0" />
+                                                      <JFXRadioButton fx:id="empInsurRadio" layoutX="93.0" layoutY="66.0" text="Principal Member/Employee" />
+                                                      <JFXRadioButton fx:id="spouseInsurRadio" layoutX="315.0" layoutY="66.0" text="Spouse" />
+                                                      <JFXRadioButton fx:id="childInsurRadio" layoutX="432.0" layoutY="66.0" text="Child" />
+                                                      <Label layoutX="283.0" layoutY="36.0" text="Patient’s Member Number" />
+                                                      <Label layoutX="12.0" layoutY="36.0" prefHeight="17.0" prefWidth="89.0" text="Patient Name" />
+                                                      <Label layoutX="12.0" layoutY="66.0" prefHeight="17.0" prefWidth="83.0" text="Relationship:" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                  </TitledPane>
+                                  <TitledPane animated="false" text="Member/ Claimant Insurance Details">
+                                       <content>
+                                          <AnchorPane fx:id="claimantPane" minHeight="0.0" minWidth="0.0" prefHeight="431.0" prefWidth="548.0">
+                                             <children>
+                                                <AnchorPane layoutX="16.0" layoutY="3.0" minHeight="0.0" minWidth="0.0" prefHeight="425.0" prefWidth="530.0">
+                                                   <children>
+                                                      <TextField fx:id="memLastNameField" layoutX="18.0" layoutY="26.0" prefHeight="30.0" prefWidth="230.0" promptText="Last Name" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="26.0" />
+                                                      <TextField fx:id="memGivenNameField" layoutX="262.0" layoutY="26.0" prefHeight="30.0" prefWidth="250.0" promptText="Given Name" AnchorPane.leftAnchor="262.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="26.0" />
+                                                      <TextField fx:id="memIDField" editable="false" layoutX="18.0" layoutY="79.0" prefHeight="30.0" prefWidth="230.0" promptText="Member ID No." AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="79.0" />
+                                                      <TextField fx:id="memInsurNoField" layoutX="262.0" layoutY="79.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.leftAnchor="262.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="79.0" />
+                                                      <CheckBox fx:id="isPatientAddrCheckBox" layoutX="18.0" layoutY="176.0" mnemonicParsing="false" text="Use address provided by patient" AnchorPane.leftAnchor="18.0" />
+                                                      <TextField fx:id="memAddrLn1Field" layoutX="18.0" layoutY="210.0" prefHeight="30.0" prefWidth="250.0" promptText="Address Line 1" AnchorPane.leftAnchor="18.0" AnchorPane.rightAnchor="262.0" AnchorPane.topAnchor="210.0" />
+                                                      <TextField fx:id="memAddrLn2Field" layoutX="278.0" layoutY="210.0" prefHeight="30.0" prefWidth="225.0" promptText="Address Line 2" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="210.0" />
+                                                      <TextField fx:id="memCityField" layoutX="18.0" layoutY="248.0" prefHeight="30.0" prefWidth="250.0" promptText="City" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="248.0" />
+                                                      <TextField fx:id="memStateField" layoutX="278.0" layoutY="248.0" prefHeight="30.0" prefWidth="225.0" promptText="State" AnchorPane.leftAnchor="278.0" AnchorPane.topAnchor="248.0" />
+                                                      <TextField fx:id="memZipCodeField" layoutX="18.0" layoutY="299.0" prefHeight="30.0" prefWidth="250.0" promptText="Postal Code" AnchorPane.topAnchor="299.0" />
+                                                      <PrefixSelectionComboBox fx:id="memCountryComboBox" layoutX="278.0" layoutY="299.0" prefHeight="30.0" prefWidth="225.0" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="299.0" />
+                                                      <TextField fx:id="memEmailField" layoutX="18.0" layoutY="368.0" prefHeight="30.0" prefWidth="250.0" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="368.0" />
+                                                      <TextField fx:id="memPhoneField" layoutX="278.0" layoutY="368.0" prefHeight="30.0" prefWidth="225.0" AnchorPane.leftAnchor="278.0" AnchorPane.rightAnchor="27.0" AnchorPane.topAnchor="368.0" />
+                                                      <Label layoutX="18.0" layoutY="4.0" text="Name" AnchorPane.leftAnchor="18.0" />
+                                                      <Label layoutX="18.0" layoutY="56.0" text="Last Name" AnchorPane.topAnchor="56.0" />
+                                                      <Label layoutX="262.0" layoutY="56.0" prefHeight="17.0" prefWidth="98.0" text="Given Name(s)" AnchorPane.leftAnchor="262.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="56.0" />
+                                                      <Label layoutX="262.0" layoutY="112.0" text="Member Insurance No." AnchorPane.leftAnchor="262.0" AnchorPane.topAnchor="112.0" />
+                                                      <Label layoutX="18.0" layoutY="112.0" text="Member ID No." AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="112.0" />
+                                                      <Label layoutX="18.0" layoutY="145.0" text="Address" AnchorPane.topAnchor="145.0" />
+                                                      <Label layoutX="18.0" layoutY="278.0" text="City" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="278.0" />
+                                                      <Label layoutX="278.0" layoutY="278.0" text="State" AnchorPane.leftAnchor="278.0" AnchorPane.topAnchor="278.0" />
+                                                      <Label layoutX="18.0" layoutY="330.0" text="Zip/Postal Code" AnchorPane.topAnchor="330.0" />
+                                                      <Label layoutX="278.0" layoutY="330.0" text="Country" AnchorPane.leftAnchor="278.0" AnchorPane.topAnchor="330.0" />
+                                                      <Line endX="412.0" layoutX="98.0" layoutY="139.0" opacity="0.25" startX="-80.0" styleClass="line" />
+                                                      <Label layoutX="18.0" layoutY="399.0" text="Email" AnchorPane.leftAnchor="18.0" />
+                                                      <Label layoutX="278.0" layoutY="399.0" text="Phone Number" AnchorPane.leftAnchor="278.0" />
+                                                   </children>
+                                                </AnchorPane>
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                  </TitledPane>
+                                </panes>
+                              </Accordion>
+                              <Label layoutX="44.0" layoutY="72.0" text="Scheme Name/ Principal Member’s Employer" AnchorPane.leftAnchor="44.0" AnchorPane.topAnchor="72.0" />
+                              <Label layoutX="44.0" layoutY="7.0" text="Insurance Provider" AnchorPane.leftAnchor="44.0" />
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="102.0" layoutY="30.0" text="Insurance Details" AnchorPane.topAnchor="30.0" />
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </AnchorPane>
                </content>
             </Tab>
+            <Tab id="additionalInfoPane" fx:id="addInfoTab" text="Additional Info">
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+               </content>
+               <content>
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutX="54.0" layoutY="73.0" prefHeight="530.0" prefWidth="658.0">
+                           <children>
+                              <JFXButton fx:id="saveButton" layoutX="527.0" layoutY="467.0" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #48aaad;" text="Save" />
+                           </children></AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content></Tab>
          </tabs>
       </JFXTabPane>
    </children>

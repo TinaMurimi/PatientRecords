@@ -35,7 +35,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBoxBuilder;
+// import javafx.scene.control.CheckBoxBuilder;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.TextField;
@@ -472,7 +472,8 @@ public class UserDashboardController extends BaseController implements Initializ
      */
     public CheckBox getSelectAllCheckBox() {
         if (selectAllCheckBox == null) {
-            final CheckBox selectAllCheckBox = CheckBoxBuilder.create().build();
+            // final CheckBox selectAllCheckBox = CheckBoxBuilder.create().build();
+            final CheckBox selectAllCheckBox = new CheckBox();
 
             // Adding EventHandler to the CheckBox to select/deselect all users in table.
             selectAllCheckBox.setOnAction(new EventHandler<ActionEvent>() {
@@ -516,42 +517,6 @@ public class UserDashboardController extends BaseController implements Initializ
             cell.setAlignment(Pos.CENTER_LEFT);
             return cell;
         });
-    }
-
-    /**
-     * User honorific title
-     */
-    public enum Title {
-        Dr("Dr."), Mr("Mr."), Ms("Ms."), Miss("Miss"), Prof("Prof."), Mx("Mx."), Other("Other");
-
-        private final String title;
-        private Title code;
-
-        Title(String title) {
-            this.title = title;
-        }
-
-        public String getEnumTitle() {
-            return title;
-        }
-    }
-
-    /**
-     * Returns user's honorific title
-     * @param name (String) Title name to match to
-     * @return title (Title)
-     */
-    public Title getTitle(String name) {
-        Title title = null;
-
-        for (Title t : Title.values()) {
-            if (t.getEnumTitle().equals(name)) {
-                title = t;
-                break;
-            }
-        }
-
-        return title;
     }
 
     @Override

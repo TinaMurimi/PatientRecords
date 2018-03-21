@@ -49,7 +49,7 @@ public class PatientViewController extends PatientDashboardController implements
     // Dashboard CSS file URL
     private final URL url = this.getClass().getResource("/patientrecords/styles/form.css");
     
-    private ObservableList<User> patientList;
+    private ObservableList<Patient> patientList;
 
 
     private EditUserController main;
@@ -66,7 +66,6 @@ public class PatientViewController extends PatientDashboardController implements
 
     @FXML
     private URL location;
-    
     
     @FXML
     private BorderPane patientViewPane;
@@ -166,6 +165,7 @@ public class PatientViewController extends PatientDashboardController implements
      * @param db 
      */
     public PatientViewController(String id, MongoDatabase db){
+        super(db);
         // this.id = id;
         // this.id = new ObjectId(id)
         this.id = new ObjectId("5a8ecbfba173da01c375ac56");
@@ -214,49 +214,19 @@ public class PatientViewController extends PatientDashboardController implements
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
         }
     }
-    
- 
+
+
     /**
-     * Returns the details of a patient
-     * @return patients
+     * Parse patient details
+     *
      */
-    public List<Document> getPatient(){
-        
-        System.out.println("\n----------- getPatient() -------------");
-        
-        List<Document> patients = new ArrayList<>();
-        FindIterable result = null;
-        
-        try {
-            result = collection.find(new Document().append("_id", id));
-            
-        } catch (MongoException e){
-            logger.log(Level.SEVERE, "Unable to fetch patient details", e);
-        }
-        
-        if (result != null) {
-            Iterator iterator = result.iterator();
-            
-            while(iterator.hasNext()){
-                Document patient = (Document) iterator.next();
-                
-                System.out.println("patient");
-                System.out.println(patient);
-                // System.out.println(patient.get("_id"));
-                
-                patients.add(patient);
+    public ObservableList<Patient>  parsePatientDetails(FindIterable<Document> result){
+            patientList = FXCollections.observableArrayList();
 
-            
-            }
-
-
-            // List<Document> ratings = (List<Document>) ((Document) result.get("metadata")).get("ratings");
-
-        }
-        return patients;
+            return patientList;
     }
-    
-    
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

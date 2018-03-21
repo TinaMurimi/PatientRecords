@@ -17,8 +17,9 @@ public class Claimant extends Person {
     private final StringProperty insurProvider; // Insurance Provider
     private final StringProperty scheme; // Scheme Name/No
     private final StringProperty insurPatientNo; // Patient Member No
+    private final StringProperty insurPrinIdNo; // Principal Member No
     private final StringProperty insurPrinNo; // Principal Member No
-    private final StringProperty rltnInsur; // Relationship to Principal Insurance Member 
+    private final StringProperty rltnInsur; // Relationship to Principal Insurance Member
 
     public Claimant() {
         super();
@@ -31,6 +32,7 @@ public class Claimant extends Person {
         this.insurProvider = new SimpleStringProperty();
         this.scheme = new SimpleStringProperty();
         this.insurPatientNo = new SimpleStringProperty();
+        this.insurPrinIdNo = new SimpleStringProperty();
         this.insurPrinNo = new SimpleStringProperty();
         this.rltnInsur = new SimpleStringProperty();
     }
@@ -125,6 +127,21 @@ public class Claimant extends Person {
     public StringProperty insurPatientNoProperty() {
         return insurPatientNo;
     }
+
+
+    // @return the insurPrinIdNo
+    public void setPrinIdNo(String insurPrinIdNo) {
+        this.insurPrinIdNo.set(insurPrinIdNo);
+    }
+
+    public String getPrinIdNo() {
+        return insurPrinIdNo.get();
+    }
+
+    public StringProperty memberPrinIdNoProperty() {
+        return insurPrinIdNo;
+    }
+
 
     // @return the insurPrinNo
     public void setInsurPrinNo(String insurPrinNo) {

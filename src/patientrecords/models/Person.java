@@ -19,7 +19,7 @@ public class Person {
     private final BooleanProperty isSelected;
 
     private final StringProperty _ID; // DB ObjectID
-    private final ListProperty<Document> identification; // Field National ID/ Passport Number
+    private Document identification; // Field National ID/ Passport Number
 
     private final StringProperty lastName;
     private final StringProperty givenName;
@@ -36,7 +36,6 @@ public class Person {
         this.isSelected = new SimpleBooleanProperty();
 
         this._ID = new SimpleStringProperty(); // ObjectID from DB
-        this.identification = new SimpleListProperty<>();
 
         this.lastName = new SimpleStringProperty();
         this.givenName = new SimpleStringProperty();
@@ -76,15 +75,11 @@ public class Person {
     }
 
     // @return the identification
-    public void setIdentification(ObservableList<Document> identification) {
-        this.identification.set(identification);
+    public void setIdentification(Document identification) {
+        this.identification = identification;
     }
 
-    public ObservableList<Document> getIdentification() {
-        return identification.get();
-    }
-
-    public ListProperty identificationProperty() {
+    public Document getIdentification() {
         return identification;
     }
 
@@ -129,9 +124,9 @@ public class Person {
         return address;
     }
 
-    public ListProperty<Document> addressProperty() {
+    /*public ListProperty<Document> addressProperty() {
         return address;
-    }
+    }*/
 
     // the phoneNo
     public void setPhoneNo(String phoneNo) {

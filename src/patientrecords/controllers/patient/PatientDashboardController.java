@@ -1,5 +1,6 @@
 package patientrecords.controllers.patient;
 
+import javafx.collections.transformation.SortedList;
 import patientrecords.controllers.BaseController;
 import patientrecords.models.Patient;
 
@@ -80,7 +81,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBoxBuilder;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.paint.Color;
@@ -104,6 +104,27 @@ public class PatientDashboardController extends BaseController implements Initia
     // Dashboard CSS file URL
     private final URL url;
 
+
+    // Gender ComboBox options
+    public final ObservableList<String> genderOptions =
+            FXCollections.observableArrayList(
+                    "Male",
+                    "Female"
+            );
+
+    // Country Identification Type options
+    public ObservableList<String> idTypeOptions =
+            FXCollections.observableArrayList(
+                    "National ID",
+                    "Passport"
+            );
+
+    // Country ComboBox options
+    public SortedList<String> sortedCountryOptions = new SortedList<>(FXCollections.observableArrayList());
+    List<String> countryOptions = new ArrayList<>();
+    Locale[] locales = Locale.getAvailableLocales();
+
+
     @FXML
     private TextField searchField;
 
@@ -113,12 +134,26 @@ public class PatientDashboardController extends BaseController implements Initia
     @FXML
     TableView<Patient> patientsTableView;
 
-    public PatientDashboardController() {
+    public PatientDashboardController(MongoDatabase db) {
+
+        this.db = db;
+        this.collection = db.getCollection("Patients");
         this.logger = Logger.getLogger(getClass().getName());
         this.url = this.getClass().getResource("/patientrecords/styles/dashboard.css");
+        setCountryOptions();
     }
 
-    public void patientDashboardLoader(Stage primaryStage, MongoDatabase db) {
+    public void setCountryOptions() {
+        for (Locale locale : locales) {
+            String name = locale.getDisplayCountry();
+            if (!countryOptions.contains(name))
+                countryOptions.add(name);
+        }
+
+       sortedCountryOptions = FXCollections.observableList(countryOptions).sorted(Comparator.naturalOrder());
+    }
+
+    public void patientDashboardLoader(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.db = db;
         this.collection = db.getCollection("Patients");
@@ -186,7 +221,7 @@ public class PatientDashboardController extends BaseController implements Initia
         try {
             result = listAllItems(collection);
         } catch (MongoCommandException e) {
-            logger.log(Level.SEVERE, "Unable to fetch list of all users", e);
+            logger.log(Level.SEVERE, "Unable to fetch list of all patients", e);
         }
         
         return result;
@@ -229,21 +264,21 @@ public class PatientDashboardController extends BaseController implements Initia
                     Document doc = cursor.next();
 
                     patient.setID(doc.get("_id").toString());
-                    patient.setFileNo(doc.get("file").toString());
+                    // patient.setFileNo(doc.get("file").toString());
 
-                    ObservableList<Document> identification = doc.get("identification") == null ? null
-                            : (ObservableList) doc.get("identification");
+                    Document identification = doc.get("identification") == null ? null
+                            : (Document) doc.get("identification");
                     patient.setIdentification(identification);
 
                     patient.setLastName(doc.get("lastname").toString());
-                    patient.setGivenName(doc.get("givenName").toString());
-
-                    List<Document> address = doc.get("address") == null ? null : (ArrayList) doc.get("address");
-                    ObservableList<Document> addr = FXCollections.observableArrayList(address);
-                    patient.setAddress(addr);
+                    patient.setGivenName(doc.get("givenname").toString());
 
                     LocalDateTime dob = mongoDateToLDT(doc.get("dob").toString());
                     patient.setDoB(dob);
+
+                    Document address = doc.get("address") == null ? null : (Document) doc.get("address");
+                    // ObservableList<Document> addr = FXCollections.observableArrayList(address);
+                    patient.setAddress(address);
 
                     String phoneno = doc.get("phoneno") == null ? null : doc.get("phoneno").toString();
                     patient.setPhoneNo(phoneno);
@@ -262,19 +297,19 @@ public class PatientDashboardController extends BaseController implements Initia
                     String rh = doc.get("rh") == null ? null : doc.get("rh").toString();
                     patient.setRH(rh);
 
-                    ObservableList<Document> allergies = doc.get("allergies") == null ? null
+                    ObservableList<String> allergies = doc.get("allergies") == null ? null
                             : (ObservableList) doc.get("allergies");
                     patient.setAllergies(allergies);
 
-                    ObservableList<Document> chronic = doc.get("chronicdiseases") == null ? null
+                    ObservableList<String> chronic = doc.get("chronicdiseases") == null ? null
                             : (ObservableList) doc.get("chronicdiseases");
                     patient.setChronic(chronic);
 
-                    ObservableList<Document> vaccinations = doc.get("vaccinations") == null ? null
+                    ObservableList<String> vaccinations = doc.get("vaccinations") == null ? null
                             : (ObservableList) doc.get("vaccinations");
                     patient.setVaccine(vaccinations);
 
-                    LocalDateTime created = mongoDateToLDT(doc.get("datecreated").toString());
+                    LocalDateTime created = mongoDateToLDT(doc.get("created").toString());
                     patient.setDateCreated(created);
 
                     // Add user to the ObservableList, userList
@@ -314,9 +349,9 @@ public class PatientDashboardController extends BaseController implements Initia
                 Document findQuery = new Document();
                 findQuery.append("lastName", regQuery);
                 findQuery.append("otherName", regQuery);
-                findQuery.append("fileNo", regQuery);
-                findQuery.append("idNo", regQuery); // National Identification Number
-                findQuery.append("ppNo", regQuery); // Passport Number
+                // findQuery.append("fileNo", regQuery);
+                findQuery.append("identification", new Document("idno", regQuery)); // National Identification Number
+                findQuery.append("identification", new Document("ppno", regQuery)); // Passport Number
 
                 result = collection.find(findQuery);
             } else {

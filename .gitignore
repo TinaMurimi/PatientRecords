@@ -3,3 +3,6 @@ MongoDBFiles/
 build/
 dist/
 nbproject/
+out/
+.idea/
+PatientRecords.iml

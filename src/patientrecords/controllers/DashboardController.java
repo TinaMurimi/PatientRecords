@@ -1,5 +1,6 @@
 package patientrecords.controllers;
 
+import patientrecords.controllers.patient.CreatePatient;
 import patientrecords.controllers.user.UserDashboardController;
 import java.io.IOException;
 import java.util.HashMap;
@@ -97,10 +98,8 @@ public class DashboardController implements Initializable {
         patientsLink.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent e) {
-                    PatientDashboardController pc = new PatientDashboardController();
-                    pc.db = db;
-                    pc.collection = db.getCollection("Patients");
-                    pc.parsePatientList(pc.getPatients());
+                    CreatePatient cpc = new CreatePatient(db);
+                    cpc.createPatientLoader();
                 }
             });
 

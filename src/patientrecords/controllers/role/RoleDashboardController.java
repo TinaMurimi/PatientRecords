@@ -82,7 +82,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBoxBuilder;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.paint.Color;
